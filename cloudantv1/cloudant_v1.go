@@ -25,6 +25,7 @@ package cloudantv1
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/IBM/cloudant-go-sdk/auth"
 	common "github.com/IBM/cloudant-go-sdk/common"
 	"github.com/IBM/go-sdk-core/v4/core"
 	"github.com/go-openapi/strfmt"
@@ -61,7 +62,7 @@ func NewCloudantV1UsingExternalConfig(options *CloudantV1Options) (cloudant *Clo
 	}
 
 	if options.Authenticator == nil {
-		options.Authenticator, err = core.GetAuthenticatorFromEnvironment(options.ServiceName)
+		options.Authenticator, err = auth.GetAuthenticatorFromEnvironment(options.ServiceName)
 		if err != nil {
 			return
 		}
