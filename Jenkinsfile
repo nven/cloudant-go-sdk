@@ -8,7 +8,7 @@ pipeline {
     skipDefaultCheckout()
   }
   environment {
-    GH_CREDS = credentials('gh-sdks-automation')
+    GH_CREDS = credentials('github-token')
   }
   stages {
     stage('Checkout') {
@@ -19,7 +19,7 @@ pipeline {
           checkoutResult = checkout scm
           commitHash = "${checkoutResult.GIT_COMMIT[0..6]}"
           sh """
-            git config user.email '71659186+cloudant-sdks-automation@users.noreply.github.com'
+            git config user.email 'ricellis@users.noreply.github.com'
             git config user.name 'cloudant-sdks-automation'
             git config credential.username '${env.GH_CREDS_USR}'
             git config credential.helper '!f() { echo password=\$GH_CREDS_PSW; echo; }; f'
@@ -46,6 +46,7 @@ pipeline {
       post {
         always {
           junit (
+            allowEmptyResults: true,
             testResults: '**/junitreports/*.xml'
           )
         }
@@ -58,36 +59,6 @@ pipeline {
       steps {
         bumpVersion(true)
         publishStaging()
-      }
-    }
-    stage('Run Gauge tests') {
-      steps {
-        script {
-            buildResults = null
-            prefixedSdkVersion = ''
-            if (libName == 'go') {
-              prefixedSdkVersion = "@$commitHash"
-            } else if (libName == 'node') {
-              prefixedSdkVersion = "@${env.NEW_SDK_VERSION}"
-            } else if (libName == 'python') {
-              prefixedSdkVersion = "==${env.NEW_SDK_VERSION}"
-            } else if (libName == 'java') {
-              prefixedSdkVersion = "${env.NEW_SDK_VERSION}"
-            }
-          try {
-            buildResults = build job: "/SDKs NextGen/sdks-gauge/${env.BRANCH_NAME}", parameters: [
-                string(name: 'SDK_RUN_LANG', value: "$libName"),
-                string(name: "SDK_VERSION_${libName.toUpperCase()}", value: "$prefixedSdkVersion")]
-          } catch (Exception e) {
-            // only run build in sdks-gauge master branch if BRANCH_NAME doesn't exist
-            if (buildResults == null) {
-              echo "No matching branch named '${env.BRANCH_NAME}' in sdks-gauge, building master branch"
-              build job: '/SDKs NextGen/sdks-gauge/master', parameters: [
-                  string(name: 'SDK_RUN_LANG', value: "$libName"),
-                  string(name: "SDK_VERSION_${libName.toUpperCase()}", value: "$prefixedSdkVersion")]
-            }
-          }
-        }
       }
     }
     stage('Publish[repository]') {
@@ -117,14 +88,11 @@ def libName
 def commitHash
 def bumpVersion
 def customizeVersion
-def prefixSdkVersion
 
 void defaultInit() {
   // Default to using bump2version
   bumpVersion = { isDevRelease ->
     newVersion = getNextVersion(isDevRelease)
-    // Set an env var with the new version
-    env.NEW_SDK_VERSION = newVersion
     doVersionBump(isDevRelease, newVersion)
   }
 
@@ -168,12 +136,6 @@ void applyCustomizations() {
 }
 
 void runTests() {
-  sh '''
-  for file in ./**/*suite_test.go
-  do
-    go test $(dirname $file)/... -ginkgo.reportFile ./../junitreports/$(dirname $file).xml
-  done
-  '''
 }
 
 void publishStaging() {

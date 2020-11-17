@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.16.0-36b26b63-20201022-212410
+ * IBM OpenAPI SDK Code Generator Version: 3.12.0-64fe8d3f-20200820-144050
  */
  
 
@@ -23,7 +23,6 @@
 package cloudantv1
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	common "github.com/IBM/cloudant-go-sdk/common"
@@ -89,7 +88,6 @@ func NewCloudantV1(options *CloudantV1Options) (service *CloudantV1, err error) 
 	serviceOptions := &core.ServiceOptions{
 		URL:           DefaultServiceURL,
 		Authenticator: options.Authenticator,
-		EnableGzipCompression: true,
 	}
 
 	baseService, err := core.NewBaseService(serviceOptions)
@@ -116,40 +114,21 @@ func (cloudant *CloudantV1) SetServiceURL(url string) error {
 	return cloudant.Service.SetServiceURL(url)
 }
 
-// GetServiceURL returns the service URL
-func (cloudant *CloudantV1) GetServiceURL() string {
-	return cloudant.Service.GetServiceURL()
-}
-
-// SetEnableGzipCompression sets the service's EnableGzipCompression field
-func (cloudant *CloudantV1) SetEnableGzipCompression(enableGzip bool) {
-	cloudant.Service.SetEnableGzipCompression(enableGzip)
-}
-
-// GetEnableGzipCompression returns the service's EnableGzipCompression field
-func (cloudant *CloudantV1) GetEnableGzipCompression() bool {
-	return cloudant.Service.GetEnableGzipCompression()
-}
-
 // GetServerInformation : Retrieve server instance information
 // When you access the root of an instance, IBM Cloudant returns meta-information about the instance. The response
 // includes a JSON structure that contains information about the server, including a welcome message and the server's
 // version.
 func (cloudant *CloudantV1) GetServerInformation(getServerInformationOptions *GetServerInformationOptions) (result *ServerInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetServerInformationWithContext(context.Background(), getServerInformationOptions)
-}
-
-// GetServerInformationWithContext is an alternate form of the GetServerInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetServerInformationWithContext(ctx context.Context, getServerInformationOptions *GetServerInformationOptions) (result *ServerInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getServerInformationOptions, "getServerInformationOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{""}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -187,20 +166,16 @@ func (cloudant *CloudantV1) GetServerInformationWithContext(ctx context.Context,
 // Displays the nodes that are part of the cluster as `cluster_nodes`. The field, `all_nodes`, displays all nodes this
 // node knows about, including the ones that are part of the cluster. This endpoint is useful when you set up a cluster.
 func (cloudant *CloudantV1) GetMembershipInformation(getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetMembershipInformationWithContext(context.Background(), getMembershipInformationOptions)
-}
-
-// GetMembershipInformationWithContext is an alternate form of the GetMembershipInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Context, getMembershipInformationOptions *GetMembershipInformationOptions) (result *MembershipInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getMembershipInformationOptions, "getMembershipInformationOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_membership"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_membership`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -238,20 +213,16 @@ func (cloudant *CloudantV1) GetMembershipInformationWithContext(ctx context.Cont
 // Requests one or more Universally Unique Identifiers (UUIDs) from the instance. The response is a JSON object that
 // provides a list of UUIDs.
 func (cloudant *CloudantV1) GetUuids(getUuidsOptions *GetUuidsOptions) (result *UuidsResult, response *core.DetailedResponse, err error) {
-	return cloudant.GetUuidsWithContext(context.Background(), getUuidsOptions)
-}
-
-// GetUuidsWithContext is an alternate form of the GetUuids method which supports a Context parameter
-func (cloudant *CloudantV1) GetUuidsWithContext(ctx context.Context, getUuidsOptions *GetUuidsOptions) (result *UuidsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getUuidsOptions, "getUuidsOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_uuids"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_uuids`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -289,131 +260,10 @@ func (cloudant *CloudantV1) GetUuidsWithContext(ctx context.Context, getUuidsOpt
 	return
 }
 
-// GetCapacityThroughputInformation : Retrieve provisioned throughput capacity information
-// View the amount of provisioned throughput capacity allocated to an IBM Cloudant instance and what is the target
-// provisioned throughput capacity.
-func (cloudant *CloudantV1) GetCapacityThroughputInformation(getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetCapacityThroughputInformationWithContext(context.Background(), getCapacityThroughputInformationOptions)
-}
-
-// GetCapacityThroughputInformationWithContext is an alternate form of the GetCapacityThroughputInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetCapacityThroughputInformationWithContext(ctx context.Context, getCapacityThroughputInformationOptions *GetCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getCapacityThroughputInformationOptions, "getCapacityThroughputInformationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/capacity/throughput`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getCapacityThroughputInformationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCapacityThroughputInformation")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
-// PutCapacityThroughputInformation : Update the target provisioned throughput capacity
-// Sets the target provisioned throughput capacity for an IBM Cloudant instance. When target capacity is changed, the
-// current capacity asynchronously changes to meet the target capacity.
-func (cloudant *CloudantV1) PutCapacityThroughputInformation(putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
-	return cloudant.PutCapacityThroughputInformationWithContext(context.Background(), putCapacityThroughputInformationOptions)
-}
-
-// PutCapacityThroughputInformationWithContext is an alternate form of the PutCapacityThroughputInformation method which supports a Context parameter
-func (cloudant *CloudantV1) PutCapacityThroughputInformationWithContext(ctx context.Context, putCapacityThroughputInformationOptions *PutCapacityThroughputInformationOptions) (result *CapacityThroughputInformation, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(putCapacityThroughputInformationOptions, "putCapacityThroughputInformationOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(putCapacityThroughputInformationOptions, "putCapacityThroughputInformationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/capacity/throughput`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range putCapacityThroughputInformationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PutCapacityThroughputInformation")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-
-	body := make(map[string]interface{})
-	if putCapacityThroughputInformationOptions.Blocks != nil {
-		body["blocks"] = putCapacityThroughputInformationOptions.Blocks
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCapacityThroughputInformation)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
 // HeadDatabase : Retrieve the HTTP headers for a database
 // Returns the HTTP headers that contain a minimal amount of information about the specified database. Since the
 // response body is empty, using the HEAD method is a lightweight way to check if the database exists or not.
 func (cloudant *CloudantV1) HeadDatabase(headDatabaseOptions *HeadDatabaseOptions) (response *core.DetailedResponse, err error) {
-	return cloudant.HeadDatabaseWithContext(context.Background(), headDatabaseOptions)
-}
-
-// HeadDatabaseWithContext is an alternate form of the HeadDatabase method which supports a Context parameter
-func (cloudant *CloudantV1) HeadDatabaseWithContext(ctx context.Context, headDatabaseOptions *HeadDatabaseOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headDatabaseOptions, "headDatabaseOptions cannot be nil")
 	if err != nil {
 		return
@@ -423,14 +273,11 @@ func (cloudant *CloudantV1) HeadDatabaseWithContext(ctx context.Context, headDat
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *headDatabaseOptions.Db,
-	}
+	pathSegments := []string{""}
+	pathParameters := []string{*headDatabaseOptions.Db}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -456,20 +303,16 @@ func (cloudant *CloudantV1) HeadDatabaseWithContext(ctx context.Context, headDat
 
 // GetAllDbs : Query a list of all database names in the instance
 func (cloudant *CloudantV1) GetAllDbs(getAllDbsOptions *GetAllDbsOptions) (result []string, response *core.DetailedResponse, err error) {
-	return cloudant.GetAllDbsWithContext(context.Background(), getAllDbsOptions)
-}
-
-// GetAllDbsWithContext is an alternate form of the GetAllDbs method which supports a Context parameter
-func (cloudant *CloudantV1) GetAllDbsWithContext(ctx context.Context, getAllDbsOptions *GetAllDbsOptions) (result []string, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getAllDbsOptions, "getAllDbsOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_all_dbs"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_all_dbs`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -515,24 +358,16 @@ func (cloudant *CloudantV1) GetAllDbsWithContext(ctx context.Context, getAllDbsO
 // multiple `GET /{db}` requests. It returns a list that contains an information object for each database specified in
 // the request.
 func (cloudant *CloudantV1) PostDbsInfo(postDbsInfoOptions *PostDbsInfoOptions) (result []DbsInfoResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostDbsInfoWithContext(context.Background(), postDbsInfoOptions)
-}
-
-// PostDbsInfoWithContext is an alternate form of the PostDbsInfo method which supports a Context parameter
-func (cloudant *CloudantV1) PostDbsInfoWithContext(ctx context.Context, postDbsInfoOptions *PostDbsInfoOptions) (result []DbsInfoResult, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postDbsInfoOptions, "postDbsInfoOptions cannot be nil")
-	if err != nil {
-		return
-	}
 	err = core.ValidateStruct(postDbsInfoOptions, "postDbsInfoOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_dbs_info"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_dbs_info`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -581,11 +416,6 @@ func (cloudant *CloudantV1) PostDbsInfoWithContext(ctx context.Context, postDbsI
 // the server responds with a 400 HTTP status code when the request URL includes a `?rev=` parameter. This response
 // suggests that a user wanted to delete a document but forgot to add the document ID to the URL.
 func (cloudant *CloudantV1) DeleteDatabase(deleteDatabaseOptions *DeleteDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.DeleteDatabaseWithContext(context.Background(), deleteDatabaseOptions)
-}
-
-// DeleteDatabaseWithContext is an alternate form of the DeleteDatabase method which supports a Context parameter
-func (cloudant *CloudantV1) DeleteDatabaseWithContext(ctx context.Context, deleteDatabaseOptions *DeleteDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteDatabaseOptions, "deleteDatabaseOptions cannot be nil")
 	if err != nil {
 		return
@@ -595,14 +425,11 @@ func (cloudant *CloudantV1) DeleteDatabaseWithContext(ctx context.Context, delet
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *deleteDatabaseOptions.Db,
-	}
+	pathSegments := []string{""}
+	pathParameters := []string{*deleteDatabaseOptions.Db}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -638,11 +465,6 @@ func (cloudant *CloudantV1) DeleteDatabaseWithContext(ctx context.Context, delet
 
 // GetDatabaseInformation : Retrieve information about a database
 func (cloudant *CloudantV1) GetDatabaseInformation(getDatabaseInformationOptions *GetDatabaseInformationOptions) (result *DatabaseInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetDatabaseInformationWithContext(context.Background(), getDatabaseInformationOptions)
-}
-
-// GetDatabaseInformationWithContext is an alternate form of the GetDatabaseInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetDatabaseInformationWithContext(ctx context.Context, getDatabaseInformationOptions *GetDatabaseInformationOptions) (result *DatabaseInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDatabaseInformationOptions, "getDatabaseInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -652,14 +474,11 @@ func (cloudant *CloudantV1) GetDatabaseInformationWithContext(ctx context.Contex
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDatabaseInformationOptions.Db,
-	}
+	pathSegments := []string{""}
+	pathParameters := []string{*getDatabaseInformationOptions.Db}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -695,11 +514,6 @@ func (cloudant *CloudantV1) GetDatabaseInformationWithContext(ctx context.Contex
 
 // PutDatabase : Create a database
 func (cloudant *CloudantV1) PutDatabase(putDatabaseOptions *PutDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.PutDatabaseWithContext(context.Background(), putDatabaseOptions)
-}
-
-// PutDatabaseWithContext is an alternate form of the PutDatabase method which supports a Context parameter
-func (cloudant *CloudantV1) PutDatabaseWithContext(ctx context.Context, putDatabaseOptions *PutDatabaseOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putDatabaseOptions, "putDatabaseOptions cannot be nil")
 	if err != nil {
 		return
@@ -709,14 +523,11 @@ func (cloudant *CloudantV1) PutDatabaseWithContext(ctx context.Context, putDatab
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *putDatabaseOptions.Db,
-	}
+	pathSegments := []string{""}
+	pathParameters := []string{*putDatabaseOptions.Db}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -761,11 +572,6 @@ func (cloudant *CloudantV1) PutDatabaseWithContext(ctx context.Context, putDatab
 // Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
 // query parameter because it allows one to pass more information to the filter.
 func (cloudant *CloudantV1) PostChanges(postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostChangesWithContext(context.Background(), postChangesOptions)
-}
-
-// PostChangesWithContext is an alternate form of the PostChanges method which supports a Context parameter
-func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result *ChangesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
 	if err != nil {
 		return
@@ -775,14 +581,11 @@ func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChan
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postChangesOptions.Db,
-	}
+	pathSegments := []string{"", "_changes"}
+	pathParameters := []string{*postChangesOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -882,11 +685,6 @@ func (cloudant *CloudantV1) PostChangesWithContext(ctx context.Context, postChan
 // Requests the database changes feed in the same way as `GET /{db}/_changes` does. It is widely used with the `filter`
 // query parameter because it allows one to pass more information to the filter.
 func (cloudant *CloudantV1) PostChangesAsStream(postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostChangesAsStreamWithContext(context.Background(), postChangesOptions)
-}
-
-// PostChangesAsStreamWithContext is an alternate form of the PostChangesAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostChangesAsStreamWithContext(ctx context.Context, postChangesOptions *PostChangesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postChangesOptions, "postChangesOptions cannot be nil")
 	if err != nil {
 		return
@@ -896,14 +694,11 @@ func (cloudant *CloudantV1) PostChangesAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postChangesOptions.Db,
-	}
+	pathSegments := []string{"", "_changes"}
+	pathParameters := []string{*postChangesOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_changes`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -996,11 +791,6 @@ func (cloudant *CloudantV1) PostChangesAsStreamWithContext(ctx context.Context, 
 // requested document, and the Content-Length specifies the length of the data if the document was requested in full.
 // Add any of the query arguments, then the resulting HTTP headers that correspond to it are returned.
 func (cloudant *CloudantV1) HeadDocument(headDocumentOptions *HeadDocumentOptions) (response *core.DetailedResponse, err error) {
-	return cloudant.HeadDocumentWithContext(context.Background(), headDocumentOptions)
-}
-
-// HeadDocumentWithContext is an alternate form of the HeadDocument method which supports a Context parameter
-func (cloudant *CloudantV1) HeadDocumentWithContext(ctx context.Context, headDocumentOptions *HeadDocumentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headDocumentOptions, "headDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1010,15 +800,11 @@ func (cloudant *CloudantV1) HeadDocumentWithContext(ctx context.Context, headDoc
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *headDocumentOptions.Db,
-		"doc_id": *headDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", ""}
+	pathParameters := []string{*headDocumentOptions.Db, *headDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1060,11 +846,6 @@ func (cloudant *CloudantV1) HeadDocumentWithContext(ctx context.Context, headDoc
 // includes the `_local` or `_design` prefix, then this operation is used to create or modify local or design documents
 // respectively.
 func (cloudant *CloudantV1) PostDocument(postDocumentOptions *PostDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostDocumentWithContext(context.Background(), postDocumentOptions)
-}
-
-// PostDocumentWithContext is an alternate form of the PostDocument method which supports a Context parameter
-func (cloudant *CloudantV1) PostDocumentWithContext(ctx context.Context, postDocumentOptions *PostDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postDocumentOptions, "postDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1078,14 +859,11 @@ func (cloudant *CloudantV1) PostDocumentWithContext(ctx context.Context, postDoc
 		postDocumentOptions.SetContentType("application/json")
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postDocumentOptions.Db,
-	}
+	pathSegments := []string{""}
+	pathParameters := []string{*postDocumentOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1137,11 +915,6 @@ func (cloudant *CloudantV1) PostDocumentWithContext(ctx context.Context, postDoc
 // body parameters are specified, results for all documents in the database are returned. Optionally, document content
 // or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostAllDocs(postAllDocsOptions *PostAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostAllDocsWithContext(context.Background(), postAllDocsOptions)
-}
-
-// PostAllDocsWithContext is an alternate form of the PostAllDocs method which supports a Context parameter
-func (cloudant *CloudantV1) PostAllDocsWithContext(ctx context.Context, postAllDocsOptions *PostAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsOptions, "postAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -1151,14 +924,11 @@ func (cloudant *CloudantV1) PostAllDocsWithContext(ctx context.Context, postAllD
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postAllDocsOptions.Db,
-	}
+	pathSegments := []string{"", "_all_docs"}
+	pathParameters := []string{*postAllDocsOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1244,11 +1014,6 @@ func (cloudant *CloudantV1) PostAllDocsWithContext(ctx context.Context, postAllD
 // body parameters are specified, results for all documents in the database are returned. Optionally, document content
 // or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostAllDocsAsStream(postAllDocsOptions *PostAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostAllDocsAsStreamWithContext(context.Background(), postAllDocsOptions)
-}
-
-// PostAllDocsAsStreamWithContext is an alternate form of the PostAllDocsAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostAllDocsAsStreamWithContext(ctx context.Context, postAllDocsOptions *PostAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsOptions, "postAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -1258,14 +1023,11 @@ func (cloudant *CloudantV1) PostAllDocsAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postAllDocsOptions.Db,
-	}
+	pathSegments := []string{"", "_all_docs"}
+	pathParameters := []string{*postAllDocsOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1341,11 +1103,6 @@ func (cloudant *CloudantV1) PostAllDocsAsStreamWithContext(ctx context.Context, 
 // result objects, one for each query, with a structure equivalent to that of a single `_all_docs` request. This enables
 // you to request multiple queries in a single request, in place of multiple `POST /{db}/_all_docs` requests.
 func (cloudant *CloudantV1) PostAllDocsQueries(postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostAllDocsQueriesWithContext(context.Background(), postAllDocsQueriesOptions)
-}
-
-// PostAllDocsQueriesWithContext is an alternate form of the PostAllDocsQueries method which supports a Context parameter
-func (cloudant *CloudantV1) PostAllDocsQueriesWithContext(ctx context.Context, postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsQueriesOptions, "postAllDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -1355,14 +1112,11 @@ func (cloudant *CloudantV1) PostAllDocsQueriesWithContext(ctx context.Context, p
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postAllDocsQueriesOptions.Db,
-	}
+	pathSegments := []string{"", "_all_docs/queries"}
+	pathParameters := []string{*postAllDocsQueriesOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs/queries`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1411,11 +1165,6 @@ func (cloudant *CloudantV1) PostAllDocsQueriesWithContext(ctx context.Context, p
 // result objects, one for each query, with a structure equivalent to that of a single `_all_docs` request. This enables
 // you to request multiple queries in a single request, in place of multiple `POST /{db}/_all_docs` requests.
 func (cloudant *CloudantV1) PostAllDocsQueriesAsStream(postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostAllDocsQueriesAsStreamWithContext(context.Background(), postAllDocsQueriesOptions)
-}
-
-// PostAllDocsQueriesAsStreamWithContext is an alternate form of the PostAllDocsQueriesAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostAllDocsQueriesAsStreamWithContext(ctx context.Context, postAllDocsQueriesOptions *PostAllDocsQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postAllDocsQueriesOptions, "postAllDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -1425,14 +1174,11 @@ func (cloudant *CloudantV1) PostAllDocsQueriesAsStreamWithContext(ctx context.Co
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postAllDocsQueriesOptions.Db,
-	}
+	pathSegments := []string{"", "_all_docs/queries"}
+	pathParameters := []string{*postAllDocsQueriesOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_all_docs/queries`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1472,11 +1218,6 @@ func (cloudant *CloudantV1) PostAllDocsQueriesAsStreamWithContext(ctx context.Co
 // The basic operation is similar to creating or updating a single document, except that you batch the document
 // structure and information.
 func (cloudant *CloudantV1) PostBulkDocs(postBulkDocsOptions *PostBulkDocsOptions) (result []DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostBulkDocsWithContext(context.Background(), postBulkDocsOptions)
-}
-
-// PostBulkDocsWithContext is an alternate form of the PostBulkDocs method which supports a Context parameter
-func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBulkDocsOptions *PostBulkDocsOptions) (result []DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkDocsOptions, "postBulkDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -1486,14 +1227,11 @@ func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBul
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postBulkDocsOptions.Db,
-	}
+	pathSegments := []string{"", "_bulk_docs"}
+	pathParameters := []string{*postBulkDocsOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_docs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1507,7 +1245,6 @@ func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBul
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
 
 	_, err = builder.SetBodyContent("application/json", postBulkDocsOptions.BulkDocs, nil, postBulkDocsOptions.Body)
 	if err != nil {
@@ -1536,11 +1273,6 @@ func (cloudant *CloudantV1) PostBulkDocsWithContext(ctx context.Context, postBul
 // PostBulkGet : Bulk query revision information for multiple documents
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGet(postBulkGetOptions *PostBulkGetOptions) (result *BulkGetResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostBulkGetWithContext(context.Background(), postBulkGetOptions)
-}
-
-// PostBulkGetWithContext is an alternate form of the PostBulkGet method which supports a Context parameter
-func (cloudant *CloudantV1) PostBulkGetWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result *BulkGetResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1550,14 +1282,11 @@ func (cloudant *CloudantV1) PostBulkGetWithContext(ctx context.Context, postBulk
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postBulkGetOptions.Db,
-	}
+	pathSegments := []string{"", "_bulk_get"}
+	pathParameters := []string{*postBulkGetOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1617,11 +1346,6 @@ func (cloudant *CloudantV1) PostBulkGetWithContext(ctx context.Context, postBulk
 // PostBulkGetAsMixed : Bulk query revision information for multiple documents as mixed
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGetAsMixed(postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostBulkGetAsMixedWithContext(context.Background(), postBulkGetOptions)
-}
-
-// PostBulkGetAsMixedWithContext is an alternate form of the PostBulkGetAsMixed method which supports a Context parameter
-func (cloudant *CloudantV1) PostBulkGetAsMixedWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1631,14 +1355,11 @@ func (cloudant *CloudantV1) PostBulkGetAsMixedWithContext(ctx context.Context, p
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postBulkGetOptions.Db,
-	}
+	pathSegments := []string{"", "_bulk_get"}
+	pathParameters := []string{*postBulkGetOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1689,11 +1410,6 @@ func (cloudant *CloudantV1) PostBulkGetAsMixedWithContext(ctx context.Context, p
 // PostBulkGetAsRelated : Bulk query revision information for multiple documents as related
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGetAsRelated(postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostBulkGetAsRelatedWithContext(context.Background(), postBulkGetOptions)
-}
-
-// PostBulkGetAsRelatedWithContext is an alternate form of the PostBulkGetAsRelated method which supports a Context parameter
-func (cloudant *CloudantV1) PostBulkGetAsRelatedWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1703,14 +1419,11 @@ func (cloudant *CloudantV1) PostBulkGetAsRelatedWithContext(ctx context.Context,
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postBulkGetOptions.Db,
-	}
+	pathSegments := []string{"", "_bulk_get"}
+	pathParameters := []string{*postBulkGetOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1761,11 +1474,6 @@ func (cloudant *CloudantV1) PostBulkGetAsRelatedWithContext(ctx context.Context,
 // PostBulkGetAsStream : Bulk query revision information for multiple documents as stream
 // Fetch specific revisions or revision histories for multiple documents in bulk as replicators do.
 func (cloudant *CloudantV1) PostBulkGetAsStream(postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostBulkGetAsStreamWithContext(context.Background(), postBulkGetOptions)
-}
-
-// PostBulkGetAsStreamWithContext is an alternate form of the PostBulkGetAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostBulkGetAsStreamWithContext(ctx context.Context, postBulkGetOptions *PostBulkGetOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postBulkGetOptions, "postBulkGetOptions cannot be nil")
 	if err != nil {
 		return
@@ -1775,14 +1483,11 @@ func (cloudant *CloudantV1) PostBulkGetAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postBulkGetOptions.Db,
-	}
+	pathSegments := []string{"", "_bulk_get"}
+	pathParameters := []string{*postBulkGetOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_bulk_get`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1835,11 +1540,6 @@ func (cloudant *CloudantV1) PostBulkGetAsStreamWithContext(ctx context.Context, 
 // are not returned within requests anymore but stay in the database. You must supply the current (latest) revision,
 // either by using the `rev` parameter or by using the `If-Match` header to specify the revision.
 func (cloudant *CloudantV1) DeleteDocument(deleteDocumentOptions *DeleteDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.DeleteDocumentWithContext(context.Background(), deleteDocumentOptions)
-}
-
-// DeleteDocumentWithContext is an alternate form of the DeleteDocument method which supports a Context parameter
-func (cloudant *CloudantV1) DeleteDocumentWithContext(ctx context.Context, deleteDocumentOptions *DeleteDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteDocumentOptions, "deleteDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1849,15 +1549,11 @@ func (cloudant *CloudantV1) DeleteDocumentWithContext(ctx context.Context, delet
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *deleteDocumentOptions.Db,
-		"doc_id": *deleteDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", ""}
+	pathParameters := []string{*deleteDocumentOptions.Db, *deleteDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -1905,11 +1601,6 @@ func (cloudant *CloudantV1) DeleteDocumentWithContext(ctx context.Context, delet
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocument(getDocumentOptions *GetDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
-	return cloudant.GetDocumentWithContext(context.Background(), getDocumentOptions)
-}
-
-// GetDocumentWithContext is an alternate form of the GetDocument method which supports a Context parameter
-func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -1919,15 +1610,11 @@ func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocum
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
-		"doc_id": *getDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", ""}
+	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2005,11 +1692,6 @@ func (cloudant *CloudantV1) GetDocumentWithContext(ctx context.Context, getDocum
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocumentAsMixed(getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.GetDocumentAsMixedWithContext(context.Background(), getDocumentOptions)
-}
-
-// GetDocumentAsMixedWithContext is an alternate form of the GetDocumentAsMixed method which supports a Context parameter
-func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2019,15 +1701,11 @@ func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, g
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
-		"doc_id": *getDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", ""}
+	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2096,11 +1774,6 @@ func (cloudant *CloudantV1) GetDocumentAsMixedWithContext(ctx context.Context, g
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocumentAsRelated(getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.GetDocumentAsRelatedWithContext(context.Background(), getDocumentOptions)
-}
-
-// GetDocumentAsRelatedWithContext is an alternate form of the GetDocumentAsRelated method which supports a Context parameter
-func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2110,15 +1783,11 @@ func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context,
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
-		"doc_id": *getDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", ""}
+	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2187,11 +1856,6 @@ func (cloudant *CloudantV1) GetDocumentAsRelatedWithContext(ctx context.Context,
 // Returns document with the specified `doc_id` from the specified database. Unless you request a specific revision, the
 // latest revision of the document is always returned.
 func (cloudant *CloudantV1) GetDocumentAsStream(getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.GetDocumentAsStreamWithContext(context.Background(), getDocumentOptions)
-}
-
-// GetDocumentAsStreamWithContext is an alternate form of the GetDocumentAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, getDocumentOptions *GetDocumentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentOptions, "getDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2201,15 +1865,11 @@ func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, 
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDocumentOptions.Db,
-		"doc_id": *getDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", ""}
+	pathParameters := []string{*getDocumentOptions.Db, *getDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2278,11 +1938,6 @@ func (cloudant *CloudantV1) GetDocumentAsStreamWithContext(ctx context.Context, 
 // The PUT method creates a new named document, or creates a new revision of the existing document. Unlike the `POST
 // /{db}` request, you must specify the document ID in the request URL.
 func (cloudant *CloudantV1) PutDocument(putDocumentOptions *PutDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.PutDocumentWithContext(context.Background(), putDocumentOptions)
-}
-
-// PutDocumentWithContext is an alternate form of the PutDocument method which supports a Context parameter
-func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocumentOptions *PutDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putDocumentOptions, "putDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2296,15 +1951,11 @@ func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocum
 		putDocumentOptions.SetContentType("application/json")
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *putDocumentOptions.Db,
-		"doc_id": *putDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", ""}
+	pathParameters := []string{*putDocumentOptions.Db, *putDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2366,11 +2017,6 @@ func (cloudant *CloudantV1) PutDocumentWithContext(ctx context.Context, putDocum
 // Content-Length specifies the length of the data. If you add any of the query arguments, then the resulting HTTP
 // headers correspond to what is returned for the equivalent GET request.
 func (cloudant *CloudantV1) HeadDesignDocument(headDesignDocumentOptions *HeadDesignDocumentOptions) (response *core.DetailedResponse, err error) {
-	return cloudant.HeadDesignDocumentWithContext(context.Background(), headDesignDocumentOptions)
-}
-
-// HeadDesignDocumentWithContext is an alternate form of the HeadDesignDocument method which supports a Context parameter
-func (cloudant *CloudantV1) HeadDesignDocumentWithContext(ctx context.Context, headDesignDocumentOptions *HeadDesignDocumentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headDesignDocumentOptions, "headDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2380,15 +2026,11 @@ func (cloudant *CloudantV1) HeadDesignDocumentWithContext(ctx context.Context, h
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *headDesignDocumentOptions.Db,
-		"ddoc": *headDesignDocumentOptions.Ddoc,
-	}
+	pathSegments := []string{"", "_design"}
+	pathParameters := []string{*headDesignDocumentOptions.Db, *headDesignDocumentOptions.Ddoc}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2420,11 +2062,6 @@ func (cloudant *CloudantV1) HeadDesignDocumentWithContext(ctx context.Context, h
 // this field are not returned with requests but stay in the database. You must supply the current (latest) revision,
 // either by using the `rev` parameter or by using the `If-Match` header to specify the revision.
 func (cloudant *CloudantV1) DeleteDesignDocument(deleteDesignDocumentOptions *DeleteDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.DeleteDesignDocumentWithContext(context.Background(), deleteDesignDocumentOptions)
-}
-
-// DeleteDesignDocumentWithContext is an alternate form of the DeleteDesignDocument method which supports a Context parameter
-func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context, deleteDesignDocumentOptions *DeleteDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteDesignDocumentOptions, "deleteDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2434,15 +2071,11 @@ func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context,
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *deleteDesignDocumentOptions.Db,
-		"ddoc": *deleteDesignDocumentOptions.Ddoc,
-	}
+	pathSegments := []string{"", "_design"}
+	pathParameters := []string{*deleteDesignDocumentOptions.Db, *deleteDesignDocumentOptions.Ddoc}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2490,11 +2123,6 @@ func (cloudant *CloudantV1) DeleteDesignDocumentWithContext(ctx context.Context,
 // Returns design document with the specified `doc_id` from the specified database. Unless you request a specific
 // revision, the current revision of the design document is always returned.
 func (cloudant *CloudantV1) GetDesignDocument(getDesignDocumentOptions *GetDesignDocumentOptions) (result *DesignDocument, response *core.DetailedResponse, err error) {
-	return cloudant.GetDesignDocumentWithContext(context.Background(), getDesignDocumentOptions)
-}
-
-// GetDesignDocumentWithContext is an alternate form of the GetDesignDocument method which supports a Context parameter
-func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, getDesignDocumentOptions *GetDesignDocumentOptions) (result *DesignDocument, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDesignDocumentOptions, "getDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2504,15 +2132,11 @@ func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, ge
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDesignDocumentOptions.Db,
-		"ddoc": *getDesignDocumentOptions.Ddoc,
-	}
+	pathSegments := []string{"", "_design"}
+	pathParameters := []string{*getDesignDocumentOptions.Db, *getDesignDocumentOptions.Ddoc}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2589,11 +2213,6 @@ func (cloudant *CloudantV1) GetDesignDocumentWithContext(ctx context.Context, ge
 // PutDesignDocument : Create or modify a design document
 // The PUT method creates a new named design document, or creates a new revision of the existing design document.
 func (cloudant *CloudantV1) PutDesignDocument(putDesignDocumentOptions *PutDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.PutDesignDocumentWithContext(context.Background(), putDesignDocumentOptions)
-}
-
-// PutDesignDocumentWithContext is an alternate form of the PutDesignDocument method which supports a Context parameter
-func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, putDesignDocumentOptions *PutDesignDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putDesignDocumentOptions, "putDesignDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -2603,15 +2222,11 @@ func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, pu
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *putDesignDocumentOptions.Db,
-		"ddoc": *putDesignDocumentOptions.Ddoc,
-	}
+	pathSegments := []string{"", "_design"}
+	pathParameters := []string{*putDesignDocumentOptions.Db, *putDesignDocumentOptions.Ddoc}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2640,9 +2255,11 @@ func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, pu
 		builder.AddQuery("rev", fmt.Sprint(*putDesignDocumentOptions.Rev))
 	}
 
-	_, err = builder.SetBodyContentJSON(putDesignDocumentOptions.DesignDocument)
-	if err != nil {
-		return
+	if putDesignDocumentOptions.DesignDocument != nil {
+		_, err = builder.SetBodyContentJSON(putDesignDocumentOptions.DesignDocument)
+		if err != nil {
+			return
+		}
 	}
 
 	request, err := builder.Build()
@@ -2668,11 +2285,6 @@ func (cloudant *CloudantV1) PutDesignDocumentWithContext(ctx context.Context, pu
 // Retrieves information about the specified design document, including the index, index size, and current status of the
 // design document and associated index information.
 func (cloudant *CloudantV1) GetDesignDocumentInformation(getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions) (result *DesignDocumentInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetDesignDocumentInformationWithContext(context.Background(), getDesignDocumentInformationOptions)
-}
-
-// GetDesignDocumentInformationWithContext is an alternate form of the GetDesignDocumentInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetDesignDocumentInformationWithContext(ctx context.Context, getDesignDocumentInformationOptions *GetDesignDocumentInformationOptions) (result *DesignDocumentInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDesignDocumentInformationOptions, "getDesignDocumentInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -2682,15 +2294,11 @@ func (cloudant *CloudantV1) GetDesignDocumentInformationWithContext(ctx context.
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDesignDocumentInformationOptions.Db,
-		"ddoc": *getDesignDocumentInformationOptions.Ddoc,
-	}
+	pathSegments := []string{"", "_design", "_info"}
+	pathParameters := []string{*getDesignDocumentInformationOptions.Db, *getDesignDocumentInformationOptions.Ddoc}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_info`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2730,11 +2338,6 @@ func (cloudant *CloudantV1) GetDesignDocumentInformationWithContext(ctx context.
 // request body parameters are specified, results for all design documents in the database are returned. Optionally, the
 // design document content or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostDesignDocs(postDesignDocsOptions *PostDesignDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostDesignDocsWithContext(context.Background(), postDesignDocsOptions)
-}
-
-// PostDesignDocsWithContext is an alternate form of the PostDesignDocs method which supports a Context parameter
-func (cloudant *CloudantV1) PostDesignDocsWithContext(ctx context.Context, postDesignDocsOptions *PostDesignDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postDesignDocsOptions, "postDesignDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -2744,14 +2347,11 @@ func (cloudant *CloudantV1) PostDesignDocsWithContext(ctx context.Context, postD
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postDesignDocsOptions.Db,
-	}
+	pathSegments := []string{"", "_design_docs"}
+	pathParameters := []string{*postDesignDocsOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design_docs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2838,11 +2438,6 @@ func (cloudant *CloudantV1) PostDesignDocsWithContext(ctx context.Context, postD
 // This operation runs multiple view queries of all design documents in the database. This operation enables you to
 // request numerous queries in a single request, in place of multiple POST `/{db}/_design_docs` requests.
 func (cloudant *CloudantV1) PostDesignDocsQueries(postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostDesignDocsQueriesWithContext(context.Background(), postDesignDocsQueriesOptions)
-}
-
-// PostDesignDocsQueriesWithContext is an alternate form of the PostDesignDocsQueries method which supports a Context parameter
-func (cloudant *CloudantV1) PostDesignDocsQueriesWithContext(ctx context.Context, postDesignDocsQueriesOptions *PostDesignDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postDesignDocsQueriesOptions, "postDesignDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -2852,14 +2447,11 @@ func (cloudant *CloudantV1) PostDesignDocsQueriesWithContext(ctx context.Context
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postDesignDocsQueriesOptions.Db,
-	}
+	pathSegments := []string{"", "_design_docs/queries"}
+	pathParameters := []string{*postDesignDocsQueriesOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design_docs/queries`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -2912,11 +2504,6 @@ func (cloudant *CloudantV1) PostDesignDocsQueriesWithContext(ctx context.Context
 // `POST` method is that the query is submitted as a JSON object in the request body. This avoids the limitations of
 // passing query options as URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostView(postViewOptions *PostViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostViewWithContext(context.Background(), postViewOptions)
-}
-
-// PostViewWithContext is an alternate form of the PostView method which supports a Context parameter
-func (cloudant *CloudantV1) PostViewWithContext(ctx context.Context, postViewOptions *PostViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewOptions, "postViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -2926,16 +2513,11 @@ func (cloudant *CloudantV1) PostViewWithContext(ctx context.Context, postViewOpt
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postViewOptions.Db,
-		"ddoc": *postViewOptions.Ddoc,
-		"view": *postViewOptions.View,
-	}
+	pathSegments := []string{"", "_design", "_view"}
+	pathParameters := []string{*postViewOptions.Db, *postViewOptions.Ddoc, *postViewOptions.View}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3042,11 +2624,6 @@ func (cloudant *CloudantV1) PostViewWithContext(ctx context.Context, postViewOpt
 // `POST` method is that the query is submitted as a JSON object in the request body. This avoids the limitations of
 // passing query options as URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostViewAsStream(postViewOptions *PostViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostViewAsStreamWithContext(context.Background(), postViewOptions)
-}
-
-// PostViewAsStreamWithContext is an alternate form of the PostViewAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostViewAsStreamWithContext(ctx context.Context, postViewOptions *PostViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewOptions, "postViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -3056,16 +2633,11 @@ func (cloudant *CloudantV1) PostViewAsStreamWithContext(ctx context.Context, pos
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postViewOptions.Db,
-		"ddoc": *postViewOptions.Ddoc,
-		"view": *postViewOptions.View,
-	}
+	pathSegments := []string{"", "_design", "_view"}
+	pathParameters := []string{*postViewOptions.Db, *postViewOptions.Ddoc, *postViewOptions.View}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3160,11 +2732,6 @@ func (cloudant *CloudantV1) PostViewAsStreamWithContext(ctx context.Context, pos
 // PostViewQueries : Multi-query a MapReduce view
 // This operation runs multiple specified view queries against the view function from the specified design document.
 func (cloudant *CloudantV1) PostViewQueries(postViewQueriesOptions *PostViewQueriesOptions) (result *ViewQueriesResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostViewQueriesWithContext(context.Background(), postViewQueriesOptions)
-}
-
-// PostViewQueriesWithContext is an alternate form of the PostViewQueries method which supports a Context parameter
-func (cloudant *CloudantV1) PostViewQueriesWithContext(ctx context.Context, postViewQueriesOptions *PostViewQueriesOptions) (result *ViewQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewQueriesOptions, "postViewQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -3174,16 +2741,11 @@ func (cloudant *CloudantV1) PostViewQueriesWithContext(ctx context.Context, post
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postViewQueriesOptions.Db,
-		"ddoc": *postViewQueriesOptions.Ddoc,
-		"view": *postViewQueriesOptions.View,
-	}
+	pathSegments := []string{"", "_design", "_view", "queries"}
+	pathParameters := []string{*postViewQueriesOptions.Db, *postViewQueriesOptions.Ddoc, *postViewQueriesOptions.View}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}/queries`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3230,11 +2792,6 @@ func (cloudant *CloudantV1) PostViewQueriesWithContext(ctx context.Context, post
 // PostViewQueriesAsStream : Multi-query a MapReduce view as stream
 // This operation runs multiple specified view queries against the view function from the specified design document.
 func (cloudant *CloudantV1) PostViewQueriesAsStream(postViewQueriesOptions *PostViewQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostViewQueriesAsStreamWithContext(context.Background(), postViewQueriesOptions)
-}
-
-// PostViewQueriesAsStreamWithContext is an alternate form of the PostViewQueriesAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostViewQueriesAsStreamWithContext(ctx context.Context, postViewQueriesOptions *PostViewQueriesOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postViewQueriesOptions, "postViewQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -3244,16 +2801,11 @@ func (cloudant *CloudantV1) PostViewQueriesAsStreamWithContext(ctx context.Conte
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postViewQueriesOptions.Db,
-		"ddoc": *postViewQueriesOptions.Ddoc,
-		"view": *postViewQueriesOptions.View,
-	}
+	pathSegments := []string{"", "_design", "_view", "queries"}
+	pathParameters := []string{*postViewQueriesOptions.Db, *postViewQueriesOptions.Ddoc, *postViewQueriesOptions.View}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_view/{view}/queries`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3291,11 +2843,6 @@ func (cloudant *CloudantV1) PostViewQueriesAsStreamWithContext(ctx context.Conte
 // GetPartitionInformation : Retrieve information about a database partition
 // Given a partition key, return the database name, sizes, partition, doc count, and doc delete count.
 func (cloudant *CloudantV1) GetPartitionInformation(getPartitionInformationOptions *GetPartitionInformationOptions) (result *PartitionInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetPartitionInformationWithContext(context.Background(), getPartitionInformationOptions)
-}
-
-// GetPartitionInformationWithContext is an alternate form of the GetPartitionInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetPartitionInformationWithContext(ctx context.Context, getPartitionInformationOptions *GetPartitionInformationOptions) (result *PartitionInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getPartitionInformationOptions, "getPartitionInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -3305,15 +2852,11 @@ func (cloudant *CloudantV1) GetPartitionInformationWithContext(ctx context.Conte
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getPartitionInformationOptions.Db,
-		"partition_key": *getPartitionInformationOptions.PartitionKey,
-	}
+	pathSegments := []string{"", "_partition"}
+	pathParameters := []string{*getPartitionInformationOptions.Db, *getPartitionInformationOptions.PartitionKey}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3353,11 +2896,6 @@ func (cloudant *CloudantV1) GetPartitionInformationWithContext(ctx context.Conte
 // parameters are specified, results for all documents in the database partition are returned. Optionally, document
 // content or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostPartitionAllDocs(postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionAllDocsWithContext(context.Background(), postPartitionAllDocsOptions)
-}
-
-// PostPartitionAllDocsWithContext is an alternate form of the PostPartitionAllDocs method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionAllDocsWithContext(ctx context.Context, postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionAllDocsOptions, "postPartitionAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -3367,15 +2905,11 @@ func (cloudant *CloudantV1) PostPartitionAllDocsWithContext(ctx context.Context,
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionAllDocsOptions.Db,
-		"partition_key": *postPartitionAllDocsOptions.PartitionKey,
-	}
+	pathSegments := []string{"", "_partition", "_all_docs"}
+	pathParameters := []string{*postPartitionAllDocsOptions.Db, *postPartitionAllDocsOptions.PartitionKey}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_all_docs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3461,11 +2995,6 @@ func (cloudant *CloudantV1) PostPartitionAllDocsWithContext(ctx context.Context,
 // parameters are specified, results for all documents in the database partition are returned. Optionally, document
 // content or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostPartitionAllDocsAsStream(postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionAllDocsAsStreamWithContext(context.Background(), postPartitionAllDocsOptions)
-}
-
-// PostPartitionAllDocsAsStreamWithContext is an alternate form of the PostPartitionAllDocsAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionAllDocsAsStreamWithContext(ctx context.Context, postPartitionAllDocsOptions *PostPartitionAllDocsOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionAllDocsOptions, "postPartitionAllDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -3475,15 +3004,11 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStreamWithContext(ctx context.
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionAllDocsOptions.Db,
-		"partition_key": *postPartitionAllDocsOptions.PartitionKey,
-	}
+	pathSegments := []string{"", "_partition", "_all_docs"}
+	pathParameters := []string{*postPartitionAllDocsOptions.Db, *postPartitionAllDocsOptions.PartitionKey}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_all_docs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3559,11 +3084,6 @@ func (cloudant *CloudantV1) PostPartitionAllDocsAsStreamWithContext(ctx context.
 // Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
 // views. The index function decides what data to index and store in the index.
 func (cloudant *CloudantV1) PostPartitionSearch(postPartitionSearchOptions *PostPartitionSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionSearchWithContext(context.Background(), postPartitionSearchOptions)
-}
-
-// PostPartitionSearchWithContext is an alternate form of the PostPartitionSearch method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, postPartitionSearchOptions *PostPartitionSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionSearchOptions, "postPartitionSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -3573,17 +3093,11 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionSearchOptions.Db,
-		"partition_key": *postPartitionSearchOptions.PartitionKey,
-		"ddoc": *postPartitionSearchOptions.Ddoc,
-		"index": *postPartitionSearchOptions.Index,
-	}
+	pathSegments := []string{"", "_partition", "_design", "_search"}
+	pathParameters := []string{*postPartitionSearchOptions.Db, *postPartitionSearchOptions.PartitionKey, *postPartitionSearchOptions.Ddoc, *postPartitionSearchOptions.Index}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3600,9 +3114,6 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postPartitionSearchOptions.Query != nil {
-		body["query"] = postPartitionSearchOptions.Query
-	}
 	if postPartitionSearchOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionSearchOptions.Bookmark
 	}
@@ -3629,6 +3140,9 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 	}
 	if postPartitionSearchOptions.Limit != nil {
 		body["limit"] = postPartitionSearchOptions.Limit
+	}
+	if postPartitionSearchOptions.Query != nil {
+		body["query"] = postPartitionSearchOptions.Query
 	}
 	if postPartitionSearchOptions.Sort != nil {
 		body["sort"] = postPartitionSearchOptions.Sort
@@ -3665,11 +3179,6 @@ func (cloudant *CloudantV1) PostPartitionSearchWithContext(ctx context.Context, 
 // Lucene Query Parser Syntax. Search indexes are defined by an index function, similar to a map function in MapReduce
 // views. The index function decides what data to index and store in the index.
 func (cloudant *CloudantV1) PostPartitionSearchAsStream(postPartitionSearchOptions *PostPartitionSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionSearchAsStreamWithContext(context.Background(), postPartitionSearchOptions)
-}
-
-// PostPartitionSearchAsStreamWithContext is an alternate form of the PostPartitionSearchAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.Context, postPartitionSearchOptions *PostPartitionSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionSearchOptions, "postPartitionSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -3679,17 +3188,11 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.C
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionSearchOptions.Db,
-		"partition_key": *postPartitionSearchOptions.PartitionKey,
-		"ddoc": *postPartitionSearchOptions.Ddoc,
-		"index": *postPartitionSearchOptions.Index,
-	}
+	pathSegments := []string{"", "_partition", "_design", "_search"}
+	pathParameters := []string{*postPartitionSearchOptions.Db, *postPartitionSearchOptions.PartitionKey, *postPartitionSearchOptions.Ddoc, *postPartitionSearchOptions.Index}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_search/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3706,9 +3209,6 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.C
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postPartitionSearchOptions.Query != nil {
-		body["query"] = postPartitionSearchOptions.Query
-	}
 	if postPartitionSearchOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionSearchOptions.Bookmark
 	}
@@ -3735,6 +3235,9 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.C
 	}
 	if postPartitionSearchOptions.Limit != nil {
 		body["limit"] = postPartitionSearchOptions.Limit
+	}
+	if postPartitionSearchOptions.Query != nil {
+		body["query"] = postPartitionSearchOptions.Query
 	}
 	if postPartitionSearchOptions.Sort != nil {
 		body["sort"] = postPartitionSearchOptions.Sort
@@ -3763,11 +3266,6 @@ func (cloudant *CloudantV1) PostPartitionSearchAsStreamWithContext(ctx context.C
 // results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
 // API.
 func (cloudant *CloudantV1) PostPartitionView(postPartitionViewOptions *PostPartitionViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionViewWithContext(context.Background(), postPartitionViewOptions)
-}
-
-// PostPartitionViewWithContext is an alternate form of the PostPartitionView method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, postPartitionViewOptions *PostPartitionViewOptions) (result *ViewResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionViewOptions, "postPartitionViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -3777,17 +3275,11 @@ func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, po
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionViewOptions.Db,
-		"partition_key": *postPartitionViewOptions.PartitionKey,
-		"ddoc": *postPartitionViewOptions.Ddoc,
-		"view": *postPartitionViewOptions.View,
-	}
+	pathSegments := []string{"", "_partition", "_design", "_view"}
+	pathParameters := []string{*postPartitionViewOptions.Db, *postPartitionViewOptions.PartitionKey, *postPartitionViewOptions.Ddoc, *postPartitionViewOptions.View}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -3894,11 +3386,6 @@ func (cloudant *CloudantV1) PostPartitionViewWithContext(ctx context.Context, po
 // results. The remainder of the POST view functionality is identical to the `GET /{db}/_design/{ddoc}/_view/{view}`
 // API.
 func (cloudant *CloudantV1) PostPartitionViewAsStream(postPartitionViewOptions *PostPartitionViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionViewAsStreamWithContext(context.Background(), postPartitionViewOptions)
-}
-
-// PostPartitionViewAsStreamWithContext is an alternate form of the PostPartitionViewAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Context, postPartitionViewOptions *PostPartitionViewOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionViewOptions, "postPartitionViewOptions cannot be nil")
 	if err != nil {
 		return
@@ -3908,17 +3395,11 @@ func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Con
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionViewOptions.Db,
-		"partition_key": *postPartitionViewOptions.PartitionKey,
-		"ddoc": *postPartitionViewOptions.Ddoc,
-		"view": *postPartitionViewOptions.View,
-	}
+	pathSegments := []string{"", "_partition", "_design", "_view"}
+	pathParameters := []string{*postPartitionViewOptions.Db, *postPartitionViewOptions.PartitionKey, *postPartitionViewOptions.Ddoc, *postPartitionViewOptions.View}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_design/{ddoc}/_view/{view}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4014,11 +3495,6 @@ func (cloudant *CloudantV1) PostPartitionViewAsStreamWithContext(ctx context.Con
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostPartitionFind(postPartitionFindOptions *PostPartitionFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionFindWithContext(context.Background(), postPartitionFindOptions)
-}
-
-// PostPartitionFindWithContext is an alternate form of the PostPartitionFind method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, postPartitionFindOptions *PostPartitionFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionFindOptions, "postPartitionFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -4028,15 +3504,11 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionFindOptions.Db,
-		"partition_key": *postPartitionFindOptions.PartitionKey,
-	}
+	pathSegments := []string{"", "_partition", "_find"}
+	pathParameters := []string{*postPartitionFindOptions.Db, *postPartitionFindOptions.PartitionKey}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_find`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4053,9 +3525,6 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postPartitionFindOptions.Selector != nil {
-		body["selector"] = postPartitionFindOptions.Selector
-	}
 	if postPartitionFindOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionFindOptions.Bookmark
 	}
@@ -4070,6 +3539,9 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 	}
 	if postPartitionFindOptions.Limit != nil {
 		body["limit"] = postPartitionFindOptions.Limit
+	}
+	if postPartitionFindOptions.Selector != nil {
+		body["selector"] = postPartitionFindOptions.Selector
 	}
 	if postPartitionFindOptions.Skip != nil {
 		body["skip"] = postPartitionFindOptions.Skip
@@ -4114,11 +3586,6 @@ func (cloudant *CloudantV1) PostPartitionFindWithContext(ctx context.Context, po
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostPartitionFindAsStream(postPartitionFindOptions *PostPartitionFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostPartitionFindAsStreamWithContext(context.Background(), postPartitionFindOptions)
-}
-
-// PostPartitionFindAsStreamWithContext is an alternate form of the PostPartitionFindAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Context, postPartitionFindOptions *PostPartitionFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postPartitionFindOptions, "postPartitionFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -4128,15 +3595,11 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postPartitionFindOptions.Db,
-		"partition_key": *postPartitionFindOptions.PartitionKey,
-	}
+	pathSegments := []string{"", "_partition", "_find"}
+	pathParameters := []string{*postPartitionFindOptions.Db, *postPartitionFindOptions.PartitionKey}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_partition/{partition_key}/_find`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4153,9 +3616,6 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postPartitionFindOptions.Selector != nil {
-		body["selector"] = postPartitionFindOptions.Selector
-	}
 	if postPartitionFindOptions.Bookmark != nil {
 		body["bookmark"] = postPartitionFindOptions.Bookmark
 	}
@@ -4170,6 +3630,9 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 	}
 	if postPartitionFindOptions.Limit != nil {
 		body["limit"] = postPartitionFindOptions.Limit
+	}
+	if postPartitionFindOptions.Selector != nil {
+		body["selector"] = postPartitionFindOptions.Selector
 	}
 	if postPartitionFindOptions.Skip != nil {
 		body["skip"] = postPartitionFindOptions.Skip
@@ -4203,13 +3666,8 @@ func (cloudant *CloudantV1) PostPartitionFindAsStreamWithContext(ctx context.Con
 
 // PostExplain : Retrieve information about which index is used for a query
 // Shows which index is being used by the query. Parameters are the same as the [`_find`
-// endpoint](#query-an-index-by-using-selector-syntax).
+// endpoint](#query-an-index-by-using-selector-syntax.
 func (cloudant *CloudantV1) PostExplain(postExplainOptions *PostExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostExplainWithContext(context.Background(), postExplainOptions)
-}
-
-// PostExplainWithContext is an alternate form of the PostExplain method which supports a Context parameter
-func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExplainOptions *PostExplainOptions) (result *ExplainResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postExplainOptions, "postExplainOptions cannot be nil")
 	if err != nil {
 		return
@@ -4219,14 +3677,11 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postExplainOptions.Db,
-	}
+	pathSegments := []string{"", "_explain"}
+	pathParameters := []string{*postExplainOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_explain`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4243,9 +3698,6 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postExplainOptions.Selector != nil {
-		body["selector"] = postExplainOptions.Selector
-	}
 	if postExplainOptions.Bookmark != nil {
 		body["bookmark"] = postExplainOptions.Bookmark
 	}
@@ -4260,6 +3712,9 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 	}
 	if postExplainOptions.Limit != nil {
 		body["limit"] = postExplainOptions.Limit
+	}
+	if postExplainOptions.Selector != nil {
+		body["selector"] = postExplainOptions.Selector
 	}
 	if postExplainOptions.Skip != nil {
 		body["skip"] = postExplainOptions.Skip
@@ -4307,11 +3762,6 @@ func (cloudant *CloudantV1) PostExplainWithContext(ctx context.Context, postExpl
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostFind(postFindOptions *PostFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostFindWithContext(context.Background(), postFindOptions)
-}
-
-// PostFindWithContext is an alternate form of the PostFind method which supports a Context parameter
-func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOptions *PostFindOptions) (result *FindResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postFindOptions, "postFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -4321,14 +3771,11 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postFindOptions.Db,
-	}
+	pathSegments := []string{"", "_find"}
+	pathParameters := []string{*postFindOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_find`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4345,9 +3792,6 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postFindOptions.Selector != nil {
-		body["selector"] = postFindOptions.Selector
-	}
 	if postFindOptions.Bookmark != nil {
 		body["bookmark"] = postFindOptions.Bookmark
 	}
@@ -4362,6 +3806,9 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 	}
 	if postFindOptions.Limit != nil {
 		body["limit"] = postFindOptions.Limit
+	}
+	if postFindOptions.Selector != nil {
+		body["selector"] = postFindOptions.Selector
 	}
 	if postFindOptions.Skip != nil {
 		body["skip"] = postFindOptions.Skip
@@ -4409,11 +3856,6 @@ func (cloudant *CloudantV1) PostFindWithContext(ctx context.Context, postFindOpt
 // Query documents by using a declarative JSON querying syntax. Queries can use the built-in `_all_docs` index or custom
 // indices, specified by using the `_index` endpoint.
 func (cloudant *CloudantV1) PostFindAsStream(postFindOptions *PostFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostFindAsStreamWithContext(context.Background(), postFindOptions)
-}
-
-// PostFindAsStreamWithContext is an alternate form of the PostFindAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, postFindOptions *PostFindOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postFindOptions, "postFindOptions cannot be nil")
 	if err != nil {
 		return
@@ -4423,14 +3865,11 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postFindOptions.Db,
-	}
+	pathSegments := []string{"", "_find"}
+	pathParameters := []string{*postFindOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_find`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4447,9 +3886,6 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postFindOptions.Selector != nil {
-		body["selector"] = postFindOptions.Selector
-	}
 	if postFindOptions.Bookmark != nil {
 		body["bookmark"] = postFindOptions.Bookmark
 	}
@@ -4464,6 +3900,9 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 	}
 	if postFindOptions.Limit != nil {
 		body["limit"] = postFindOptions.Limit
+	}
+	if postFindOptions.Selector != nil {
+		body["selector"] = postFindOptions.Selector
 	}
 	if postFindOptions.Skip != nil {
 		body["skip"] = postFindOptions.Skip
@@ -4503,11 +3942,6 @@ func (cloudant *CloudantV1) PostFindAsStreamWithContext(ctx context.Context, pos
 // including the primary index. In addition to the information available through this API, indexes are also stored in
 // the `indexes` property of design documents.
 func (cloudant *CloudantV1) GetIndexesInformation(getIndexesInformationOptions *GetIndexesInformationOptions) (result *IndexesInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetIndexesInformationWithContext(context.Background(), getIndexesInformationOptions)
-}
-
-// GetIndexesInformationWithContext is an alternate form of the GetIndexesInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetIndexesInformationWithContext(ctx context.Context, getIndexesInformationOptions *GetIndexesInformationOptions) (result *IndexesInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getIndexesInformationOptions, "getIndexesInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -4517,14 +3951,11 @@ func (cloudant *CloudantV1) GetIndexesInformationWithContext(ctx context.Context
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getIndexesInformationOptions.Db,
-	}
+	pathSegments := []string{"", "_index"}
+	pathParameters := []string{*getIndexesInformationOptions.Db}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4561,11 +3992,6 @@ func (cloudant *CloudantV1) GetIndexesInformationWithContext(ctx context.Context
 // PostIndex : Create a new index on a database
 // Create a new index on a database.
 func (cloudant *CloudantV1) PostIndex(postIndexOptions *PostIndexOptions) (result *IndexResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostIndexWithContext(context.Background(), postIndexOptions)
-}
-
-// PostIndexWithContext is an alternate form of the PostIndex method which supports a Context parameter
-func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexOptions *PostIndexOptions) (result *IndexResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postIndexOptions, "postIndexOptions cannot be nil")
 	if err != nil {
 		return
@@ -4575,14 +4001,11 @@ func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexO
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postIndexOptions.Db,
-	}
+	pathSegments := []string{"", "_index"}
+	pathParameters := []string{*postIndexOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4599,14 +4022,14 @@ func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexO
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postIndexOptions.Index != nil {
-		body["index"] = postIndexOptions.Index
-	}
 	if postIndexOptions.Ddoc != nil {
 		body["ddoc"] = postIndexOptions.Ddoc
 	}
 	if postIndexOptions.Def != nil {
 		body["def"] = postIndexOptions.Def
+	}
+	if postIndexOptions.Index != nil {
+		body["index"] = postIndexOptions.Index
 	}
 	if postIndexOptions.Name != nil {
 		body["name"] = postIndexOptions.Name
@@ -4646,11 +4069,6 @@ func (cloudant *CloudantV1) PostIndexWithContext(ctx context.Context, postIndexO
 
 // DeleteIndex : Delete an index
 func (cloudant *CloudantV1) DeleteIndex(deleteIndexOptions *DeleteIndexOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.DeleteIndexWithContext(context.Background(), deleteIndexOptions)
-}
-
-// DeleteIndexWithContext is an alternate form of the DeleteIndex method which supports a Context parameter
-func (cloudant *CloudantV1) DeleteIndexWithContext(ctx context.Context, deleteIndexOptions *DeleteIndexOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteIndexOptions, "deleteIndexOptions cannot be nil")
 	if err != nil {
 		return
@@ -4660,17 +4078,11 @@ func (cloudant *CloudantV1) DeleteIndexWithContext(ctx context.Context, deleteIn
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *deleteIndexOptions.Db,
-		"ddoc": *deleteIndexOptions.Ddoc,
-		"type": *deleteIndexOptions.Type,
-		"index": *deleteIndexOptions.Index,
-	}
+	pathSegments := []string{"", "_index/_design", "", ""}
+	pathParameters := []string{*deleteIndexOptions.Db, *deleteIndexOptions.Ddoc, *deleteIndexOptions.Type, *deleteIndexOptions.Index}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_index/_design/{ddoc}/{type}/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4708,24 +4120,16 @@ func (cloudant *CloudantV1) DeleteIndexWithContext(ctx context.Context, deleteIn
 // Returns the results of analyzer tokenization of the provided sample text. This endpoint can be used for testing
 // analyzer tokenization.
 func (cloudant *CloudantV1) PostSearchAnalyze(postSearchAnalyzeOptions *PostSearchAnalyzeOptions) (result *SearchAnalyzeResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostSearchAnalyzeWithContext(context.Background(), postSearchAnalyzeOptions)
-}
-
-// PostSearchAnalyzeWithContext is an alternate form of the PostSearchAnalyze method which supports a Context parameter
-func (cloudant *CloudantV1) PostSearchAnalyzeWithContext(ctx context.Context, postSearchAnalyzeOptions *PostSearchAnalyzeOptions) (result *SearchAnalyzeResult, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postSearchAnalyzeOptions, "postSearchAnalyzeOptions cannot be nil")
-	if err != nil {
-		return
-	}
 	err = core.ValidateStruct(postSearchAnalyzeOptions, "postSearchAnalyzeOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_search_analyze"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_search_analyze`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4779,11 +4183,6 @@ func (cloudant *CloudantV1) PostSearchAnalyzeWithContext(ctx context.Context, po
 // the query is submitted as a JSON object in the request body. This avoids the limitations of passing query options as
 // URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostSearch(postSearchOptions *PostSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostSearchWithContext(context.Background(), postSearchOptions)
-}
-
-// PostSearchWithContext is an alternate form of the PostSearch method which supports a Context parameter
-func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearchOptions *PostSearchOptions) (result *SearchResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postSearchOptions, "postSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -4793,16 +4192,11 @@ func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearc
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postSearchOptions.Db,
-		"ddoc": *postSearchOptions.Ddoc,
-		"index": *postSearchOptions.Index,
-	}
+	pathSegments := []string{"", "_design", "_search"}
+	pathParameters := []string{*postSearchOptions.Db, *postSearchOptions.Ddoc, *postSearchOptions.Index}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4819,9 +4213,6 @@ func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearc
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postSearchOptions.Query != nil {
-		body["query"] = postSearchOptions.Query
-	}
 	if postSearchOptions.Bookmark != nil {
 		body["bookmark"] = postSearchOptions.Bookmark
 	}
@@ -4848,6 +4239,9 @@ func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearc
 	}
 	if postSearchOptions.Limit != nil {
 		body["limit"] = postSearchOptions.Limit
+	}
+	if postSearchOptions.Query != nil {
+		body["query"] = postSearchOptions.Query
 	}
 	if postSearchOptions.Sort != nil {
 		body["sort"] = postSearchOptions.Sort
@@ -4904,11 +4298,6 @@ func (cloudant *CloudantV1) PostSearchWithContext(ctx context.Context, postSearc
 // the query is submitted as a JSON object in the request body. This avoids the limitations of passing query options as
 // URL query parameters of a `GET` request.
 func (cloudant *CloudantV1) PostSearchAsStream(postSearchOptions *PostSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.PostSearchAsStreamWithContext(context.Background(), postSearchOptions)
-}
-
-// PostSearchAsStreamWithContext is an alternate form of the PostSearchAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, postSearchOptions *PostSearchOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postSearchOptions, "postSearchOptions cannot be nil")
 	if err != nil {
 		return
@@ -4918,16 +4307,11 @@ func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, p
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postSearchOptions.Db,
-		"ddoc": *postSearchOptions.Ddoc,
-		"index": *postSearchOptions.Index,
-	}
+	pathSegments := []string{"", "_design", "_search"}
+	pathParameters := []string{*postSearchOptions.Db, *postSearchOptions.Ddoc, *postSearchOptions.Index}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -4944,9 +4328,6 @@ func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, p
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if postSearchOptions.Query != nil {
-		body["query"] = postSearchOptions.Query
-	}
 	if postSearchOptions.Bookmark != nil {
 		body["bookmark"] = postSearchOptions.Bookmark
 	}
@@ -4973,6 +4354,9 @@ func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, p
 	}
 	if postSearchOptions.Limit != nil {
 		body["limit"] = postSearchOptions.Limit
+	}
+	if postSearchOptions.Query != nil {
+		body["query"] = postSearchOptions.Query
 	}
 	if postSearchOptions.Sort != nil {
 		body["sort"] = postSearchOptions.Sort
@@ -5016,11 +4400,6 @@ func (cloudant *CloudantV1) PostSearchAsStreamWithContext(ctx context.Context, p
 // GetSearchInfo : Retrieve information about a search index
 // Retrieve search index metadata information, such as the size of the index on disk.
 func (cloudant *CloudantV1) GetSearchInfo(getSearchInfoOptions *GetSearchInfoOptions) (result *SearchInfoResult, response *core.DetailedResponse, err error) {
-	return cloudant.GetSearchInfoWithContext(context.Background(), getSearchInfoOptions)
-}
-
-// GetSearchInfoWithContext is an alternate form of the GetSearchInfo method which supports a Context parameter
-func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSearchInfoOptions *GetSearchInfoOptions) (result *SearchInfoResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSearchInfoOptions, "getSearchInfoOptions cannot be nil")
 	if err != nil {
 		return
@@ -5030,16 +4409,11 @@ func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSea
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getSearchInfoOptions.Db,
-		"ddoc": *getSearchInfoOptions.Ddoc,
-		"index": *getSearchInfoOptions.Index,
-	}
+	pathSegments := []string{"", "_design", "_search_info"}
+	pathParameters := []string{*getSearchInfoOptions.Db, *getSearchInfoOptions.Ddoc, *getSearchInfoOptions.Index}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_search_info/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5076,11 +4450,6 @@ func (cloudant *CloudantV1) GetSearchInfoWithContext(ctx context.Context, getSea
 // GetGeo : Query a geospatial index
 // Executes a query against the requested geospatial index from the specified design document.
 func (cloudant *CloudantV1) GetGeo(getGeoOptions *GetGeoOptions) (result *GeoResult, response *core.DetailedResponse, err error) {
-	return cloudant.GetGeoWithContext(context.Background(), getGeoOptions)
-}
-
-// GetGeoWithContext is an alternate form of the GetGeo method which supports a Context parameter
-func (cloudant *CloudantV1) GetGeoWithContext(ctx context.Context, getGeoOptions *GetGeoOptions) (result *GeoResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getGeoOptions, "getGeoOptions cannot be nil")
 	if err != nil {
 		return
@@ -5090,16 +4459,11 @@ func (cloudant *CloudantV1) GetGeoWithContext(ctx context.Context, getGeoOptions
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getGeoOptions.Db,
-		"ddoc": *getGeoOptions.Ddoc,
-		"index": *getGeoOptions.Index,
-	}
+	pathSegments := []string{"", "_design", "_geo"}
+	pathParameters := []string{*getGeoOptions.Db, *getGeoOptions.Ddoc, *getGeoOptions.Index}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5182,11 +4546,6 @@ func (cloudant *CloudantV1) GetGeoWithContext(ctx context.Context, getGeoOptions
 // GetGeoAsStream : Query a geospatial index as stream
 // Executes a query against the requested geospatial index from the specified design document.
 func (cloudant *CloudantV1) GetGeoAsStream(getGeoOptions *GetGeoOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.GetGeoAsStreamWithContext(context.Background(), getGeoOptions)
-}
-
-// GetGeoAsStreamWithContext is an alternate form of the GetGeoAsStream method which supports a Context parameter
-func (cloudant *CloudantV1) GetGeoAsStreamWithContext(ctx context.Context, getGeoOptions *GetGeoOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getGeoOptions, "getGeoOptions cannot be nil")
 	if err != nil {
 		return
@@ -5196,16 +4555,11 @@ func (cloudant *CloudantV1) GetGeoAsStreamWithContext(ctx context.Context, getGe
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getGeoOptions.Db,
-		"ddoc": *getGeoOptions.Ddoc,
-		"index": *getGeoOptions.Index,
-	}
+	pathSegments := []string{"", "_design", "_geo"}
+	pathParameters := []string{*getGeoOptions.Db, *getGeoOptions.Ddoc, *getGeoOptions.Index}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5279,11 +4633,6 @@ func (cloudant *CloudantV1) GetGeoAsStreamWithContext(ctx context.Context, getGe
 // PostGeoCleanup : Cleanup old geospatial indexes
 // Cleanup old geospatial indexes from disk that have been superseded by newer index builds.
 func (cloudant *CloudantV1) PostGeoCleanup(postGeoCleanupOptions *PostGeoCleanupOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.PostGeoCleanupWithContext(context.Background(), postGeoCleanupOptions)
-}
-
-// PostGeoCleanupWithContext is an alternate form of the PostGeoCleanup method which supports a Context parameter
-func (cloudant *CloudantV1) PostGeoCleanupWithContext(ctx context.Context, postGeoCleanupOptions *PostGeoCleanupOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postGeoCleanupOptions, "postGeoCleanupOptions cannot be nil")
 	if err != nil {
 		return
@@ -5293,14 +4642,11 @@ func (cloudant *CloudantV1) PostGeoCleanupWithContext(ctx context.Context, postG
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postGeoCleanupOptions.Db,
-	}
+	pathSegments := []string{"", "_geo_cleanup"}
+	pathParameters := []string{*postGeoCleanupOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_geo_cleanup`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5336,11 +4682,6 @@ func (cloudant *CloudantV1) PostGeoCleanupWithContext(ctx context.Context, postG
 
 // GetGeoIndexInformation : Retrieve information about a geospatial index
 func (cloudant *CloudantV1) GetGeoIndexInformation(getGeoIndexInformationOptions *GetGeoIndexInformationOptions) (result *GeoIndexInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetGeoIndexInformationWithContext(context.Background(), getGeoIndexInformationOptions)
-}
-
-// GetGeoIndexInformationWithContext is an alternate form of the GetGeoIndexInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetGeoIndexInformationWithContext(ctx context.Context, getGeoIndexInformationOptions *GetGeoIndexInformationOptions) (result *GeoIndexInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getGeoIndexInformationOptions, "getGeoIndexInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -5350,16 +4691,11 @@ func (cloudant *CloudantV1) GetGeoIndexInformationWithContext(ctx context.Contex
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getGeoIndexInformationOptions.Db,
-		"ddoc": *getGeoIndexInformationOptions.Ddoc,
-		"index": *getGeoIndexInformationOptions.Index,
-	}
+	pathSegments := []string{"", "_design", "_geo_info"}
+	pathParameters := []string{*getGeoIndexInformationOptions.Db, *getGeoIndexInformationOptions.Ddoc, *getGeoIndexInformationOptions.Index}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_design/{ddoc}/_geo_info/{index}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5399,20 +4735,16 @@ func (cloudant *CloudantV1) GetGeoIndexInformationWithContext(ctx context.Contex
 // might repeat changes. Polling modes for this method work like polling modes for the changes feed.
 // **Note: This endpoint requires _admin or _db_updates role and is only available on dedicated clusters.**.
 func (cloudant *CloudantV1) GetDbUpdates(getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
-	return cloudant.GetDbUpdatesWithContext(context.Background(), getDbUpdatesOptions)
-}
-
-// GetDbUpdatesWithContext is an alternate form of the GetDbUpdates method which supports a Context parameter
-func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUpdatesOptions *GetDbUpdatesOptions) (result *DbUpdates, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getDbUpdatesOptions, "getDbUpdatesOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_db_updates"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_db_updates`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5462,11 +4794,6 @@ func (cloudant *CloudantV1) GetDbUpdatesWithContext(ctx context.Context, getDbUp
 // HeadReplicationDocument : Retrieve the HTTP headers for a replication document
 // Retrieves the HTTP headers for a replication document from the `_replicator` database.
 func (cloudant *CloudantV1) HeadReplicationDocument(headReplicationDocumentOptions *HeadReplicationDocumentOptions) (response *core.DetailedResponse, err error) {
-	return cloudant.HeadReplicationDocumentWithContext(context.Background(), headReplicationDocumentOptions)
-}
-
-// HeadReplicationDocumentWithContext is an alternate form of the HeadReplicationDocument method which supports a Context parameter
-func (cloudant *CloudantV1) HeadReplicationDocumentWithContext(ctx context.Context, headReplicationDocumentOptions *HeadReplicationDocumentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headReplicationDocumentOptions, "headReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5476,14 +4803,11 @@ func (cloudant *CloudantV1) HeadReplicationDocumentWithContext(ctx context.Conte
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"doc_id": *headReplicationDocumentOptions.DocID,
-	}
+	pathSegments := []string{"_replicator"}
+	pathParameters := []string{*headReplicationDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5514,11 +4838,6 @@ func (cloudant *CloudantV1) HeadReplicationDocumentWithContext(ctx context.Conte
 // Returns the HTTP headers that contain a minimal amount of information about the specified replication task. Only the
 // header information is returned.
 func (cloudant *CloudantV1) HeadSchedulerJob(headSchedulerJobOptions *HeadSchedulerJobOptions) (response *core.DetailedResponse, err error) {
-	return cloudant.HeadSchedulerJobWithContext(context.Background(), headSchedulerJobOptions)
-}
-
-// HeadSchedulerJobWithContext is an alternate form of the HeadSchedulerJob method which supports a Context parameter
-func (cloudant *CloudantV1) HeadSchedulerJobWithContext(ctx context.Context, headSchedulerJobOptions *HeadSchedulerJobOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headSchedulerJobOptions, "headSchedulerJobOptions cannot be nil")
 	if err != nil {
 		return
@@ -5528,14 +4847,11 @@ func (cloudant *CloudantV1) HeadSchedulerJobWithContext(ctx context.Context, hea
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"job_id": *headSchedulerJobOptions.JobID,
-	}
+	pathSegments := []string{"_scheduler/jobs"}
+	pathParameters := []string{*headSchedulerJobOptions.JobID}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs/{job_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5562,24 +4878,16 @@ func (cloudant *CloudantV1) HeadSchedulerJobWithContext(ctx context.Context, hea
 // PostReplicate : Create or modify a replication operation
 // Requests, configures, or stops a replicate operation.
 func (cloudant *CloudantV1) PostReplicate(postReplicateOptions *PostReplicateOptions) (result *ReplicationResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostReplicateWithContext(context.Background(), postReplicateOptions)
-}
-
-// PostReplicateWithContext is an alternate form of the PostReplicate method which supports a Context parameter
-func (cloudant *CloudantV1) PostReplicateWithContext(ctx context.Context, postReplicateOptions *PostReplicateOptions) (result *ReplicationResult, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postReplicateOptions, "postReplicateOptions cannot be nil")
-	if err != nil {
-		return
-	}
 	err = core.ValidateStruct(postReplicateOptions, "postReplicateOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_replicate"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicate`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5595,9 +4903,11 @@ func (cloudant *CloudantV1) PostReplicateWithContext(ctx context.Context, postRe
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	_, err = builder.SetBodyContentJSON(postReplicateOptions.ReplicationDocument)
-	if err != nil {
-		return
+	if postReplicateOptions.ReplicationDocument != nil {
+		_, err = builder.SetBodyContentJSON(postReplicateOptions.ReplicationDocument)
+		if err != nil {
+			return
+		}
 	}
 
 	request, err := builder.Build()
@@ -5622,11 +4932,6 @@ func (cloudant *CloudantV1) PostReplicateWithContext(ctx context.Context, postRe
 // DeleteReplicationDocument : Cancel a replication
 // Cancels a replication by deleting the document that describes it from the `_replicator` database.
 func (cloudant *CloudantV1) DeleteReplicationDocument(deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.DeleteReplicationDocumentWithContext(context.Background(), deleteReplicationDocumentOptions)
-}
-
-// DeleteReplicationDocumentWithContext is an alternate form of the DeleteReplicationDocument method which supports a Context parameter
-func (cloudant *CloudantV1) DeleteReplicationDocumentWithContext(ctx context.Context, deleteReplicationDocumentOptions *DeleteReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteReplicationDocumentOptions, "deleteReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5636,14 +4941,11 @@ func (cloudant *CloudantV1) DeleteReplicationDocumentWithContext(ctx context.Con
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"doc_id": *deleteReplicationDocumentOptions.DocID,
-	}
+	pathSegments := []string{"_replicator"}
+	pathParameters := []string{*deleteReplicationDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5691,11 +4993,6 @@ func (cloudant *CloudantV1) DeleteReplicationDocumentWithContext(ctx context.Con
 // Retrieves a replication document from the `_replicator` database to view the configuration of the replication. The
 // status of the replication is no longer recorded in the document but can be checked via the replication scheduler.
 func (cloudant *CloudantV1) GetReplicationDocument(getReplicationDocumentOptions *GetReplicationDocumentOptions) (result *ReplicationDocument, response *core.DetailedResponse, err error) {
-	return cloudant.GetReplicationDocumentWithContext(context.Background(), getReplicationDocumentOptions)
-}
-
-// GetReplicationDocumentWithContext is an alternate form of the GetReplicationDocument method which supports a Context parameter
-func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Context, getReplicationDocumentOptions *GetReplicationDocumentOptions) (result *ReplicationDocument, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getReplicationDocumentOptions, "getReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5705,14 +5002,11 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"doc_id": *getReplicationDocumentOptions.DocID,
-	}
+	pathSegments := []string{"_replicator"}
+	pathParameters := []string{*getReplicationDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5790,11 +5084,6 @@ func (cloudant *CloudantV1) GetReplicationDocumentWithContext(ctx context.Contex
 // Creates or modifies a document in the `_replicator` database to start a new replication or to edit an existing
 // replication.
 func (cloudant *CloudantV1) PutReplicationDocument(putReplicationDocumentOptions *PutReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.PutReplicationDocumentWithContext(context.Background(), putReplicationDocumentOptions)
-}
-
-// PutReplicationDocumentWithContext is an alternate form of the PutReplicationDocument method which supports a Context parameter
-func (cloudant *CloudantV1) PutReplicationDocumentWithContext(ctx context.Context, putReplicationDocumentOptions *PutReplicationDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putReplicationDocumentOptions, "putReplicationDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5804,14 +5093,11 @@ func (cloudant *CloudantV1) PutReplicationDocumentWithContext(ctx context.Contex
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"doc_id": *putReplicationDocumentOptions.DocID,
-	}
+	pathSegments := []string{"_replicator"}
+	pathParameters := []string{*putReplicationDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_replicator/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5840,9 +5126,11 @@ func (cloudant *CloudantV1) PutReplicationDocumentWithContext(ctx context.Contex
 		builder.AddQuery("rev", fmt.Sprint(*putReplicationDocumentOptions.Rev))
 	}
 
-	_, err = builder.SetBodyContentJSON(putReplicationDocumentOptions.ReplicationDocument)
-	if err != nil {
-		return
+	if putReplicationDocumentOptions.ReplicationDocument != nil {
+		_, err = builder.SetBodyContentJSON(putReplicationDocumentOptions.ReplicationDocument)
+		if err != nil {
+			return
+		}
 	}
 
 	request, err := builder.Build()
@@ -5869,20 +5157,16 @@ func (cloudant *CloudantV1) PutReplicationDocumentWithContext(ctx context.Contex
 // For each document, the endpoint returns the document ID, database, replication ID, source and target, and other
 // information.
 func (cloudant *CloudantV1) GetSchedulerDocs(getSchedulerDocsOptions *GetSchedulerDocsOptions) (result *SchedulerDocsResult, response *core.DetailedResponse, err error) {
-	return cloudant.GetSchedulerDocsWithContext(context.Background(), getSchedulerDocsOptions)
-}
-
-// GetSchedulerDocsWithContext is an alternate form of the GetSchedulerDocs method which supports a Context parameter
-func (cloudant *CloudantV1) GetSchedulerDocsWithContext(ctx context.Context, getSchedulerDocsOptions *GetSchedulerDocsOptions) (result *SchedulerDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getSchedulerDocsOptions, "getSchedulerDocsOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_scheduler/docs"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/docs`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5930,11 +5214,6 @@ func (cloudant *CloudantV1) GetSchedulerDocsWithContext(ctx context.Context, get
 // Retrieves information about a replication document from the replicator database. The endpoint returns the document
 // ID, database, replication ID, source and target, and other information.
 func (cloudant *CloudantV1) GetSchedulerDocument(getSchedulerDocumentOptions *GetSchedulerDocumentOptions) (result *SchedulerDocument, response *core.DetailedResponse, err error) {
-	return cloudant.GetSchedulerDocumentWithContext(context.Background(), getSchedulerDocumentOptions)
-}
-
-// GetSchedulerDocumentWithContext is an alternate form of the GetSchedulerDocument method which supports a Context parameter
-func (cloudant *CloudantV1) GetSchedulerDocumentWithContext(ctx context.Context, getSchedulerDocumentOptions *GetSchedulerDocumentOptions) (result *SchedulerDocument, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSchedulerDocumentOptions, "getSchedulerDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -5944,14 +5223,11 @@ func (cloudant *CloudantV1) GetSchedulerDocumentWithContext(ctx context.Context,
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"doc_id": *getSchedulerDocumentOptions.DocID,
-	}
+	pathSegments := []string{"_scheduler/docs/_replicator"}
+	pathParameters := []string{*getSchedulerDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/docs/_replicator/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -5991,20 +5267,16 @@ func (cloudant *CloudantV1) GetSchedulerDocumentWithContext(ctx context.Context,
 // documents were malformed. Each job description includes source and target information, replication ID, history of
 // recent events, and other information.
 func (cloudant *CloudantV1) GetSchedulerJobs(getSchedulerJobsOptions *GetSchedulerJobsOptions) (result *SchedulerJobsResult, response *core.DetailedResponse, err error) {
-	return cloudant.GetSchedulerJobsWithContext(context.Background(), getSchedulerJobsOptions)
-}
-
-// GetSchedulerJobsWithContext is an alternate form of the GetSchedulerJobs method which supports a Context parameter
-func (cloudant *CloudantV1) GetSchedulerJobsWithContext(ctx context.Context, getSchedulerJobsOptions *GetSchedulerJobsOptions) (result *SchedulerJobsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getSchedulerJobsOptions, "getSchedulerJobsOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_scheduler/jobs"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6048,11 +5320,6 @@ func (cloudant *CloudantV1) GetSchedulerJobsWithContext(ctx context.Context, get
 // GetSchedulerJob : Retrieve a replication scheduler job
 // Retrieves the state of a single replication task based on its replication ID.
 func (cloudant *CloudantV1) GetSchedulerJob(getSchedulerJobOptions *GetSchedulerJobOptions) (result *SchedulerJob, response *core.DetailedResponse, err error) {
-	return cloudant.GetSchedulerJobWithContext(context.Background(), getSchedulerJobOptions)
-}
-
-// GetSchedulerJobWithContext is an alternate form of the GetSchedulerJob method which supports a Context parameter
-func (cloudant *CloudantV1) GetSchedulerJobWithContext(ctx context.Context, getSchedulerJobOptions *GetSchedulerJobOptions) (result *SchedulerJob, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSchedulerJobOptions, "getSchedulerJobOptions cannot be nil")
 	if err != nil {
 		return
@@ -6062,14 +5329,11 @@ func (cloudant *CloudantV1) GetSchedulerJobWithContext(ctx context.Context, getS
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"job_id": *getSchedulerJobOptions.JobID,
-	}
+	pathSegments := []string{"_scheduler/jobs"}
+	pathParameters := []string{*getSchedulerJobOptions.JobID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_scheduler/jobs/{job_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6106,20 +5370,16 @@ func (cloudant *CloudantV1) GetSchedulerJobWithContext(ctx context.Context, getS
 // GetSessionInformation : Retrieve current session cookie information
 // Retrieves information about the authenticated user's session.
 func (cloudant *CloudantV1) GetSessionInformation(getSessionInformationOptions *GetSessionInformationOptions) (result *SessionInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetSessionInformationWithContext(context.Background(), getSessionInformationOptions)
-}
-
-// GetSessionInformationWithContext is an alternate form of the GetSessionInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetSessionInformationWithContext(ctx context.Context, getSessionInformationOptions *GetSessionInformationOptions) (result *SessionInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getSessionInformationOptions, "getSessionInformationOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_session"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_session`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6153,16 +5413,160 @@ func (cloudant *CloudantV1) GetSessionInformationWithContext(ctx context.Context
 	return
 }
 
+// DeleteIamSession : Delete an IAM cookie session
+// Returns a response that instructs the HTTP client to clear the cookie. The session cookies are stateless and cannot
+// be invalidated; hence, this operation is optional and does not invalidate the cookie on the server.
+func (cloudant *CloudantV1) DeleteIamSession(deleteIamSessionOptions *DeleteIamSessionOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(deleteIamSessionOptions, "deleteIamSessionOptions")
+	if err != nil {
+		return
+	}
+
+	pathSegments := []string{"_iam_session"}
+	pathParameters := []string{}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range deleteIamSessionOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "DeleteIamSession")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// GetIamSessionInformation : Retrieve current IAM cookie session information
+// Retrieves information about an IAM cookie session.
+func (cloudant *CloudantV1) GetIamSessionInformation(getIamSessionInformationOptions *GetIamSessionInformationOptions) (result *IamSessionInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(getIamSessionInformationOptions, "getIamSessionInformationOptions")
+	if err != nil {
+		return
+	}
+
+	pathSegments := []string{"_iam_session"}
+	pathParameters := []string{}
+
+	builder := core.NewRequestBuilder(core.GET)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range getIamSessionInformationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetIamSessionInformation")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalIamSessionInformation)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
+// PostIamSession : Create a session cookie by using an IAM token
+// Log in by exchanging an IAM token for an IBM Cloudant cookie.
+func (cloudant *CloudantV1) PostIamSession(postIamSessionOptions *PostIamSessionOptions) (result *Ok, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(postIamSessionOptions, "postIamSessionOptions")
+	if err != nil {
+		return
+	}
+
+	pathSegments := []string{"_iam_session"}
+	pathParameters := []string{}
+
+	builder := core.NewRequestBuilder(core.POST)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postIamSessionOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostIamSession")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if postIamSessionOptions.AccessToken != nil {
+		body["access_token"] = postIamSessionOptions.AccessToken
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
 // GetSecurity : Retrieve database permissions information
 // See who has permission to read, write, and manage the database. The credentials you use to log in to the dashboard
 // automatically include `_admin` permissions to all databases you create. Everyone and everything else, including users
 // you share databases with and API keys you create, must be given a permission level explicitly.
 func (cloudant *CloudantV1) GetSecurity(getSecurityOptions *GetSecurityOptions) (result *Security, response *core.DetailedResponse, err error) {
-	return cloudant.GetSecurityWithContext(context.Background(), getSecurityOptions)
-}
-
-// GetSecurityWithContext is an alternate form of the GetSecurity method which supports a Context parameter
-func (cloudant *CloudantV1) GetSecurityWithContext(ctx context.Context, getSecurityOptions *GetSecurityOptions) (result *Security, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getSecurityOptions, "getSecurityOptions cannot be nil")
 	if err != nil {
 		return
@@ -6172,14 +5576,11 @@ func (cloudant *CloudantV1) GetSecurityWithContext(ctx context.Context, getSecur
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getSecurityOptions.Db,
-	}
+	pathSegments := []string{"", "_security"}
+	pathParameters := []string{*getSecurityOptions.Db}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_security`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6218,11 +5619,6 @@ func (cloudant *CloudantV1) GetSecurityWithContext(ctx context.Context, getSecur
 // CouchDB related permissions. Be careful: by removing a Cloudant API key, a member or an admin from the list of users
 // that have access permissions, you remove it from the list of users that have access to the database.
 func (cloudant *CloudantV1) PutSecurity(putSecurityOptions *PutSecurityOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.PutSecurityWithContext(context.Background(), putSecurityOptions)
-}
-
-// PutSecurityWithContext is an alternate form of the PutSecurity method which supports a Context parameter
-func (cloudant *CloudantV1) PutSecurityWithContext(ctx context.Context, putSecurityOptions *PutSecurityOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putSecurityOptions, "putSecurityOptions cannot be nil")
 	if err != nil {
 		return
@@ -6232,14 +5628,11 @@ func (cloudant *CloudantV1) PutSecurityWithContext(ctx context.Context, putSecur
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *putSecurityOptions.Db,
-	}
+	pathSegments := []string{"", "_security"}
+	pathParameters := []string{*putSecurityOptions.Db}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_security`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6297,20 +5690,16 @@ func (cloudant *CloudantV1) PutSecurityWithContext(ctx context.Context, putSecur
 // account for that person or application. An API key is a randomly generated username and password. The key is given
 // the wanted access permissions for a database.
 func (cloudant *CloudantV1) PostApiKeys(postApiKeysOptions *PostApiKeysOptions) (result *ApiKeysResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostApiKeysWithContext(context.Background(), postApiKeysOptions)
-}
-
-// PostApiKeysWithContext is an alternate form of the PostApiKeys method which supports a Context parameter
-func (cloudant *CloudantV1) PostApiKeysWithContext(ctx context.Context, postApiKeysOptions *PostApiKeysOptions) (result *ApiKeysResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(postApiKeysOptions, "postApiKeysOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_api/v2/api_keys"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/api_keys`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6348,11 +5737,6 @@ func (cloudant *CloudantV1) PostApiKeysWithContext(ctx context.Context, postApiK
 // Modify only Cloudant related permissions to database. Be careful: by removing an API key from the list, you remove
 // the API key from the list of users that have access to the database.
 func (cloudant *CloudantV1) PutCloudantSecurityConfiguration(putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.PutCloudantSecurityConfigurationWithContext(context.Background(), putCloudantSecurityConfigurationOptions)
-}
-
-// PutCloudantSecurityConfigurationWithContext is an alternate form of the PutCloudantSecurityConfiguration method which supports a Context parameter
-func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx context.Context, putCloudantSecurityConfigurationOptions *PutCloudantSecurityConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putCloudantSecurityConfigurationOptions, "putCloudantSecurityConfigurationOptions cannot be nil")
 	if err != nil {
 		return
@@ -6362,14 +5746,11 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx cont
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *putCloudantSecurityConfigurationOptions.Db,
-	}
+	pathSegments := []string{"_api/v2/db", "_security"}
+	pathParameters := []string{*putCloudantSecurityConfigurationOptions.Db}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/db/{db}/_security`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6386,14 +5767,14 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx cont
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if putCloudantSecurityConfigurationOptions.Cloudant != nil {
-		body["cloudant"] = putCloudantSecurityConfigurationOptions.Cloudant
-	}
 	if putCloudantSecurityConfigurationOptions.Admins != nil {
 		body["admins"] = putCloudantSecurityConfigurationOptions.Admins
 	}
 	if putCloudantSecurityConfigurationOptions.Members != nil {
 		body["members"] = putCloudantSecurityConfigurationOptions.Members
+	}
+	if putCloudantSecurityConfigurationOptions.Cloudant != nil {
+		body["cloudant"] = putCloudantSecurityConfigurationOptions.Cloudant
 	}
 	if putCloudantSecurityConfigurationOptions.CouchdbAuthOnly != nil {
 		body["couchdb_auth_only"] = putCloudantSecurityConfigurationOptions.CouchdbAuthOnly
@@ -6425,21 +5806,17 @@ func (cloudant *CloudantV1) PutCloudantSecurityConfigurationWithContext(ctx cont
 // GetCorsInformation : Retrieve CORS configuration information
 // Lists all Cross-origin resource sharing (CORS) configuration. CORS defines a way in which the browser and the server
 // interact to determine whether or not to allow the request.
-func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions) (result *CorsInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetCorsInformationWithContext(context.Background(), getCorsInformationOptions)
-}
-
-// GetCorsInformationWithContext is an alternate form of the GetCorsInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, getCorsInformationOptions *GetCorsInformationOptions) (result *CorsInformation, response *core.DetailedResponse, err error) {
+func (cloudant *CloudantV1) GetCorsInformation(getCorsInformationOptions *GetCorsInformationOptions) (result *CorsConfiguration, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getCorsInformationOptions, "getCorsInformationOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_api/v2/user/config/cors"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/config/cors`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6464,7 +5841,7 @@ func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, g
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCorsInformation)
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCorsConfiguration)
 	if err != nil {
 		return
 	}
@@ -6477,24 +5854,16 @@ func (cloudant *CloudantV1) GetCorsInformationWithContext(ctx context.Context, g
 // Sets the CORS configuration. The configuration applies to all databases and all account level endpoints in your
 // account.
 func (cloudant *CloudantV1) PutCorsConfiguration(putCorsConfigurationOptions *PutCorsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.PutCorsConfigurationWithContext(context.Background(), putCorsConfigurationOptions)
-}
-
-// PutCorsConfigurationWithContext is an alternate form of the PutCorsConfiguration method which supports a Context parameter
-func (cloudant *CloudantV1) PutCorsConfigurationWithContext(ctx context.Context, putCorsConfigurationOptions *PutCorsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(putCorsConfigurationOptions, "putCorsConfigurationOptions cannot be nil")
-	if err != nil {
-		return
-	}
 	err = core.ValidateStruct(putCorsConfigurationOptions, "putCorsConfigurationOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_api/v2/user/config/cors"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/config/cors`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6511,14 +5880,14 @@ func (cloudant *CloudantV1) PutCorsConfigurationWithContext(ctx context.Context,
 	builder.AddHeader("Content-Type", "application/json")
 
 	body := make(map[string]interface{})
-	if putCorsConfigurationOptions.Origins != nil {
-		body["origins"] = putCorsConfigurationOptions.Origins
-	}
 	if putCorsConfigurationOptions.AllowCredentials != nil {
 		body["allow_credentials"] = putCorsConfigurationOptions.AllowCredentials
 	}
 	if putCorsConfigurationOptions.EnableCors != nil {
 		body["enable_cors"] = putCorsConfigurationOptions.EnableCors
+	}
+	if putCorsConfigurationOptions.Origins != nil {
+		body["origins"] = putCorsConfigurationOptions.Origins
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -6549,11 +5918,6 @@ func (cloudant *CloudantV1) PutCorsConfigurationWithContext(ctx context.Context,
 // supports the same query arguments as the `GET /{db}/{doc_id}/{attachment_name}` method, but only the header
 // information (including attachment size, encoding, and the MD5 hash as an ETag), is returned.
 func (cloudant *CloudantV1) HeadAttachment(headAttachmentOptions *HeadAttachmentOptions) (response *core.DetailedResponse, err error) {
-	return cloudant.HeadAttachmentWithContext(context.Background(), headAttachmentOptions)
-}
-
-// HeadAttachmentWithContext is an alternate form of the HeadAttachment method which supports a Context parameter
-func (cloudant *CloudantV1) HeadAttachmentWithContext(ctx context.Context, headAttachmentOptions *HeadAttachmentOptions) (response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(headAttachmentOptions, "headAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6563,16 +5927,11 @@ func (cloudant *CloudantV1) HeadAttachmentWithContext(ctx context.Context, headA
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *headAttachmentOptions.Db,
-		"doc_id": *headAttachmentOptions.DocID,
-		"attachment_name": *headAttachmentOptions.AttachmentName,
-	}
+	pathSegments := []string{"", "", ""}
+	pathParameters := []string{*headAttachmentOptions.Db, *headAttachmentOptions.DocID, *headAttachmentOptions.AttachmentName}
 
 	builder := core.NewRequestBuilder(core.HEAD)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6610,11 +5969,6 @@ func (cloudant *CloudantV1) HeadAttachmentWithContext(ctx context.Context, headA
 // Deletes the attachment with the filename, `{attachment_name}`, from the specified doc. You must supply the `rev`
 // query parameter or `If-Match` header with the current revision to delete the attachment.
 func (cloudant *CloudantV1) DeleteAttachment(deleteAttachmentOptions *DeleteAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.DeleteAttachmentWithContext(context.Background(), deleteAttachmentOptions)
-}
-
-// DeleteAttachmentWithContext is an alternate form of the DeleteAttachment method which supports a Context parameter
-func (cloudant *CloudantV1) DeleteAttachmentWithContext(ctx context.Context, deleteAttachmentOptions *DeleteAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteAttachmentOptions, "deleteAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6624,16 +5978,11 @@ func (cloudant *CloudantV1) DeleteAttachmentWithContext(ctx context.Context, del
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *deleteAttachmentOptions.Db,
-		"doc_id": *deleteAttachmentOptions.DocID,
-		"attachment_name": *deleteAttachmentOptions.AttachmentName,
-	}
+	pathSegments := []string{"", "", ""}
+	pathParameters := []string{*deleteAttachmentOptions.Db, *deleteAttachmentOptions.DocID, *deleteAttachmentOptions.AttachmentName}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6682,11 +6031,6 @@ func (cloudant *CloudantV1) DeleteAttachmentWithContext(ctx context.Context, del
 // returned, just as if you were accessing a static file. The returned Content-Type header is the same as the content
 // type set when the document attachment was submitted to the database.
 func (cloudant *CloudantV1) GetAttachment(getAttachmentOptions *GetAttachmentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
-	return cloudant.GetAttachmentWithContext(context.Background(), getAttachmentOptions)
-}
-
-// GetAttachmentWithContext is an alternate form of the GetAttachment method which supports a Context parameter
-func (cloudant *CloudantV1) GetAttachmentWithContext(ctx context.Context, getAttachmentOptions *GetAttachmentOptions) (result io.ReadCloser, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getAttachmentOptions, "getAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6696,16 +6040,11 @@ func (cloudant *CloudantV1) GetAttachmentWithContext(ctx context.Context, getAtt
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getAttachmentOptions.Db,
-		"doc_id": *getAttachmentOptions.DocID,
-		"attachment_name": *getAttachmentOptions.AttachmentName,
-	}
+	pathSegments := []string{"", "", ""}
+	pathParameters := []string{*getAttachmentOptions.Db, *getAttachmentOptions.DocID, *getAttachmentOptions.AttachmentName}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6755,11 +6094,6 @@ func (cloudant *CloudantV1) GetAttachmentWithContext(ctx context.Context, getAtt
 // supply the revision information to add an attachment to the document, this serves as validation to update the
 // existing attachment.
 func (cloudant *CloudantV1) PutAttachment(putAttachmentOptions *PutAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.PutAttachmentWithContext(context.Background(), putAttachmentOptions)
-}
-
-// PutAttachmentWithContext is an alternate form of the PutAttachment method which supports a Context parameter
-func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAttachmentOptions *PutAttachmentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putAttachmentOptions, "putAttachmentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6769,16 +6103,11 @@ func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAtt
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *putAttachmentOptions.Db,
-		"doc_id": *putAttachmentOptions.DocID,
-		"attachment_name": *putAttachmentOptions.AttachmentName,
-	}
+	pathSegments := []string{"", "", ""}
+	pathParameters := []string{*putAttachmentOptions.Db, *putAttachmentOptions.DocID, *putAttachmentOptions.AttachmentName}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/{doc_id}/{attachment_name}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6831,11 +6160,6 @@ func (cloudant *CloudantV1) PutAttachmentWithContext(ctx context.Context, putAtt
 // Deletes the specified local document. The semantics are identical to deleting a standard document in the specified
 // database, except that the document is not replicated.
 func (cloudant *CloudantV1) DeleteLocalDocument(deleteLocalDocumentOptions *DeleteLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.DeleteLocalDocumentWithContext(context.Background(), deleteLocalDocumentOptions)
-}
-
-// DeleteLocalDocumentWithContext is an alternate form of the DeleteLocalDocument method which supports a Context parameter
-func (cloudant *CloudantV1) DeleteLocalDocumentWithContext(ctx context.Context, deleteLocalDocumentOptions *DeleteLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(deleteLocalDocumentOptions, "deleteLocalDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6845,15 +6169,11 @@ func (cloudant *CloudantV1) DeleteLocalDocumentWithContext(ctx context.Context, 
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *deleteLocalDocumentOptions.Db,
-		"doc_id": *deleteLocalDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", "_local"}
+	pathParameters := []string{*deleteLocalDocumentOptions.Db, *deleteLocalDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.DELETE)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6895,11 +6215,6 @@ func (cloudant *CloudantV1) DeleteLocalDocumentWithContext(ctx context.Context, 
 // Retrieves the specified local document. The semantics are identical to accessing a standard document in the specified
 // database, except that the document is not replicated.
 func (cloudant *CloudantV1) GetLocalDocument(getLocalDocumentOptions *GetLocalDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
-	return cloudant.GetLocalDocumentWithContext(context.Background(), getLocalDocumentOptions)
-}
-
-// GetLocalDocumentWithContext is an alternate form of the GetLocalDocument method which supports a Context parameter
-func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, getLocalDocumentOptions *GetLocalDocumentOptions) (result *Document, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getLocalDocumentOptions, "getLocalDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6909,15 +6224,11 @@ func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, get
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getLocalDocumentOptions.Db,
-		"doc_id": *getLocalDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", "_local"}
+	pathParameters := []string{*getLocalDocumentOptions.Db, *getLocalDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -6974,11 +6285,6 @@ func (cloudant *CloudantV1) GetLocalDocumentWithContext(ctx context.Context, get
 // Stores the specified local document. The semantics are identical to storing a standard document in the specified
 // database, except that the document is not replicated.
 func (cloudant *CloudantV1) PutLocalDocument(putLocalDocumentOptions *PutLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
-	return cloudant.PutLocalDocumentWithContext(context.Background(), putLocalDocumentOptions)
-}
-
-// PutLocalDocumentWithContext is an alternate form of the PutLocalDocument method which supports a Context parameter
-func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, putLocalDocumentOptions *PutLocalDocumentOptions) (result *DocumentResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(putLocalDocumentOptions, "putLocalDocumentOptions cannot be nil")
 	if err != nil {
 		return
@@ -6992,15 +6298,11 @@ func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, put
 		putLocalDocumentOptions.SetContentType("application/json")
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *putLocalDocumentOptions.Db,
-		"doc_id": *putLocalDocumentOptions.DocID,
-	}
+	pathSegments := []string{"", "_local"}
+	pathParameters := []string{*putLocalDocumentOptions.Db, *putLocalDocumentOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7052,11 +6354,6 @@ func (cloudant *CloudantV1) PutLocalDocumentWithContext(ctx context.Context, put
 // parameters are specified, results for all local documents in the database are returned. Optionally, document content
 // or additional metadata can be included in the response.
 func (cloudant *CloudantV1) PostLocalDocs(postLocalDocsOptions *PostLocalDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostLocalDocsWithContext(context.Background(), postLocalDocsOptions)
-}
-
-// PostLocalDocsWithContext is an alternate form of the PostLocalDocs method which supports a Context parameter
-func (cloudant *CloudantV1) PostLocalDocsWithContext(ctx context.Context, postLocalDocsOptions *PostLocalDocsOptions) (result *AllDocsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postLocalDocsOptions, "postLocalDocsOptions cannot be nil")
 	if err != nil {
 		return
@@ -7066,14 +6363,11 @@ func (cloudant *CloudantV1) PostLocalDocsWithContext(ctx context.Context, postLo
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postLocalDocsOptions.Db,
-	}
+	pathSegments := []string{"", "_local_docs"}
+	pathParameters := []string{*postLocalDocsOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local_docs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7160,11 +6454,6 @@ func (cloudant *CloudantV1) PostLocalDocsWithContext(ctx context.Context, postLo
 // Runs multiple view queries of all local documents in this database. This operation enables you to request multiple
 // queries in a single request, in place of multiple `POST /{db}/_local_docs` requests.
 func (cloudant *CloudantV1) PostLocalDocsQueries(postLocalDocsQueriesOptions *PostLocalDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostLocalDocsQueriesWithContext(context.Background(), postLocalDocsQueriesOptions)
-}
-
-// PostLocalDocsQueriesWithContext is an alternate form of the PostLocalDocsQueries method which supports a Context parameter
-func (cloudant *CloudantV1) PostLocalDocsQueriesWithContext(ctx context.Context, postLocalDocsQueriesOptions *PostLocalDocsQueriesOptions) (result *AllDocsQueriesResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postLocalDocsQueriesOptions, "postLocalDocsQueriesOptions cannot be nil")
 	if err != nil {
 		return
@@ -7174,14 +6463,11 @@ func (cloudant *CloudantV1) PostLocalDocsQueriesWithContext(ctx context.Context,
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postLocalDocsQueriesOptions.Db,
-	}
+	pathSegments := []string{"", "_local_docs/queries"}
+	pathParameters := []string{*postLocalDocsQueriesOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_local_docs/queries`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7228,14 +6514,62 @@ func (cloudant *CloudantV1) PostLocalDocsQueriesWithContext(ctx context.Context,
 	return
 }
 
+// PostEnsureFullCommit : Commit any recent changes to the specified database to disk
+// Commits any recent changes to the specified database to disk. You must make a request to this endpoint if you want to
+// ensure that recent changes have been flushed. This function is likely not required, assuming you have the recommended
+// configuration setting, `delayed_commits=false`. This setting requires that changes are written to disk before a 200
+// or similar result is returned.
+func (cloudant *CloudantV1) PostEnsureFullCommit(postEnsureFullCommitOptions *PostEnsureFullCommitOptions) (result *EnsureFullCommitInformation, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(postEnsureFullCommitOptions, "postEnsureFullCommitOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(postEnsureFullCommitOptions, "postEnsureFullCommitOptions")
+	if err != nil {
+		return
+	}
+
+	pathSegments := []string{"", "_ensure_full_commit"}
+	pathParameters := []string{*postEnsureFullCommitOptions.Db}
+
+	builder := core.NewRequestBuilder(core.POST)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range postEnsureFullCommitOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostEnsureFullCommit")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = cloudant.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalEnsureFullCommitInformation)
+	if err != nil {
+		return
+	}
+	response.Result = result
+
+	return
+}
+
 // PostMissingRevs : Query which document revisions are missing from the database
 // Given a list of document revisions, returns the document revisions that do not exist in the database.
 func (cloudant *CloudantV1) PostMissingRevs(postMissingRevsOptions *PostMissingRevsOptions) (result *MissingRevsResult, response *core.DetailedResponse, err error) {
-	return cloudant.PostMissingRevsWithContext(context.Background(), postMissingRevsOptions)
-}
-
-// PostMissingRevsWithContext is an alternate form of the PostMissingRevs method which supports a Context parameter
-func (cloudant *CloudantV1) PostMissingRevsWithContext(ctx context.Context, postMissingRevsOptions *PostMissingRevsOptions) (result *MissingRevsResult, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postMissingRevsOptions, "postMissingRevsOptions cannot be nil")
 	if err != nil {
 		return
@@ -7245,14 +6579,11 @@ func (cloudant *CloudantV1) PostMissingRevsWithContext(ctx context.Context, post
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postMissingRevsOptions.Db,
-	}
+	pathSegments := []string{"", "_missing_revs"}
+	pathParameters := []string{*postMissingRevsOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_missing_revs`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7268,9 +6599,11 @@ func (cloudant *CloudantV1) PostMissingRevsWithContext(ctx context.Context, post
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	_, err = builder.SetBodyContentJSON(postMissingRevsOptions.DocumentRevisions)
-	if err != nil {
-		return
+	if postMissingRevsOptions.DocumentRevisions != nil {
+		_, err = builder.SetBodyContentJSON(postMissingRevsOptions.DocumentRevisions)
+		if err != nil {
+			return
+		}
 	}
 
 	request, err := builder.Build()
@@ -7297,11 +6630,6 @@ func (cloudant *CloudantV1) PostMissingRevsWithContext(ctx context.Context, post
 // database, the replicator sends this set to the destination database's `_revs_diff` to find out which of them already
 // exists there. It can then avoid fetching and sending already-known document bodies.
 func (cloudant *CloudantV1) PostRevsDiff(postRevsDiffOptions *PostRevsDiffOptions) (result map[string]RevsDiff, response *core.DetailedResponse, err error) {
-	return cloudant.PostRevsDiffWithContext(context.Background(), postRevsDiffOptions)
-}
-
-// PostRevsDiffWithContext is an alternate form of the PostRevsDiff method which supports a Context parameter
-func (cloudant *CloudantV1) PostRevsDiffWithContext(ctx context.Context, postRevsDiffOptions *PostRevsDiffOptions) (result map[string]RevsDiff, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(postRevsDiffOptions, "postRevsDiffOptions cannot be nil")
 	if err != nil {
 		return
@@ -7311,14 +6639,11 @@ func (cloudant *CloudantV1) PostRevsDiffWithContext(ctx context.Context, postRev
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *postRevsDiffOptions.Db,
-	}
+	pathSegments := []string{"", "_revs_diff"}
+	pathParameters := []string{*postRevsDiffOptions.Db}
 
 	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_revs_diff`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7334,9 +6659,11 @@ func (cloudant *CloudantV1) PostRevsDiffWithContext(ctx context.Context, postRev
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 
-	_, err = builder.SetBodyContentJSON(postRevsDiffOptions.DocumentRevisions)
-	if err != nil {
-		return
+	if postRevsDiffOptions.DocumentRevisions != nil {
+		_, err = builder.SetBodyContentJSON(postRevsDiffOptions.DocumentRevisions)
+		if err != nil {
+			return
+		}
 	}
 
 	request, err := builder.Build()
@@ -7361,11 +6688,6 @@ func (cloudant *CloudantV1) PostRevsDiffWithContext(ctx context.Context, postRev
 // GetShardsInformation : Retrieve shard information
 // List each shard range and the corresponding replicas for a specified database.
 func (cloudant *CloudantV1) GetShardsInformation(getShardsInformationOptions *GetShardsInformationOptions) (result *ShardsInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetShardsInformationWithContext(context.Background(), getShardsInformationOptions)
-}
-
-// GetShardsInformationWithContext is an alternate form of the GetShardsInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetShardsInformationWithContext(ctx context.Context, getShardsInformationOptions *GetShardsInformationOptions) (result *ShardsInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getShardsInformationOptions, "getShardsInformationOptions cannot be nil")
 	if err != nil {
 		return
@@ -7375,14 +6697,11 @@ func (cloudant *CloudantV1) GetShardsInformationWithContext(ctx context.Context,
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getShardsInformationOptions.Db,
-	}
+	pathSegments := []string{"", "_shards"}
+	pathParameters := []string{*getShardsInformationOptions.Db}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_shards`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7420,11 +6739,6 @@ func (cloudant *CloudantV1) GetShardsInformationWithContext(ctx context.Context,
 // Retrieves information about a specific shard where a particular document is stored, along with information about the
 // nodes where that shard has a replica.
 func (cloudant *CloudantV1) GetDocumentShardsInfo(getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions) (result *DocumentShardInfo, response *core.DetailedResponse, err error) {
-	return cloudant.GetDocumentShardsInfoWithContext(context.Background(), getDocumentShardsInfoOptions)
-}
-
-// GetDocumentShardsInfoWithContext is an alternate form of the GetDocumentShardsInfo method which supports a Context parameter
-func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context, getDocumentShardsInfoOptions *GetDocumentShardsInfoOptions) (result *DocumentShardInfo, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDocumentShardsInfoOptions, "getDocumentShardsInfoOptions cannot be nil")
 	if err != nil {
 		return
@@ -7434,15 +6748,11 @@ func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context
 		return
 	}
 
-	pathParamsMap := map[string]string{
-		"db": *getDocumentShardsInfoOptions.Db,
-		"doc_id": *getDocumentShardsInfoOptions.DocID,
-	}
+	pathSegments := []string{"", "_shards"}
+	pathParameters := []string{*getDocumentShardsInfoOptions.Db, *getDocumentShardsInfoOptions.DocID}
 
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/{db}/_shards/{doc_id}`, pathParamsMap)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7481,20 +6791,16 @@ func (cloudant *CloudantV1) GetDocumentShardsInfoWithContext(ctx context.Context
 // currently running tasks, with each task described as a single object. Depending on the operation type, the set of
 // response object fields might be different.
 func (cloudant *CloudantV1) GetActiveTasks(getActiveTasksOptions *GetActiveTasksOptions) (result []ActiveTask, response *core.DetailedResponse, err error) {
-	return cloudant.GetActiveTasksWithContext(context.Background(), getActiveTasksOptions)
-}
-
-// GetActiveTasksWithContext is an alternate form of the GetActiveTasks method which supports a Context parameter
-func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getActiveTasksOptions *GetActiveTasksOptions) (result []ActiveTask, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getActiveTasksOptions, "getActiveTasksOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_active_tasks"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_active_tasks`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7532,20 +6838,16 @@ func (cloudant *CloudantV1) GetActiveTasksWithContext(ctx context.Context, getAc
 // Confirms that the server is up, running, and ready to respond to requests. If `maintenance_mode` is `true` or `nolb`,
 // the endpoint returns a 404 response.
 func (cloudant *CloudantV1) GetUpInformation(getUpInformationOptions *GetUpInformationOptions) (result *UpInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetUpInformationWithContext(context.Background(), getUpInformationOptions)
-}
-
-// GetUpInformationWithContext is an alternate form of the GetUpInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, getUpInformationOptions *GetUpInformationOptions) (result *UpInformation, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(getUpInformationOptions, "getUpInformationOptions")
 	if err != nil {
 		return
 	}
 
+	pathSegments := []string{"_up"}
+	pathParameters := []string{}
+
 	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_up`, nil)
+	_, err = builder.ConstructHTTPURL(cloudant.Service.Options.URL, pathSegments, pathParameters)
 	if err != nil {
 		return
 	}
@@ -7579,190 +6881,22 @@ func (cloudant *CloudantV1) GetUpInformationWithContext(ctx context.Context, get
 	return
 }
 
-// GetActivityTrackerEventsInformation : Retrieve Activity Tracker events information
-// Check event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
-func (cloudant *CloudantV1) GetActivityTrackerEventsInformation(getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) (result *ActivityTrackerEventsConfiguration, response *core.DetailedResponse, err error) {
-	return cloudant.GetActivityTrackerEventsInformationWithContext(context.Background(), getActivityTrackerEventsInformationOptions)
-}
-
-// GetActivityTrackerEventsInformationWithContext is an alternate form of the GetActivityTrackerEventsInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetActivityTrackerEventsInformationWithContext(ctx context.Context, getActivityTrackerEventsInformationOptions *GetActivityTrackerEventsInformationOptions) (result *ActivityTrackerEventsConfiguration, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getActivityTrackerEventsInformationOptions, "getActivityTrackerEventsInformationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/activity_tracker/events`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getActivityTrackerEventsInformationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetActivityTrackerEventsInformation")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalActivityTrackerEventsConfiguration)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
-// PostActivityTrackerEventsConfiguration : Modify Activity Tracker events configuration
-// Configure event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
-func (cloudant *CloudantV1) PostActivityTrackerEventsConfiguration(postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	return cloudant.PostActivityTrackerEventsConfigurationWithContext(context.Background(), postActivityTrackerEventsConfigurationOptions)
-}
-
-// PostActivityTrackerEventsConfigurationWithContext is an alternate form of the PostActivityTrackerEventsConfiguration method which supports a Context parameter
-func (cloudant *CloudantV1) PostActivityTrackerEventsConfigurationWithContext(ctx context.Context, postActivityTrackerEventsConfigurationOptions *PostActivityTrackerEventsConfigurationOptions) (result *Ok, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(postActivityTrackerEventsConfigurationOptions, "postActivityTrackerEventsConfigurationOptions cannot be nil")
-	if err != nil {
-		return
-	}
-	err = core.ValidateStruct(postActivityTrackerEventsConfigurationOptions, "postActivityTrackerEventsConfigurationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.POST)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/activity_tracker/events`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range postActivityTrackerEventsConfigurationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "PostActivityTrackerEventsConfiguration")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-
-	body := make(map[string]interface{})
-	if postActivityTrackerEventsConfigurationOptions.Types != nil {
-		body["types"] = postActivityTrackerEventsConfigurationOptions.Types
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOk)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
-// GetCurrentThroughputInformation : Retrieve the current provisioned throughput capacity consumption
-// View the current consumption of provisioned throughput capacity for an IBM Cloudant instance. The current consumption
-// shows the quantities of reads, writes, and global queries conducted against the instance for a given second.
-func (cloudant *CloudantV1) GetCurrentThroughputInformation(getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions) (result *CurrentThroughputInformation, response *core.DetailedResponse, err error) {
-	return cloudant.GetCurrentThroughputInformationWithContext(context.Background(), getCurrentThroughputInformationOptions)
-}
-
-// GetCurrentThroughputInformationWithContext is an alternate form of the GetCurrentThroughputInformation method which supports a Context parameter
-func (cloudant *CloudantV1) GetCurrentThroughputInformationWithContext(ctx context.Context, getCurrentThroughputInformationOptions *GetCurrentThroughputInformationOptions) (result *CurrentThroughputInformation, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(getCurrentThroughputInformationOptions, "getCurrentThroughputInformationOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.GET)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = cloudant.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(cloudant.Service.Options.URL, `/_api/v2/user/current/throughput`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range getCurrentThroughputInformationOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("cloudant", "V1", "GetCurrentThroughputInformation")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = cloudant.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCurrentThroughputInformation)
-	if err != nil {
-		return
-	}
-	response.Result = result
-
-	return
-}
-
 // ActiveTask : Schema for information about a running task.
 type ActiveTask struct {
 	// Processed changes.
 	ChangesDone *int64 `json:"changes_done,omitempty"`
 
 	// Source database.
-	Database *string `json:"database" validate:"required"`
-
-	// Cluster node where the task is running.
-	Node *string `json:"node" validate:"required"`
+	Database *string `json:"database,omitempty"`
 
 	// Process ID.
-	Pid *string `json:"pid" validate:"required"`
+	Pid *string `json:"pid,omitempty"`
 
 	// Current percentage progress.
 	Progress *int64 `json:"progress,omitempty"`
 
 	// Schema for a Unix epoch timestamp.
-	StartedOn *int64 `json:"started_on" validate:"required"`
+	StartedOn *int64 `json:"started_on,omitempty"`
 
 	// Task status message.
 	Status *string `json:"status,omitempty"`
@@ -7774,10 +6908,10 @@ type ActiveTask struct {
 	TotalChanges *int64 `json:"total_changes,omitempty"`
 
 	// Operation type.
-	Type *string `json:"type" validate:"required"`
+	Type *string `json:"type,omitempty"`
 
 	// Schema for a Unix epoch timestamp.
-	UpdatedOn *int64 `json:"updated_on" validate:"required"`
+	UpdatedOn *int64 `json:"updated_on,omitempty"`
 }
 
 
@@ -7789,10 +6923,6 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "database", &obj.Database)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "node", &obj.Node)
 	if err != nil {
 		return
 	}
@@ -7825,40 +6955,6 @@ func UnmarshalActiveTask(m map[string]json.RawMessage, result interface{}) (err 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "updated_on", &obj.UpdatedOn)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// ActivityTrackerEventsConfiguration : Schema for Activity Tracker events configuration.
-type ActivityTrackerEventsConfiguration struct {
-	// An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
-	// "management" is a required element of this array.
-	Types []string `json:"types" validate:"required"`
-}
-
-// Constants associated with the ActivityTrackerEventsConfiguration.Types property.
-const (
-	ActivityTrackerEventsConfigurationTypesDataConst = "data"
-	ActivityTrackerEventsConfigurationTypesManagementConst = "management"
-)
-
-
-// NewActivityTrackerEventsConfiguration : Instantiate ActivityTrackerEventsConfiguration (Generic Model Constructor)
-func (*CloudantV1) NewActivityTrackerEventsConfiguration(types []string) (model *ActivityTrackerEventsConfiguration, err error) {
-	model = &ActivityTrackerEventsConfiguration{
-		Types: types,
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
-
-// UnmarshalActivityTrackerEventsConfiguration unmarshals an instance of ActivityTrackerEventsConfiguration from the specified map of raw messages.
-func UnmarshalActivityTrackerEventsConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ActivityTrackerEventsConfiguration)
-	err = core.UnmarshalPrimitive(m, "types", &obj.Types)
 	if err != nil {
 		return
 	}
@@ -7993,10 +7089,10 @@ func UnmarshalAllDocsQuery(m map[string]json.RawMessage, result interface{}) (er
 // AllDocsResult : Schema for the result of an all documents operation.
 type AllDocsResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows" validate:"required"`
+	TotalRows *int64 `json:"total_rows,omitempty"`
 
 	// List of doc results.
-	Rows []DocsResultRow `json:"rows" validate:"required"`
+	Rows []DocsResultRow `json:"rows,omitempty"`
 
 	// Current update sequence for the database.
 	UpdateSeq *string `json:"update_seq,omitempty"`
@@ -8186,13 +7282,13 @@ func UnmarshalAnalyzerConfiguration(m map[string]json.RawMessage, result interfa
 // ApiKeysResult : Schema for api keys.
 type ApiKeysResult struct {
 	// ok.
-	Ok *bool `json:"ok" validate:"required"`
+	Ok *bool `json:"ok,omitempty"`
 
 	// The generated api key.
-	Key *string `json:"key" validate:"required"`
+	Key *string `json:"key,omitempty"`
 
 	// The password associated with the api key.
-	Password *string `json:"password" validate:"required"`
+	Password *string `json:"password,omitempty"`
 }
 
 
@@ -8299,21 +7395,12 @@ func UnmarshalAttachment(m map[string]json.RawMessage, result interface{}) (err 
 // BulkDocs : Schema for submitting documents for bulk modifications.
 type BulkDocs struct {
 	// Array of documents.
-	Docs []Document `json:"docs" validate:"required"`
+	Docs []Document `json:"docs,omitempty"`
 
 	// If `false`, prevents the database from assigning them new revision IDs. Default is `true`.
 	NewEdits *bool `json:"new_edits,omitempty"`
 }
 
-
-// NewBulkDocs : Instantiate BulkDocs (Generic Model Constructor)
-func (*CloudantV1) NewBulkDocs(docs []Document) (model *BulkDocs, err error) {
-	model = &BulkDocs{
-		Docs: docs,
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // UnmarshalBulkDocs unmarshals an instance of BulkDocs from the specified map of raw messages.
 func UnmarshalBulkDocs(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -8381,7 +7468,7 @@ func UnmarshalBulkGetQueryDocument(m map[string]json.RawMessage, result interfac
 // BulkGetResult : Schema for the results object of a bulk get operation.
 type BulkGetResult struct {
 	// Results.
-	Results []BulkGetResultItem `json:"results" validate:"required"`
+	Results []BulkGetResultItem `json:"results,omitempty"`
 }
 
 
@@ -8424,10 +7511,10 @@ func UnmarshalBulkGetResultDocument(m map[string]json.RawMessage, result interfa
 // BulkGetResultItem : Schema for the document revisions information from a bulk get operation.
 type BulkGetResultItem struct {
 	// Array of document revisions or error information.
-	Docs []BulkGetResultDocument `json:"docs" validate:"required"`
+	Docs []BulkGetResultDocument `json:"docs,omitempty"`
 
 	// Schema for a document ID.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 }
 
 
@@ -8446,71 +7533,10 @@ func UnmarshalBulkGetResultItem(m map[string]json.RawMessage, result interface{}
 	return
 }
 
-// CapacityThroughputInformation : Schema for information about the currently provisioned and target throughput capacity.
-type CapacityThroughputInformation struct {
-	// Detailed information about provisioned throughput capacity.
-	Current *CapacityThroughputInformationCurrent `json:"current" validate:"required"`
-
-	// Detailed information about target throughput capacity.
-	Target *CapacityThroughputInformationTarget `json:"target,omitempty"`
-}
-
-
-// UnmarshalCapacityThroughputInformation unmarshals an instance of CapacityThroughputInformation from the specified map of raw messages.
-func UnmarshalCapacityThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CapacityThroughputInformation)
-	err = core.UnmarshalModel(m, "current", &obj.Current, UnmarshalCapacityThroughputInformationCurrent)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "target", &obj.Target, UnmarshalCapacityThroughputInformationTarget)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// CapacityThroughputInformationCurrent : Detailed information about provisioned throughput capacity.
-type CapacityThroughputInformationCurrent struct {
-	// Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
-	Throughput *ThroughputInformation `json:"throughput" validate:"required"`
-}
-
-
-// UnmarshalCapacityThroughputInformationCurrent unmarshals an instance of CapacityThroughputInformationCurrent from the specified map of raw messages.
-func UnmarshalCapacityThroughputInformationCurrent(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CapacityThroughputInformationCurrent)
-	err = core.UnmarshalModel(m, "throughput", &obj.Throughput, UnmarshalThroughputInformation)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// CapacityThroughputInformationTarget : Detailed information about target throughput capacity.
-type CapacityThroughputInformationTarget struct {
-	// Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
-	Throughput *ThroughputInformation `json:"throughput" validate:"required"`
-}
-
-
-// UnmarshalCapacityThroughputInformationTarget unmarshals an instance of CapacityThroughputInformationTarget from the specified map of raw messages.
-func UnmarshalCapacityThroughputInformationTarget(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CapacityThroughputInformationTarget)
-	err = core.UnmarshalModel(m, "throughput", &obj.Throughput, UnmarshalThroughputInformation)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // Change : Schema for a document leaf with single field rev.
 type Change struct {
 	// Schema for a document revision identifier.
-	Rev *string `json:"rev" validate:"required"`
+	Rev *string `json:"rev,omitempty"`
 }
 
 
@@ -8528,13 +7554,13 @@ func UnmarshalChange(m map[string]json.RawMessage, result interface{}) (err erro
 // ChangesResult : Schema for normal changes feed result.
 type ChangesResult struct {
 	// last_seq.
-	LastSeq *string `json:"last_seq" validate:"required"`
+	LastSeq *string `json:"last_seq,omitempty"`
 
 	// pending.
-	Pending *int64 `json:"pending" validate:"required"`
+	Pending *int64 `json:"pending,omitempty"`
 
 	// results.
-	Results []ChangesResultItem `json:"results" validate:"required"`
+	Results []ChangesResultItem `json:"results,omitempty"`
 }
 
 
@@ -8560,19 +7586,16 @@ func UnmarshalChangesResult(m map[string]json.RawMessage, result interface{}) (e
 // ChangesResultItem : Schema for an item in the changes results array.
 type ChangesResultItem struct {
 	// List of document's leaves with single field rev.
-	Changes []Change `json:"changes" validate:"required"`
+	Changes []Change `json:"changes,omitempty"`
 
 	// if `true` then the document is deleted.
 	Deleted *bool `json:"deleted,omitempty"`
 
-	// Schema for a document.
-	Doc *Document `json:"doc,omitempty"`
-
 	// Schema for a document ID.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 
 	// Update sequence.
-	Seq *string `json:"seq" validate:"required"`
+	Seq *string `json:"seq,omitempty"`
 }
 
 
@@ -8584,10 +7607,6 @@ func UnmarshalChangesResultItem(m map[string]json.RawMessage, result interface{}
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "deleted", &obj.Deleted)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "doc", &obj.Doc, UnmarshalDocument)
 	if err != nil {
 		return
 	}
@@ -8606,13 +7625,13 @@ func UnmarshalChangesResultItem(m map[string]json.RawMessage, result interface{}
 // ContentInformationSizes : Schema for size information of content.
 type ContentInformationSizes struct {
 	// The active size of the content, in bytes.
-	Active *int64 `json:"active" validate:"required"`
+	Active *int64 `json:"active,omitempty"`
 
 	// The total uncompressed size of the content, in bytes.
-	External *int64 `json:"external" validate:"required"`
+	External *int64 `json:"external,omitempty"`
 
 	// The total size of the content as stored on disk, in bytes.
-	File *int64 `json:"file" validate:"required"`
+	File *int64 `json:"file,omitempty"`
 }
 
 
@@ -8635,14 +7654,14 @@ func UnmarshalContentInformationSizes(m map[string]json.RawMessage, result inter
 	return
 }
 
-// CorsInformation : Schema for information about the CORS configuration.
-type CorsInformation struct {
+// CorsConfiguration : Schema for a CORS configuration.
+type CorsConfiguration struct {
 	// Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
 	// withCredentials = true.
-	AllowCredentials *bool `json:"allow_credentials" validate:"required"`
+	AllowCredentials *bool `json:"allow_credentials,omitempty"`
 
 	// Boolean value to turn CORS on and off.
-	EnableCors *bool `json:"enable_cors" validate:"required"`
+	EnableCors *bool `json:"enable_cors,omitempty"`
 
 	// An array of strings that contain allowed origin domains. You have to specify the full URL including the protocol. It
 	// is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you have to specify
@@ -8651,9 +7670,18 @@ type CorsInformation struct {
 }
 
 
-// UnmarshalCorsInformation unmarshals an instance of CorsInformation from the specified map of raw messages.
-func UnmarshalCorsInformation(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CorsInformation)
+// NewCorsConfiguration : Instantiate CorsConfiguration (Generic Model Constructor)
+func (*CloudantV1) NewCorsConfiguration(origins []string) (model *CorsConfiguration, err error) {
+	model = &CorsConfiguration{
+		Origins: origins,
+	}
+	err = core.ValidateStruct(model, "required parameters")
+	return
+}
+
+// UnmarshalCorsConfiguration unmarshals an instance of CorsConfiguration from the specified map of raw messages.
+func UnmarshalCorsConfiguration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(CorsConfiguration)
 	err = core.UnmarshalPrimitive(m, "allow_credentials", &obj.AllowCredentials)
 	if err != nil {
 		return
@@ -8670,94 +7698,44 @@ func UnmarshalCorsInformation(m map[string]json.RawMessage, result interface{}) 
 	return
 }
 
-// CurrentThroughputInformation : Schema for information about current consumption of a provisioned throughput capacity.
-type CurrentThroughputInformation struct {
-	// Detailed information about current consumption.
-	Throughput *CurrentThroughputInformationThroughput `json:"throughput" validate:"required"`
-}
-
-
-// UnmarshalCurrentThroughputInformation unmarshals an instance of CurrentThroughputInformation from the specified map of raw messages.
-func UnmarshalCurrentThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CurrentThroughputInformation)
-	err = core.UnmarshalModel(m, "throughput", &obj.Throughput, UnmarshalCurrentThroughputInformationThroughput)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// CurrentThroughputInformationThroughput : Detailed information about current consumption.
-type CurrentThroughputInformationThroughput struct {
-	// Number of global queries conducted against the instance for a given second.
-	Query *int64 `json:"query" validate:"required"`
-
-	// Number of reads conducted against the instance for a given second.
-	Read *int64 `json:"read" validate:"required"`
-
-	// Number of writes conducted against the instance for a given second.
-	Write *int64 `json:"write" validate:"required"`
-}
-
-
-// UnmarshalCurrentThroughputInformationThroughput unmarshals an instance of CurrentThroughputInformationThroughput from the specified map of raw messages.
-func UnmarshalCurrentThroughputInformationThroughput(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CurrentThroughputInformationThroughput)
-	err = core.UnmarshalPrimitive(m, "query", &obj.Query)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "read", &obj.Read)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "write", &obj.Write)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // DatabaseInformation : Schema for information about a database.
 type DatabaseInformation struct {
 	// Schema for database cluster information.
-	Cluster *DatabaseInformationCluster `json:"cluster" validate:"required"`
+	Cluster *DatabaseInformationCluster `json:"cluster,omitempty"`
 
 	// An opaque string that describes the committed state of the database.
 	CommittedUpdateSeq *string `json:"committed_update_seq,omitempty"`
 
 	// True if the database compaction routine is operating on this database.
-	CompactRunning *bool `json:"compact_running" validate:"required"`
+	CompactRunning *bool `json:"compact_running,omitempty"`
 
 	// An opaque string that describes the compaction state of the database.
 	CompactedSeq *string `json:"compacted_seq,omitempty"`
 
 	// The name of the database.
-	DbName *string `json:"db_name" validate:"required"`
+	DbName *string `json:"db_name,omitempty"`
 
 	// The version of the physical format used for the data when it is stored on disk.
-	DiskFormatVersion *int64 `json:"disk_format_version" validate:"required"`
+	DiskFormatVersion *int64 `json:"disk_format_version,omitempty"`
 
 	// A count of the documents in the specified database.
-	DocCount *int64 `json:"doc_count" validate:"required"`
+	DocCount *int64 `json:"doc_count,omitempty"`
 
 	// Number of deleted documents.
-	DocDelCount *int64 `json:"doc_del_count" validate:"required"`
+	DocDelCount *int64 `json:"doc_del_count,omitempty"`
 
 	// The engine used for the database.
 	Engine *string `json:"engine,omitempty"`
 
 	// Schema for database properties.
-	Props *DatabaseInformationProps `json:"props" validate:"required"`
+	Props *DatabaseInformationProps `json:"props,omitempty"`
 
 	// Schema for size information of content.
-	Sizes *ContentInformationSizes `json:"sizes" validate:"required"`
+	Sizes *ContentInformationSizes `json:"sizes,omitempty"`
 
 	// An opaque string that describes the state of the database. Do not rely on this string for counting the number of
 	// updates.
-	UpdateSeq *string `json:"update_seq" validate:"required"`
+	UpdateSeq *string `json:"update_seq,omitempty"`
 
 	// The UUID of the database.
 	UUID *string `json:"uuid,omitempty"`
@@ -8826,16 +7804,16 @@ func UnmarshalDatabaseInformation(m map[string]json.RawMessage, result interface
 // DatabaseInformationCluster : Schema for database cluster information.
 type DatabaseInformationCluster struct {
 	// Schema for the number of replicas of a database in a cluster.
-	N *int64 `json:"n" validate:"required"`
+	N *int64 `json:"n,omitempty"`
 
 	// Schema for the number of shards in a database. Each shard is a partition of the hash value range.
-	Q *int64 `json:"q" validate:"required"`
+	Q *int64 `json:"q,omitempty"`
 
 	// Read quorum. The number of consistent copies of a document that need to be read before a successful reply.
-	R *int64 `json:"r" validate:"required"`
+	R *int64 `json:"r,omitempty"`
 
 	// Write quorum. The number of copies of a document that need to be written before a successful reply.
-	W *int64 `json:"w" validate:"required"`
+	W *int64 `json:"w,omitempty"`
 }
 
 
@@ -8886,13 +7864,13 @@ type DbEvent struct {
 	Account *string `json:"account,omitempty"`
 
 	// Database name.
-	DbName *string `json:"db_name" validate:"required"`
+	Dbname *string `json:"dbname,omitempty"`
 
 	// Sequence number.
-	Seq *string `json:"seq" validate:"required"`
+	Seq *string `json:"seq,omitempty"`
 
 	// A database event.
-	Type *string `json:"type" validate:"required"`
+	Type *string `json:"type,omitempty"`
 }
 
 // Constants associated with the DbEvent.Type property.
@@ -8911,7 +7889,7 @@ func UnmarshalDbEvent(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "db_name", &obj.DbName)
+	err = core.UnmarshalPrimitive(m, "dbname", &obj.Dbname)
 	if err != nil {
 		return
 	}
@@ -8930,10 +7908,10 @@ func UnmarshalDbEvent(m map[string]json.RawMessage, result interface{}) (err err
 // DbUpdates : Schema for database updates.
 type DbUpdates struct {
 	// Last sequence number.
-	LastSeq *string `json:"last_seq" validate:"required"`
+	LastSeq *string `json:"last_seq,omitempty"`
 
 	// results.
-	Results []DbEvent `json:"results" validate:"required"`
+	Results []DbEvent `json:"results,omitempty"`
 }
 
 
@@ -8958,7 +7936,7 @@ type DbsInfoResult struct {
 	Info *DatabaseInformation `json:"info,omitempty"`
 
 	// Database name.
-	Key *string `json:"key" validate:"required"`
+	Key *string `json:"key,omitempty"`
 }
 
 
@@ -8980,13 +7958,13 @@ func UnmarshalDbsInfoResult(m map[string]json.RawMessage, result interface{}) (e
 // DeleteAttachmentOptions : The DeleteAttachment options.
 type DeleteAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -9063,7 +8041,7 @@ func (options *DeleteAttachmentOptions) SetHeaders(param map[string]string) *Del
 // DeleteDatabaseOptions : The DeleteDatabase options.
 type DeleteDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9091,11 +8069,11 @@ func (options *DeleteDatabaseOptions) SetHeaders(param map[string]string) *Delet
 // DeleteDesignDocumentOptions : The DeleteDesignDocument options.
 type DeleteDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -9165,10 +8143,10 @@ func (options *DeleteDesignDocumentOptions) SetHeaders(param map[string]string) 
 // DeleteDocumentOptions : The DeleteDocument options.
 type DeleteDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -9235,20 +8213,38 @@ func (options *DeleteDocumentOptions) SetHeaders(param map[string]string) *Delet
 	return options
 }
 
+// DeleteIamSessionOptions : The DeleteIamSession options.
+type DeleteIamSessionOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewDeleteIamSessionOptions : Instantiate DeleteIamSessionOptions
+func (*CloudantV1) NewDeleteIamSessionOptions() *DeleteIamSessionOptions {
+	return &DeleteIamSessionOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteIamSessionOptions) SetHeaders(param map[string]string) *DeleteIamSessionOptions {
+	options.Headers = param
+	return options
+}
+
 // DeleteIndexOptions : The DeleteIndex options.
 type DeleteIndexOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the index type.
-	Type *string `json:"type" validate:"required,ne="`
+	Type *string `json:"type" validate:"required"`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required,ne="`
+	Index *string `json:"index" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -9305,10 +8301,10 @@ func (options *DeleteIndexOptions) SetHeaders(param map[string]string) *DeleteIn
 // DeleteLocalDocumentOptions : The DeleteLocalDocument options.
 type DeleteLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Query parameter to specify whether to store in batch mode. The server will respond with a HTTP 202 Accepted response
 	// code immediately.
@@ -9360,7 +8356,7 @@ func (options *DeleteLocalDocumentOptions) SetHeaders(param map[string]string) *
 // DeleteReplicationDocumentOptions : The DeleteReplicationDocument options.
 type DeleteReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -9675,10 +8671,10 @@ func UnmarshalDesignDocument(m map[string]json.RawMessage, result interface{}) (
 // DesignDocumentInformation : Schema for information about a design document.
 type DesignDocumentInformation struct {
 	// name.
-	Name *string `json:"name" validate:"required"`
+	Name *string `json:"name,omitempty"`
 
 	// View index information.
-	ViewIndex *DesignDocumentViewIndex `json:"view_index" validate:"required"`
+	ViewIndex *DesignDocumentViewIndex `json:"view_index,omitempty"`
 }
 
 
@@ -9718,28 +8714,28 @@ func UnmarshalDesignDocumentOptions(m map[string]json.RawMessage, result interfa
 // DesignDocumentViewIndex : View index information.
 type DesignDocumentViewIndex struct {
 	// Indicates whether a compaction routine is currently running on the view.
-	CompactRunning *bool `json:"compact_running" validate:"required"`
+	CompactRunning *bool `json:"compact_running,omitempty"`
 
 	// Language for the defined views.
-	Language *string `json:"language" validate:"required"`
+	Language *string `json:"language,omitempty"`
 
 	// MD5 signature of the views for the design document.
-	Signature *string `json:"signature" validate:"required"`
+	Signature *string `json:"signature,omitempty"`
 
 	// Schema for size information of content.
-	Sizes *ContentInformationSizes `json:"sizes" validate:"required"`
+	Sizes *ContentInformationSizes `json:"sizes,omitempty"`
 
 	// The update sequence of the corresponding database that has been indexed.
-	UpdateSeq *string `json:"update_seq" validate:"required"`
+	UpdateSeq *string `json:"update_seq,omitempty"`
 
 	// Indicates if the view is currently being updated.
-	UpdaterRunning *bool `json:"updater_running" validate:"required"`
+	UpdaterRunning *bool `json:"updater_running,omitempty"`
 
 	// Number of clients waiting on views from this design document.
-	WaitingClients *int64 `json:"waiting_clients" validate:"required"`
+	WaitingClients *int64 `json:"waiting_clients,omitempty"`
 
 	// Indicates if there are outstanding commits to the underlying database that need to processed.
-	WaitingCommit *bool `json:"waiting_commit" validate:"required"`
+	WaitingCommit *bool `json:"waiting_commit,omitempty"`
 }
 
 
@@ -9785,21 +8781,12 @@ func UnmarshalDesignDocumentViewIndex(m map[string]json.RawMessage, result inter
 // DesignDocumentViewsMapReduce : Schema for view functions definition.
 type DesignDocumentViewsMapReduce struct {
 	// JavaScript map function as a string.
-	Map *string `json:"map" validate:"required"`
+	Map *string `json:"map,omitempty"`
 
 	// JavaScript reduce function as a string.
 	Reduce *string `json:"reduce,omitempty"`
 }
 
-
-// NewDesignDocumentViewsMapReduce : Instantiate DesignDocumentViewsMapReduce (Generic Model Constructor)
-func (*CloudantV1) NewDesignDocumentViewsMapReduce(mapVar string) (model *DesignDocumentViewsMapReduce, err error) {
-	model = &DesignDocumentViewsMapReduce{
-		Map: core.StringPtr(mapVar),
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // UnmarshalDesignDocumentViewsMapReduce unmarshals an instance of DesignDocumentViewsMapReduce from the specified map of raw messages.
 func UnmarshalDesignDocumentViewsMapReduce(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -9834,7 +8821,7 @@ type DocsResultRow struct {
 	ID *string `json:"id,omitempty"`
 
 	// Document ID.
-	Key *string `json:"key" validate:"required"`
+	Key *string `json:"key,omitempty"`
 
 	// Value of built-in `/_all_docs` style view.
 	Value *DocsResultRowValue `json:"value,omitempty"`
@@ -9879,7 +8866,7 @@ func UnmarshalDocsResultRow(m map[string]json.RawMessage, result interface{}) (e
 // DocsResultRowValue : Value of built-in `/_all_docs` style view.
 type DocsResultRowValue struct {
 	// Schema for a document revision identifier.
-	Rev *string `json:"rev" validate:"required"`
+	Rev *string `json:"rev,omitempty"`
 }
 
 
@@ -10049,7 +9036,7 @@ func UnmarshalDocument(m map[string]json.RawMessage, result interface{}) (err er
 // DocumentResult : Schema for the result of a document modification.
 type DocumentResult struct {
 	// Schema for a document ID.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 
 	// Schema for a document revision identifier.
 	Rev *string `json:"rev,omitempty"`
@@ -10102,11 +9089,11 @@ func UnmarshalDocumentResult(m map[string]json.RawMessage, result interface{}) (
 // DocumentRevisionStatus : Schema for information about revisions and their status.
 type DocumentRevisionStatus struct {
 	// Schema for a document revision identifier.
-	Rev *string `json:"rev" validate:"required"`
+	Rev *string `json:"rev,omitempty"`
 
 	// Status of the revision. May be one of: - `available`: Revision is available for retrieving with rev query parameter
 	// - `missing`: Revision is not available - `deleted`: Revision belongs to deleted document.
-	Status *string `json:"status" validate:"required"`
+	Status *string `json:"status,omitempty"`
 }
 
 // Constants associated with the DocumentRevisionStatus.Status property.
@@ -10118,16 +9105,6 @@ const (
 	DocumentRevisionStatusStatusMissingConst = "missing"
 )
 
-
-// NewDocumentRevisionStatus : Instantiate DocumentRevisionStatus (Generic Model Constructor)
-func (*CloudantV1) NewDocumentRevisionStatus(rev string, status string) (model *DocumentRevisionStatus, err error) {
-	model = &DocumentRevisionStatus{
-		Rev: core.StringPtr(rev),
-		Status: core.StringPtr(status),
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // UnmarshalDocumentRevisionStatus unmarshals an instance of DocumentRevisionStatus from the specified map of raw messages.
 func UnmarshalDocumentRevisionStatus(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -10147,10 +9124,10 @@ func UnmarshalDocumentRevisionStatus(m map[string]json.RawMessage, result interf
 // DocumentShardInfo : Schema for document shard information.
 type DocumentShardInfo struct {
 	// List of nodes serving a replica of the shard.
-	Nodes []string `json:"nodes" validate:"required"`
+	Nodes []string `json:"nodes,omitempty"`
 
 	// The shard range in which the document is stored.
-	Range *string `json:"range" validate:"required"`
+	Range *string `json:"range,omitempty"`
 }
 
 
@@ -10169,22 +9146,47 @@ func UnmarshalDocumentShardInfo(m map[string]json.RawMessage, result interface{}
 	return
 }
 
+// EnsureFullCommitInformation : Schema for the status of a commit operation.
+type EnsureFullCommitInformation struct {
+	// Timestamp of when the database was opened, expressed in microseconds since the epoch.
+	InstanceStartTime *string `json:"instance_start_time,omitempty"`
+
+	// Operation status.
+	Ok *bool `json:"ok,omitempty"`
+}
+
+
+// UnmarshalEnsureFullCommitInformation unmarshals an instance of EnsureFullCommitInformation from the specified map of raw messages.
+func UnmarshalEnsureFullCommitInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(EnsureFullCommitInformation)
+	err = core.UnmarshalPrimitive(m, "instance_start_time", &obj.InstanceStartTime)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // ExecutionStats : Schema for find query execution statistics.
 type ExecutionStats struct {
 	// Time to execute the query.
-	ExecutionTimeMs *float64 `json:"execution_time_ms" validate:"required"`
+	ExecutionTimeMs *float64 `json:"execution_time_ms,omitempty"`
 
 	// Number of results returned.
-	ResultsReturned *int64 `json:"results_returned" validate:"required"`
+	ResultsReturned *int64 `json:"results_returned,omitempty"`
 
 	// Number of documents fetched from the index.
-	TotalDocsExamined *int64 `json:"total_docs_examined" validate:"required"`
+	TotalDocsExamined *int64 `json:"total_docs_examined,omitempty"`
 
 	// Number of rows scanned in the index.
-	TotalKeysExamined *int64 `json:"total_keys_examined" validate:"required"`
+	TotalKeysExamined *int64 `json:"total_keys_examined,omitempty"`
 
 	// Number of documents fetched from the primary index with the specified read quorum.
-	TotalQuorumDocsExamined *int64 `json:"total_quorum_docs_examined" validate:"required"`
+	TotalQuorumDocsExamined *int64 `json:"total_quorum_docs_examined,omitempty"`
 }
 
 
@@ -10218,19 +9220,19 @@ func UnmarshalExecutionStats(m map[string]json.RawMessage, result interface{}) (
 // ExplainResult : Schema for information about the index used for a find query.
 type ExplainResult struct {
 	// dbname.
-	Dbname *string `json:"dbname" validate:"required"`
+	Dbname *string `json:"dbname,omitempty"`
 
 	// fields.
-	Fields []string `json:"fields" validate:"required"`
+	Fields []string `json:"fields,omitempty"`
 
 	// Schema for information about an index.
-	Index *IndexInformation `json:"index" validate:"required"`
+	Index *IndexInformation `json:"index,omitempty"`
 
 	// limit.
-	Limit *int64 `json:"limit" validate:"required"`
+	Limit *int64 `json:"limit,omitempty"`
 
 	// opts.
-	Opts map[string]interface{} `json:"opts" validate:"required"`
+	Opts map[string]interface{} `json:"opts,omitempty"`
 
 	// range.
 	Range *ExplainResultRange `json:"range,omitempty"`
@@ -10258,10 +9260,10 @@ type ExplainResult struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector" validate:"required"`
+	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// skip.
-	Skip *int64 `json:"skip" validate:"required"`
+	Skip *int64 `json:"skip,omitempty"`
 }
 
 
@@ -10332,10 +9334,10 @@ func UnmarshalExplainResultRange(m map[string]json.RawMessage, result interface{
 // FindResult : Schema for the result of a query find operation.
 type FindResult struct {
 	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark" validate:"required"`
+	Bookmark *string `json:"bookmark,omitempty"`
 
 	// Documents matching the selector.
-	Docs []Document `json:"docs" validate:"required"`
+	Docs []Document `json:"docs,omitempty"`
 
 	// Schema for find query execution statistics.
 	ExecutionStats *ExecutionStats `json:"execution_stats,omitempty"`
@@ -10400,10 +9402,7 @@ func UnmarshalGeoIndexDefinition(m map[string]json.RawMessage, result interface{
 // GeoIndexInformation : Schema for information about a geospatial index.
 type GeoIndexInformation struct {
 	// Schema for geospatial index statistics.
-	GeoIndex *GeoIndexStats `json:"geo_index" validate:"required"`
-
-	// The name of the geospatial index design document.
-	Name *string `json:"name" validate:"required"`
+	GeoIndex *GeoIndexStats `json:"geo_index,omitempty"`
 }
 
 
@@ -10414,10 +9413,6 @@ func UnmarshalGeoIndexInformation(m map[string]json.RawMessage, result interface
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
-	if err != nil {
-		return
-	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -10425,13 +9420,13 @@ func UnmarshalGeoIndexInformation(m map[string]json.RawMessage, result interface
 // GeoIndexStats : Schema for geospatial index statistics.
 type GeoIndexStats struct {
 	// The size of the geospatial index, in bytes.
-	DataSize *int64 `json:"data_size" validate:"required"`
+	DataSize *int64 `json:"data_size,omitempty"`
 
 	// The size of the geospatial index, as stored on disk, in bytes.
-	DiskSize *int64 `json:"disk_size" validate:"required"`
+	DiskSize *int64 `json:"disk_size,omitempty"`
 
 	// Number of documents in the geospatial index.
-	DocCount *int64 `json:"doc_count" validate:"required"`
+	DocCount *int64 `json:"doc_count,omitempty"`
 }
 
 
@@ -10639,13 +9634,13 @@ func UnmarshalGeoJSONGeometryObject(m map[string]json.RawMessage, result interfa
 // format this is a GeoJson FeatureCollection with additional metadata in foreign members.
 type GeoResult struct {
 	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark" validate:"required"`
+	Bookmark *string `json:"bookmark,omitempty"`
 
 	// The array of GeoJSON Feature Objects matching the geospatial query.
 	Features []GeoJSONFeature `json:"features,omitempty"`
 
 	// The array of rows matching the geospatial query. Present only when using `view` format.
-	Rows []GeoResultRow `json:"rows" validate:"required"`
+	Rows []GeoResultRow `json:"rows,omitempty"`
 
 	// Declaration of the GeoJSON type: FeatureCollection Object.
 	Type *string `json:"type,omitempty"`
@@ -10738,24 +9733,6 @@ func (options *GetActiveTasksOptions) SetHeaders(param map[string]string) *GetAc
 	return options
 }
 
-// GetActivityTrackerEventsInformationOptions : The GetActivityTrackerEventsInformation options.
-type GetActivityTrackerEventsInformationOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewGetActivityTrackerEventsInformationOptions : Instantiate GetActivityTrackerEventsInformationOptions
-func (*CloudantV1) NewGetActivityTrackerEventsInformationOptions() *GetActivityTrackerEventsInformationOptions {
-	return &GetActivityTrackerEventsInformationOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *GetActivityTrackerEventsInformationOptions) SetHeaders(param map[string]string) *GetActivityTrackerEventsInformationOptions {
-	options.Headers = param
-	return options
-}
-
 // GetAllDbsOptions : The GetAllDbs options.
 type GetAllDbsOptions struct {
 	// Query parameter to specify whether to return the documents in descending by key order.
@@ -10823,13 +9800,13 @@ func (options *GetAllDbsOptions) SetHeaders(param map[string]string) *GetAllDbsO
 // GetAttachmentOptions : The GetAttachment options.
 type GetAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required"`
 
 	// The type of the response:  or *_/_*.
 	Accept *string `json:"Accept,omitempty"`
@@ -10914,24 +9891,6 @@ func (options *GetAttachmentOptions) SetHeaders(param map[string]string) *GetAtt
 	return options
 }
 
-// GetCapacityThroughputInformationOptions : The GetCapacityThroughputInformation options.
-type GetCapacityThroughputInformationOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewGetCapacityThroughputInformationOptions : Instantiate GetCapacityThroughputInformationOptions
-func (*CloudantV1) NewGetCapacityThroughputInformationOptions() *GetCapacityThroughputInformationOptions {
-	return &GetCapacityThroughputInformationOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *GetCapacityThroughputInformationOptions) SetHeaders(param map[string]string) *GetCapacityThroughputInformationOptions {
-	options.Headers = param
-	return options
-}
-
 // GetCorsInformationOptions : The GetCorsInformation options.
 type GetCorsInformationOptions struct {
 
@@ -10950,28 +9909,10 @@ func (options *GetCorsInformationOptions) SetHeaders(param map[string]string) *G
 	return options
 }
 
-// GetCurrentThroughputInformationOptions : The GetCurrentThroughputInformation options.
-type GetCurrentThroughputInformationOptions struct {
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewGetCurrentThroughputInformationOptions : Instantiate GetCurrentThroughputInformationOptions
-func (*CloudantV1) NewGetCurrentThroughputInformationOptions() *GetCurrentThroughputInformationOptions {
-	return &GetCurrentThroughputInformationOptions{}
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *GetCurrentThroughputInformationOptions) SetHeaders(param map[string]string) *GetCurrentThroughputInformationOptions {
-	options.Headers = param
-	return options
-}
-
 // GetDatabaseInformationOptions : The GetDatabaseInformation options.
 type GetDatabaseInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11067,11 +10008,11 @@ func (options *GetDbUpdatesOptions) SetHeaders(param map[string]string) *GetDbUp
 // GetDesignDocumentInformationOptions : The GetDesignDocumentInformation options.
 type GetDesignDocumentInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11106,11 +10047,11 @@ func (options *GetDesignDocumentInformationOptions) SetHeaders(param map[string]
 // GetDesignDocumentOptions : The GetDesignDocument options.
 type GetDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -11268,10 +10209,10 @@ func (options *GetDesignDocumentOptions) SetHeaders(param map[string]string) *Ge
 // GetDocumentOptions : The GetDocument options.
 type GetDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -11429,10 +10370,10 @@ func (options *GetDocumentOptions) SetHeaders(param map[string]string) *GetDocum
 // GetDocumentShardsInfoOptions : The GetDocumentShardsInfo options.
 type GetDocumentShardsInfoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11467,14 +10408,14 @@ func (options *GetDocumentShardsInfoOptions) SetHeaders(param map[string]string)
 // GetGeoIndexInformationOptions : The GetGeoIndexInformation options.
 type GetGeoIndexInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required,ne="`
+	Index *string `json:"index" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11516,14 +10457,14 @@ func (options *GetGeoIndexInformationOptions) SetHeaders(param map[string]string
 // GetGeoOptions : The GetGeo options.
 type GetGeoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required,ne="`
+	Index *string `json:"index" validate:"required"`
 
 	// Query parameter to specify a geospatial query bounding box with two latitude,longitude coordinates for the
 	// lower-left and upper-right corners. An example is `-11.05987446,12.28339928,-101.05987446,62.28339928`.
@@ -11740,10 +10681,28 @@ func (options *GetGeoOptions) SetHeaders(param map[string]string) *GetGeoOptions
 	return options
 }
 
+// GetIamSessionInformationOptions : The GetIamSessionInformation options.
+type GetIamSessionInformationOptions struct {
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewGetIamSessionInformationOptions : Instantiate GetIamSessionInformationOptions
+func (*CloudantV1) NewGetIamSessionInformationOptions() *GetIamSessionInformationOptions {
+	return &GetIamSessionInformationOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetIamSessionInformationOptions) SetHeaders(param map[string]string) *GetIamSessionInformationOptions {
+	options.Headers = param
+	return options
+}
+
 // GetIndexesInformationOptions : The GetIndexesInformation options.
 type GetIndexesInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11771,10 +10730,10 @@ func (options *GetIndexesInformationOptions) SetHeaders(param map[string]string)
 // GetLocalDocumentOptions : The GetLocalDocument options.
 type GetLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// The type of the response: application/json, multipart/mixed, multipart/related, or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -11883,10 +10842,10 @@ func (options *GetMembershipInformationOptions) SetHeaders(param map[string]stri
 // GetPartitionInformationOptions : The GetPartitionInformation options.
 type GetPartitionInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -11921,7 +10880,7 @@ func (options *GetPartitionInformationOptions) SetHeaders(param map[string]strin
 // GetReplicationDocumentOptions : The GetReplicationDocument options.
 type GetReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -12129,7 +11088,7 @@ func (options *GetSchedulerDocsOptions) SetHeaders(param map[string]string) *Get
 // GetSchedulerDocumentOptions : The GetSchedulerDocument options.
 type GetSchedulerDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12157,7 +11116,7 @@ func (options *GetSchedulerDocumentOptions) SetHeaders(param map[string]string) 
 // GetSchedulerJobOptions : The GetSchedulerJob options.
 type GetSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
-	JobID *string `json:"job_id" validate:"required,ne="`
+	JobID *string `json:"job_id" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12220,14 +11179,14 @@ func (options *GetSchedulerJobsOptions) SetHeaders(param map[string]string) *Get
 // GetSearchInfoOptions : The GetSearchInfo options.
 type GetSearchInfoOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required,ne="`
+	Index *string `json:"index" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12269,7 +11228,7 @@ func (options *GetSearchInfoOptions) SetHeaders(param map[string]string) *GetSea
 // GetSecurityOptions : The GetSecurity options.
 type GetSecurityOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12333,7 +11292,7 @@ func (options *GetSessionInformationOptions) SetHeaders(param map[string]string)
 // GetShardsInformationOptions : The GetShardsInformation options.
 type GetShardsInformationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12405,13 +11364,13 @@ func (options *GetUuidsOptions) SetHeaders(param map[string]string) *GetUuidsOpt
 // HeadAttachmentOptions : The HeadAttachment options.
 type HeadAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -12480,7 +11439,7 @@ func (options *HeadAttachmentOptions) SetHeaders(param map[string]string) *HeadA
 // HeadDatabaseOptions : The HeadDatabase options.
 type HeadDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12508,11 +11467,11 @@ func (options *HeadDatabaseOptions) SetHeaders(param map[string]string) *HeadDat
 // HeadDesignDocumentOptions : The HeadDesignDocument options.
 type HeadDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -12556,10 +11515,10 @@ func (options *HeadDesignDocumentOptions) SetHeaders(param map[string]string) *H
 // HeadDocumentOptions : The HeadDocument options.
 type HeadDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -12621,7 +11580,7 @@ func (options *HeadDocumentOptions) SetHeaders(param map[string]string) *HeadDoc
 // HeadReplicationDocumentOptions : The HeadReplicationDocument options.
 type HeadReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Header parameter to specify a double quoted document revision token for cache control.
 	IfNoneMatch *string `json:"If-None-Match,omitempty"`
@@ -12658,7 +11617,7 @@ func (options *HeadReplicationDocumentOptions) SetHeaders(param map[string]strin
 // HeadSchedulerJobOptions : The HeadSchedulerJob options.
 type HeadSchedulerJobOptions struct {
 	// Path parameter to specify the replication job id.
-	JobID *string `json:"job_id" validate:"required,ne="`
+	JobID *string `json:"job_id" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -12681,6 +11640,45 @@ func (options *HeadSchedulerJobOptions) SetJobID(jobID string) *HeadSchedulerJob
 func (options *HeadSchedulerJobOptions) SetHeaders(param map[string]string) *HeadSchedulerJobOptions {
 	options.Headers = param
 	return options
+}
+
+// IamSessionInformation : Schema for information about an IAM session.
+type IamSessionInformation struct {
+	// User ID.
+	ID *string `json:"id,omitempty"`
+
+	// Session is ok.
+	Ok *bool `json:"ok,omitempty"`
+
+	// Scope of the session.
+	Scope *string `json:"scope,omitempty"`
+
+	// Type of the session.
+	Type *string `json:"type,omitempty"`
+}
+
+
+// UnmarshalIamSessionInformation unmarshals an instance of IamSessionInformation from the specified map of raw messages.
+func UnmarshalIamSessionInformation(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(IamSessionInformation)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ok", &obj.Ok)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "scope", &obj.Scope)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // IndexDefinition : Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration properties
@@ -12816,19 +11814,19 @@ func UnmarshalIndexField(m map[string]json.RawMessage, result interface{}) (err 
 // IndexInformation : Schema for information about an index.
 type IndexInformation struct {
 	// Design document ID.
-	Ddoc *string `json:"ddoc" validate:"required"`
+	Ddoc *string `json:"ddoc,omitempty"`
 
 	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
 	// properties that do not apply to `json` indexes, these are:
 	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
 	// document fields and what analyzer to use for that purpose.
-	Def *IndexDefinition `json:"def" validate:"required"`
+	Def *IndexDefinition `json:"def,omitempty"`
 
 	// Index name.
-	Name *string `json:"name" validate:"required"`
+	Name *string `json:"name,omitempty"`
 
 	// Schema for the type of an index.
-	Type *string `json:"type" validate:"required"`
+	Type *string `json:"type,omitempty"`
 }
 
 // Constants associated with the IndexInformation.Type property.
@@ -12866,13 +11864,13 @@ func UnmarshalIndexInformation(m map[string]json.RawMessage, result interface{})
 // IndexResult : Schema for the result of creating an index.
 type IndexResult struct {
 	// Id of the design document the index was created in.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 
 	// Name of the index created.
-	Name *string `json:"name" validate:"required"`
+	Name *string `json:"name,omitempty"`
 
 	// Flag to show whether the index was created or one already exists.
-	Result *string `json:"result" validate:"required"`
+	Result *string `json:"result,omitempty"`
 }
 
 // Constants associated with the IndexResult.Result property.
@@ -12931,10 +11929,10 @@ func UnmarshalIndexTextOperatorDefaultField(m map[string]json.RawMessage, result
 // IndexesInformation : Schema for information about the indexes in a database.
 type IndexesInformation struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows" validate:"required"`
+	TotalRows *int64 `json:"total_rows,omitempty"`
 
 	// Indexes.
-	Indexes []IndexInformation `json:"indexes" validate:"required"`
+	Indexes []IndexInformation `json:"indexes,omitempty"`
 }
 
 
@@ -12956,10 +11954,10 @@ func UnmarshalIndexesInformation(m map[string]json.RawMessage, result interface{
 // MembershipInformation : Schema for information about known nodes and cluster membership.
 type MembershipInformation struct {
 	// List of nodes this node knows about, including the ones that are part of the cluster.
-	AllNodes []string `json:"all_nodes" validate:"required"`
+	AllNodes []string `json:"all_nodes,omitempty"`
 
 	// All cluster nodes.
-	ClusterNodes []string `json:"cluster_nodes" validate:"required"`
+	ClusterNodes []string `json:"cluster_nodes,omitempty"`
 }
 
 
@@ -12981,7 +11979,7 @@ func UnmarshalMembershipInformation(m map[string]json.RawMessage, result interfa
 // MissingRevsResult : Schema for mapping document IDs to lists of missing revisions.
 type MissingRevsResult struct {
 	// Schema for mapping document IDs to lists of revisions.
-	MissingRevs map[string][]string `json:"missing_revs" validate:"required"`
+	MissingRevs map[string][]string `json:"missing_revs,omitempty"`
 }
 
 
@@ -13017,22 +12015,22 @@ func UnmarshalOk(m map[string]json.RawMessage, result interface{}) (err error) {
 // PartitionInformation : Schema for information about a database partition.
 type PartitionInformation struct {
 	// The name of the database.
-	DbName *string `json:"db_name" validate:"required"`
+	DbName *string `json:"db_name,omitempty"`
 
 	// A count of the documents in the specified database partition.
-	DocCount *int64 `json:"doc_count" validate:"required"`
+	DocCount *int64 `json:"doc_count,omitempty"`
 
 	// Number of deleted documents.
-	DocDelCount *int64 `json:"doc_del_count" validate:"required"`
+	DocDelCount *int64 `json:"doc_del_count,omitempty"`
 
 	// The name of the partition in the database.
-	Partition *string `json:"partition" validate:"required"`
+	Partition *string `json:"partition,omitempty"`
 
 	// Schema for information about the partition index count and limit in a database.
 	PartitionedIndexes *PartitionInformationIndexes `json:"partitioned_indexes,omitempty"`
 
 	// The size of active and external data, in bytes.
-	Sizes *PartitionInformationSizes `json:"sizes" validate:"required"`
+	Sizes *PartitionInformationSizes `json:"sizes,omitempty"`
 }
 
 
@@ -13149,45 +12147,10 @@ func UnmarshalPartitionInformationSizes(m map[string]json.RawMessage, result int
 	return
 }
 
-// PostActivityTrackerEventsConfigurationOptions : The PostActivityTrackerEventsConfiguration options.
-type PostActivityTrackerEventsConfigurationOptions struct {
-	// An array of event types that are being sent to IBM Cloud Activity Tracker with LogDNA for the IBM Cloudant instance.
-	// "management" is a required element of this array.
-	Types []string `json:"types" validate:"required"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// Constants associated with the PostActivityTrackerEventsConfigurationOptions.Types property.
-const (
-	PostActivityTrackerEventsConfigurationOptionsTypesDataConst = "data"
-	PostActivityTrackerEventsConfigurationOptionsTypesManagementConst = "management"
-)
-
-// NewPostActivityTrackerEventsConfigurationOptions : Instantiate PostActivityTrackerEventsConfigurationOptions
-func (*CloudantV1) NewPostActivityTrackerEventsConfigurationOptions(types []string) *PostActivityTrackerEventsConfigurationOptions {
-	return &PostActivityTrackerEventsConfigurationOptions{
-		Types: types,
-	}
-}
-
-// SetTypes : Allow user to set Types
-func (options *PostActivityTrackerEventsConfigurationOptions) SetTypes(types []string) *PostActivityTrackerEventsConfigurationOptions {
-	options.Types = types
-	return options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *PostActivityTrackerEventsConfigurationOptions) SetHeaders(param map[string]string) *PostActivityTrackerEventsConfigurationOptions {
-	options.Headers = param
-	return options
-}
-
 // PostAllDocsOptions : The PostAllDocs options.
 type PostAllDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -13335,21 +12298,20 @@ func (options *PostAllDocsOptions) SetHeaders(param map[string]string) *PostAllD
 // PostAllDocsQueriesOptions : The PostAllDocsQueries options.
 type PostAllDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
-	Queries []AllDocsQuery `json:"queries" validate:"required"`
+	Queries []AllDocsQuery `json:"queries,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostAllDocsQueriesOptions : Instantiate PostAllDocsQueriesOptions
-func (*CloudantV1) NewPostAllDocsQueriesOptions(db string, queries []AllDocsQuery) *PostAllDocsQueriesOptions {
+func (*CloudantV1) NewPostAllDocsQueriesOptions(db string) *PostAllDocsQueriesOptions {
 	return &PostAllDocsQueriesOptions{
 		Db: core.StringPtr(db),
-		Queries: queries,
 	}
 }
 
@@ -13392,7 +12354,7 @@ func (options *PostApiKeysOptions) SetHeaders(param map[string]string) *PostApiK
 // PostBulkDocsOptions : The PostBulkDocs options.
 type PostBulkDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// HTTP request body for postBulkDocs.
 	BulkDocs *BulkDocs `json:"bulkDocs,omitempty"`
@@ -13438,10 +12400,10 @@ func (options *PostBulkDocsOptions) SetHeaders(param map[string]string) *PostBul
 // PostBulkGetOptions : The PostBulkGet options.
 type PostBulkGetOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// List of document items to get in bulk.
-	Docs []BulkGetQueryDocument `json:"docs" validate:"required"`
+	Docs []BulkGetQueryDocument `json:"docs,omitempty"`
 
 	// Query parameter to specify whether to include attachments bodies in a response.
 	Attachments *bool `json:"attachments,omitempty"`
@@ -13461,10 +12423,9 @@ type PostBulkGetOptions struct {
 }
 
 // NewPostBulkGetOptions : Instantiate PostBulkGetOptions
-func (*CloudantV1) NewPostBulkGetOptions(db string, docs []BulkGetQueryDocument) *PostBulkGetOptions {
+func (*CloudantV1) NewPostBulkGetOptions(db string) *PostBulkGetOptions {
 	return &PostBulkGetOptions{
 		Db: core.StringPtr(db),
-		Docs: docs,
 	}
 }
 
@@ -13513,7 +12474,7 @@ func (options *PostBulkGetOptions) SetHeaders(param map[string]string) *PostBulk
 // PostChangesOptions : The PostChanges options.
 type PostChangesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Schema for a list of document IDs.
 	DocIds []string `json:"doc_ids,omitempty"`
@@ -13761,17 +12722,15 @@ func (options *PostChangesOptions) SetHeaders(param map[string]string) *PostChan
 // PostDbsInfoOptions : The PostDbsInfo options.
 type PostDbsInfoOptions struct {
 	// A list of database names.
-	Keys []string `json:"keys" validate:"required"`
+	Keys []string `json:"keys,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostDbsInfoOptions : Instantiate PostDbsInfoOptions
-func (*CloudantV1) NewPostDbsInfoOptions(keys []string) *PostDbsInfoOptions {
-	return &PostDbsInfoOptions{
-		Keys: keys,
-	}
+func (*CloudantV1) NewPostDbsInfoOptions() *PostDbsInfoOptions {
+	return &PostDbsInfoOptions{}
 }
 
 // SetKeys : Allow user to set Keys
@@ -13789,7 +12748,7 @@ func (options *PostDbsInfoOptions) SetHeaders(param map[string]string) *PostDbsI
 // PostDesignDocsOptions : The PostDesignDocs options.
 type PostDesignDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -13946,24 +12905,23 @@ func (options *PostDesignDocsOptions) SetHeaders(param map[string]string) *PostD
 // PostDesignDocsQueriesOptions : The PostDesignDocsQueries options.
 type PostDesignDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
-
-	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
-	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
-	Queries []AllDocsQuery `json:"queries" validate:"required"`
+	Db *string `json:"db" validate:"required"`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
+
+	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
+	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
+	Queries []AllDocsQuery `json:"queries,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostDesignDocsQueriesOptions : Instantiate PostDesignDocsQueriesOptions
-func (*CloudantV1) NewPostDesignDocsQueriesOptions(db string, queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
+func (*CloudantV1) NewPostDesignDocsQueriesOptions(db string) *PostDesignDocsQueriesOptions {
 	return &PostDesignDocsQueriesOptions{
 		Db: core.StringPtr(db),
-		Queries: queries,
 	}
 }
 
@@ -13973,15 +12931,15 @@ func (options *PostDesignDocsQueriesOptions) SetDb(db string) *PostDesignDocsQue
 	return options
 }
 
-// SetQueries : Allow user to set Queries
-func (options *PostDesignDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
-	options.Queries = queries
-	return options
-}
-
 // SetAccept : Allow user to set Accept
 func (options *PostDesignDocsQueriesOptions) SetAccept(accept string) *PostDesignDocsQueriesOptions {
 	options.Accept = core.StringPtr(accept)
+	return options
+}
+
+// SetQueries : Allow user to set Queries
+func (options *PostDesignDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostDesignDocsQueriesOptions {
+	options.Queries = queries
 	return options
 }
 
@@ -13994,7 +12952,7 @@ func (options *PostDesignDocsQueriesOptions) SetHeaders(param map[string]string)
 // PostDocumentOptions : The PostDocument options.
 type PostDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -14063,10 +13021,56 @@ func (options *PostDocumentOptions) SetHeaders(param map[string]string) *PostDoc
 	return options
 }
 
+// PostEnsureFullCommitOptions : The PostEnsureFullCommit options.
+type PostEnsureFullCommitOptions struct {
+	// Path parameter to specify the database name.
+	Db *string `json:"db" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewPostEnsureFullCommitOptions : Instantiate PostEnsureFullCommitOptions
+func (*CloudantV1) NewPostEnsureFullCommitOptions(db string) *PostEnsureFullCommitOptions {
+	return &PostEnsureFullCommitOptions{
+		Db: core.StringPtr(db),
+	}
+}
+
+// SetDb : Allow user to set Db
+func (options *PostEnsureFullCommitOptions) SetDb(db string) *PostEnsureFullCommitOptions {
+	options.Db = core.StringPtr(db)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PostEnsureFullCommitOptions) SetHeaders(param map[string]string) *PostEnsureFullCommitOptions {
+	options.Headers = param
+	return options
+}
+
 // PostExplainOptions : The PostExplain options.
 type PostExplainOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
+
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark,omitempty"`
+
+	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Use this option to find information about the query that was run. This information includes total key lookups, total
+	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
+	// is fetched).
+	ExecutionStats *bool `json:"execution_stats,omitempty"`
+
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
+	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
+	Limit *int64 `json:"limit,omitempty"`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -14091,25 +13095,7 @@ type PostExplainOptions struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector" validate:"required"`
-
-	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
-
-	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
-	Conflicts *bool `json:"conflicts,omitempty"`
-
-	// Use this option to find information about the query that was run. This information includes total key lookups, total
-	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
-	// is fetched).
-	ExecutionStats *bool `json:"execution_stats,omitempty"`
-
-	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
-	// it is omitted, the entire document is returned.
-	Fields []string `json:"fields,omitempty"`
-
-	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
-	Limit *int64 `json:"limit,omitempty"`
+	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
@@ -14153,22 +13139,15 @@ const (
 )
 
 // NewPostExplainOptions : Instantiate PostExplainOptions
-func (*CloudantV1) NewPostExplainOptions(db string, selector map[string]interface{}) *PostExplainOptions {
+func (*CloudantV1) NewPostExplainOptions(db string) *PostExplainOptions {
 	return &PostExplainOptions{
 		Db: core.StringPtr(db),
-		Selector: selector,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PostExplainOptions) SetDb(db string) *PostExplainOptions {
 	options.Db = core.StringPtr(db)
-	return options
-}
-
-// SetSelector : Allow user to set Selector
-func (options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
-	options.Selector = selector
 	return options
 }
 
@@ -14199,6 +13178,12 @@ func (options *PostExplainOptions) SetFields(fields []string) *PostExplainOption
 // SetLimit : Allow user to set Limit
 func (options *PostExplainOptions) SetLimit(limit int64) *PostExplainOptions {
 	options.Limit = core.Int64Ptr(limit)
+	return options
+}
+
+// SetSelector : Allow user to set Selector
+func (options *PostExplainOptions) SetSelector(selector map[string]interface{}) *PostExplainOptions {
+	options.Selector = selector
 	return options
 }
 
@@ -14247,7 +13232,25 @@ func (options *PostExplainOptions) SetHeaders(param map[string]string) *PostExpl
 // PostFindOptions : The PostFind options.
 type PostFindOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
+
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark,omitempty"`
+
+	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Use this option to find information about the query that was run. This information includes total key lookups, total
+	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
+	// is fetched).
+	ExecutionStats *bool `json:"execution_stats,omitempty"`
+
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
+	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
+	Limit *int64 `json:"limit,omitempty"`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -14272,25 +13275,7 @@ type PostFindOptions struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector" validate:"required"`
-
-	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
-
-	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
-	Conflicts *bool `json:"conflicts,omitempty"`
-
-	// Use this option to find information about the query that was run. This information includes total key lookups, total
-	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
-	// is fetched).
-	ExecutionStats *bool `json:"execution_stats,omitempty"`
-
-	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
-	// it is omitted, the entire document is returned.
-	Fields []string `json:"fields,omitempty"`
-
-	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
-	Limit *int64 `json:"limit,omitempty"`
+	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
@@ -14334,22 +13319,15 @@ const (
 )
 
 // NewPostFindOptions : Instantiate PostFindOptions
-func (*CloudantV1) NewPostFindOptions(db string, selector map[string]interface{}) *PostFindOptions {
+func (*CloudantV1) NewPostFindOptions(db string) *PostFindOptions {
 	return &PostFindOptions{
 		Db: core.StringPtr(db),
-		Selector: selector,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PostFindOptions) SetDb(db string) *PostFindOptions {
 	options.Db = core.StringPtr(db)
-	return options
-}
-
-// SetSelector : Allow user to set Selector
-func (options *PostFindOptions) SetSelector(selector map[string]interface{}) *PostFindOptions {
-	options.Selector = selector
 	return options
 }
 
@@ -14380,6 +13358,12 @@ func (options *PostFindOptions) SetFields(fields []string) *PostFindOptions {
 // SetLimit : Allow user to set Limit
 func (options *PostFindOptions) SetLimit(limit int64) *PostFindOptions {
 	options.Limit = core.Int64Ptr(limit)
+	return options
+}
+
+// SetSelector : Allow user to set Selector
+func (options *PostFindOptions) SetSelector(selector map[string]interface{}) *PostFindOptions {
+	options.Selector = selector
 	return options
 }
 
@@ -14428,7 +13412,7 @@ func (options *PostFindOptions) SetHeaders(param map[string]string) *PostFindOpt
 // PostGeoCleanupOptions : The PostGeoCleanup options.
 type PostGeoCleanupOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -14453,16 +13437,36 @@ func (options *PostGeoCleanupOptions) SetHeaders(param map[string]string) *PostG
 	return options
 }
 
+// PostIamSessionOptions : The PostIamSession options.
+type PostIamSessionOptions struct {
+	// Token obtained from the IAM service.
+	AccessToken *string `json:"access_token,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewPostIamSessionOptions : Instantiate PostIamSessionOptions
+func (*CloudantV1) NewPostIamSessionOptions() *PostIamSessionOptions {
+	return &PostIamSessionOptions{}
+}
+
+// SetAccessToken : Allow user to set AccessToken
+func (options *PostIamSessionOptions) SetAccessToken(accessToken string) *PostIamSessionOptions {
+	options.AccessToken = core.StringPtr(accessToken)
+	return options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *PostIamSessionOptions) SetHeaders(param map[string]string) *PostIamSessionOptions {
+	options.Headers = param
+	return options
+}
+
 // PostIndexOptions : The PostIndex options.
 type PostIndexOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
-
-	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
-	// properties that do not apply to `json` indexes, these are:
-	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
-	// document fields and what analyzer to use for that purpose.
-	Index *IndexDefinition `json:"index" validate:"required"`
+	Db *string `json:"db" validate:"required"`
 
 	// Name of the design document in which the index will be created.
 	Ddoc *string `json:"ddoc,omitempty"`
@@ -14472,6 +13476,12 @@ type PostIndexOptions struct {
 	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
 	// document fields and what analyzer to use for that purpose.
 	Def *IndexDefinition `json:"def,omitempty"`
+
+	// Schema for a `json` or `text` query index definition. Indexes of type `text` have additional configuration
+	// properties that do not apply to `json` indexes, these are:
+	// * `default_analyzer` - the default text analyzer to use * `default_field` - whether to index the text in all
+	// document fields and what analyzer to use for that purpose.
+	Index *IndexDefinition `json:"index,omitempty"`
 
 	// name.
 	Name *string `json:"name,omitempty"`
@@ -14521,22 +13531,15 @@ const (
 )
 
 // NewPostIndexOptions : Instantiate PostIndexOptions
-func (*CloudantV1) NewPostIndexOptions(db string, index *IndexDefinition) *PostIndexOptions {
+func (*CloudantV1) NewPostIndexOptions(db string) *PostIndexOptions {
 	return &PostIndexOptions{
 		Db: core.StringPtr(db),
-		Index: index,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PostIndexOptions) SetDb(db string) *PostIndexOptions {
 	options.Db = core.StringPtr(db)
-	return options
-}
-
-// SetIndex : Allow user to set Index
-func (options *PostIndexOptions) SetIndex(index *IndexDefinition) *PostIndexOptions {
-	options.Index = index
 	return options
 }
 
@@ -14549,6 +13552,12 @@ func (options *PostIndexOptions) SetDdoc(ddoc string) *PostIndexOptions {
 // SetDef : Allow user to set Def
 func (options *PostIndexOptions) SetDef(def *IndexDefinition) *PostIndexOptions {
 	options.Def = def
+	return options
+}
+
+// SetIndex : Allow user to set Index
+func (options *PostIndexOptions) SetIndex(index *IndexDefinition) *PostIndexOptions {
+	options.Index = index
 	return options
 }
 
@@ -14585,7 +13594,7 @@ func (options *PostIndexOptions) SetHeaders(param map[string]string) *PostIndexO
 // PostLocalDocsOptions : The PostLocalDocs options.
 type PostLocalDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
@@ -14742,24 +13751,23 @@ func (options *PostLocalDocsOptions) SetHeaders(param map[string]string) *PostLo
 // PostLocalDocsQueriesOptions : The PostLocalDocsQueries options.
 type PostLocalDocsQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
-
-	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
-	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
-	Queries []AllDocsQuery `json:"queries" validate:"required"`
+	Db *string `json:"db" validate:"required"`
 
 	// The type of the response: application/json or application/octet-stream.
 	Accept *string `json:"Accept,omitempty"`
+
+	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
+	// names and their meaning are the same as the query parameters of a regular `/_all_docs` request.
+	Queries []AllDocsQuery `json:"queries,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostLocalDocsQueriesOptions : Instantiate PostLocalDocsQueriesOptions
-func (*CloudantV1) NewPostLocalDocsQueriesOptions(db string, queries []AllDocsQuery) *PostLocalDocsQueriesOptions {
+func (*CloudantV1) NewPostLocalDocsQueriesOptions(db string) *PostLocalDocsQueriesOptions {
 	return &PostLocalDocsQueriesOptions{
 		Db: core.StringPtr(db),
-		Queries: queries,
 	}
 }
 
@@ -14769,15 +13777,15 @@ func (options *PostLocalDocsQueriesOptions) SetDb(db string) *PostLocalDocsQueri
 	return options
 }
 
-// SetQueries : Allow user to set Queries
-func (options *PostLocalDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostLocalDocsQueriesOptions {
-	options.Queries = queries
-	return options
-}
-
 // SetAccept : Allow user to set Accept
 func (options *PostLocalDocsQueriesOptions) SetAccept(accept string) *PostLocalDocsQueriesOptions {
 	options.Accept = core.StringPtr(accept)
+	return options
+}
+
+// SetQueries : Allow user to set Queries
+func (options *PostLocalDocsQueriesOptions) SetQueries(queries []AllDocsQuery) *PostLocalDocsQueriesOptions {
+	options.Queries = queries
 	return options
 }
 
@@ -14790,20 +13798,19 @@ func (options *PostLocalDocsQueriesOptions) SetHeaders(param map[string]string) 
 // PostMissingRevsOptions : The PostMissingRevs options.
 type PostMissingRevsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
-	DocumentRevisions map[string][]string `json:"documentRevisions" validate:"required"`
+	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostMissingRevsOptions : Instantiate PostMissingRevsOptions
-func (*CloudantV1) NewPostMissingRevsOptions(db string, documentRevisions map[string][]string) *PostMissingRevsOptions {
+func (*CloudantV1) NewPostMissingRevsOptions(db string) *PostMissingRevsOptions {
 	return &PostMissingRevsOptions{
 		Db: core.StringPtr(db),
-		DocumentRevisions: documentRevisions,
 	}
 }
 
@@ -14828,10 +13835,10 @@ func (options *PostMissingRevsOptions) SetHeaders(param map[string]string) *Post
 // PostPartitionAllDocsOptions : The PostPartitionAllDocs options.
 type PostPartitionAllDocsOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required"`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -14986,10 +13993,28 @@ func (options *PostPartitionAllDocsOptions) SetHeaders(param map[string]string) 
 // PostPartitionFindOptions : The PostPartitionFind options.
 type PostPartitionFindOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required"`
+
+	// Opaque bookmark token used when paginating results.
+	Bookmark *string `json:"bookmark,omitempty"`
+
+	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
+	Conflicts *bool `json:"conflicts,omitempty"`
+
+	// Use this option to find information about the query that was run. This information includes total key lookups, total
+	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
+	// is fetched).
+	ExecutionStats *bool `json:"execution_stats,omitempty"`
+
+	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
+	// it is omitted, the entire document is returned.
+	Fields []string `json:"fields,omitempty"`
+
+	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
+	Limit *int64 `json:"limit,omitempty"`
 
 	// JSON object describing criteria used to select documents. The selector specifies fields in the document, and
 	// provides an expression to evaluate with the field content or other data.
@@ -15014,25 +14039,7 @@ type PostPartitionFindOptions struct {
 	// * Condition operators: are specific to a field, and are used to evaluate the value stored in that field. For
 	// instance, the basic `$eq` operator matches when the specified field contains a value that is equal to the supplied
 	// argument.
-	Selector map[string]interface{} `json:"selector" validate:"required"`
-
-	// Opaque bookmark token used when paginating results.
-	Bookmark *string `json:"bookmark,omitempty"`
-
-	// A boolean value that indicates whether or not to include information about existing conflicts in the document.
-	Conflicts *bool `json:"conflicts,omitempty"`
-
-	// Use this option to find information about the query that was run. This information includes total key lookups, total
-	// document lookups (when `include_docs=true` is used), and total quorum document lookups (when each document replica
-	// is fetched).
-	ExecutionStats *bool `json:"execution_stats,omitempty"`
-
-	// JSON array that uses the field syntax. Use this parameter to specify which fields of a document must be returned. If
-	// it is omitted, the entire document is returned.
-	Fields []string `json:"fields,omitempty"`
-
-	// Maximum number of results returned. The `type: text` indexes are limited to 200 results when queried.
-	Limit *int64 `json:"limit,omitempty"`
+	Selector map[string]interface{} `json:"selector,omitempty"`
 
 	// Skip the first 'n' results, where 'n' is the value that is specified.
 	Skip *int64 `json:"skip,omitempty"`
@@ -15070,11 +14077,10 @@ const (
 )
 
 // NewPostPartitionFindOptions : Instantiate PostPartitionFindOptions
-func (*CloudantV1) NewPostPartitionFindOptions(db string, partitionKey string, selector map[string]interface{}) *PostPartitionFindOptions {
+func (*CloudantV1) NewPostPartitionFindOptions(db string, partitionKey string) *PostPartitionFindOptions {
 	return &PostPartitionFindOptions{
 		Db: core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
-		Selector: selector,
 	}
 }
 
@@ -15087,12 +14093,6 @@ func (options *PostPartitionFindOptions) SetDb(db string) *PostPartitionFindOpti
 // SetPartitionKey : Allow user to set PartitionKey
 func (options *PostPartitionFindOptions) SetPartitionKey(partitionKey string) *PostPartitionFindOptions {
 	options.PartitionKey = core.StringPtr(partitionKey)
-	return options
-}
-
-// SetSelector : Allow user to set Selector
-func (options *PostPartitionFindOptions) SetSelector(selector map[string]interface{}) *PostPartitionFindOptions {
-	options.Selector = selector
 	return options
 }
 
@@ -15123,6 +14123,12 @@ func (options *PostPartitionFindOptions) SetFields(fields []string) *PostPartiti
 // SetLimit : Allow user to set Limit
 func (options *PostPartitionFindOptions) SetLimit(limit int64) *PostPartitionFindOptions {
 	options.Limit = core.Int64Ptr(limit)
+	return options
+}
+
+// SetSelector : Allow user to set Selector
+func (options *PostPartitionFindOptions) SetSelector(selector map[string]interface{}) *PostPartitionFindOptions {
+	options.Selector = selector
 	return options
 }
 
@@ -15165,20 +14171,17 @@ func (options *PostPartitionFindOptions) SetHeaders(param map[string]string) *Po
 // PostPartitionSearchOptions : The PostPartitionSearch options.
 type PostPartitionSearchOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required,ne="`
-
-	// The Lucene query to execute.
-	Query *string `json:"query" validate:"required"`
+	Index *string `json:"index" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -15210,6 +14213,9 @@ type PostPartitionSearchOptions struct {
 	// Limit the number of the returned documents to the specified number.
 	Limit *int64 `json:"limit,omitempty"`
 
+	// The Lucene query to execute.
+	Query *string `json:"query,omitempty"`
+
 	// Specifies the sort order of the results. In a grouped search (when group_field is used), this parameter specifies
 	// the sort order within a group. The default sort order is relevance.  A JSON string of the form
 	// "fieldname&lt;type&gt;" or "-fieldname&lt;type&gt;" for descending order, where fieldname is the name of a string or
@@ -15233,13 +14239,12 @@ const (
 )
 
 // NewPostPartitionSearchOptions : Instantiate PostPartitionSearchOptions
-func (*CloudantV1) NewPostPartitionSearchOptions(db string, partitionKey string, ddoc string, index string, query string) *PostPartitionSearchOptions {
+func (*CloudantV1) NewPostPartitionSearchOptions(db string, partitionKey string, ddoc string, index string) *PostPartitionSearchOptions {
 	return &PostPartitionSearchOptions{
 		Db: core.StringPtr(db),
 		PartitionKey: core.StringPtr(partitionKey),
 		Ddoc: core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
-		Query: core.StringPtr(query),
 	}
 }
 
@@ -15264,12 +14269,6 @@ func (options *PostPartitionSearchOptions) SetDdoc(ddoc string) *PostPartitionSe
 // SetIndex : Allow user to set Index
 func (options *PostPartitionSearchOptions) SetIndex(index string) *PostPartitionSearchOptions {
 	options.Index = core.StringPtr(index)
-	return options
-}
-
-// SetQuery : Allow user to set Query
-func (options *PostPartitionSearchOptions) SetQuery(query string) *PostPartitionSearchOptions {
-	options.Query = core.StringPtr(query)
 	return options
 }
 
@@ -15327,6 +14326,12 @@ func (options *PostPartitionSearchOptions) SetLimit(limit int64) *PostPartitionS
 	return options
 }
 
+// SetQuery : Allow user to set Query
+func (options *PostPartitionSearchOptions) SetQuery(query string) *PostPartitionSearchOptions {
+	options.Query = core.StringPtr(query)
+	return options
+}
+
 // SetSort : Allow user to set Sort
 func (options *PostPartitionSearchOptions) SetSort(sort []string) *PostPartitionSearchOptions {
 	options.Sort = sort
@@ -15348,17 +14353,17 @@ func (options *PostPartitionSearchOptions) SetHeaders(param map[string]string) *
 // PostPartitionViewOptions : The PostPartitionView options.
 type PostPartitionViewOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the database partition key.
-	PartitionKey *string `json:"partition_key" validate:"required,ne="`
+	PartitionKey *string `json:"partition_key" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"view" validate:"required,ne="`
+	View *string `json:"view" validate:"required"`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -15601,17 +14606,15 @@ func (options *PostPartitionViewOptions) SetHeaders(param map[string]string) *Po
 // PostReplicateOptions : The PostReplicate options.
 type PostReplicateOptions struct {
 	// HTTP request body for replication operations.
-	ReplicationDocument *ReplicationDocument `json:"replicationDocument" validate:"required"`
+	ReplicationDocument *ReplicationDocument `json:"replicationDocument,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostReplicateOptions : Instantiate PostReplicateOptions
-func (*CloudantV1) NewPostReplicateOptions(replicationDocument *ReplicationDocument) *PostReplicateOptions {
-	return &PostReplicateOptions{
-		ReplicationDocument: replicationDocument,
-	}
+func (*CloudantV1) NewPostReplicateOptions() *PostReplicateOptions {
+	return &PostReplicateOptions{}
 }
 
 // SetReplicationDocument : Allow user to set ReplicationDocument
@@ -15629,20 +14632,19 @@ func (options *PostReplicateOptions) SetHeaders(param map[string]string) *PostRe
 // PostRevsDiffOptions : The PostRevsDiff options.
 type PostRevsDiffOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// HTTP request body for postMissingRevs and postRevsDiff.
-	DocumentRevisions map[string][]string `json:"documentRevisions" validate:"required"`
+	DocumentRevisions map[string][]string `json:"documentRevisions,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostRevsDiffOptions : Instantiate PostRevsDiffOptions
-func (*CloudantV1) NewPostRevsDiffOptions(db string, documentRevisions map[string][]string) *PostRevsDiffOptions {
+func (*CloudantV1) NewPostRevsDiffOptions(db string) *PostRevsDiffOptions {
 	return &PostRevsDiffOptions{
 		Db: core.StringPtr(db),
-		DocumentRevisions: documentRevisions,
 	}
 }
 
@@ -15667,10 +14669,10 @@ func (options *PostRevsDiffOptions) SetHeaders(param map[string]string) *PostRev
 // PostSearchAnalyzeOptions : The PostSearchAnalyze options.
 type PostSearchAnalyzeOptions struct {
 	// analyzer.
-	Analyzer *string `json:"analyzer" validate:"required"`
+	Analyzer *string `json:"analyzer,omitempty"`
 
 	// text.
-	Text *string `json:"text" validate:"required"`
+	Text *string `json:"text,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
@@ -15722,11 +14724,8 @@ const (
 )
 
 // NewPostSearchAnalyzeOptions : Instantiate PostSearchAnalyzeOptions
-func (*CloudantV1) NewPostSearchAnalyzeOptions(analyzer string, text string) *PostSearchAnalyzeOptions {
-	return &PostSearchAnalyzeOptions{
-		Analyzer: core.StringPtr(analyzer),
-		Text: core.StringPtr(text),
-	}
+func (*CloudantV1) NewPostSearchAnalyzeOptions() *PostSearchAnalyzeOptions {
+	return &PostSearchAnalyzeOptions{}
 }
 
 // SetAnalyzer : Allow user to set Analyzer
@@ -15750,17 +14749,14 @@ func (options *PostSearchAnalyzeOptions) SetHeaders(param map[string]string) *Po
 // PostSearchOptions : The PostSearch options.
 type PostSearchOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the index name.
-	Index *string `json:"index" validate:"required,ne="`
-
-	// The Lucene query to execute.
-	Query *string `json:"query" validate:"required"`
+	Index *string `json:"index" validate:"required"`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -15791,6 +14787,9 @@ type PostSearchOptions struct {
 
 	// Limit the number of the returned documents to the specified number.
 	Limit *int64 `json:"limit,omitempty"`
+
+	// The Lucene query to execute.
+	Query *string `json:"query,omitempty"`
 
 	// Specifies the sort order of the results. In a grouped search (when group_field is used), this parameter specifies
 	// the sort order within a group. The default sort order is relevance.  A JSON string of the form
@@ -15844,12 +14843,11 @@ const (
 )
 
 // NewPostSearchOptions : Instantiate PostSearchOptions
-func (*CloudantV1) NewPostSearchOptions(db string, ddoc string, index string, query string) *PostSearchOptions {
+func (*CloudantV1) NewPostSearchOptions(db string, ddoc string, index string) *PostSearchOptions {
 	return &PostSearchOptions{
 		Db: core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 		Index: core.StringPtr(index),
-		Query: core.StringPtr(query),
 	}
 }
 
@@ -15868,12 +14866,6 @@ func (options *PostSearchOptions) SetDdoc(ddoc string) *PostSearchOptions {
 // SetIndex : Allow user to set Index
 func (options *PostSearchOptions) SetIndex(index string) *PostSearchOptions {
 	options.Index = core.StringPtr(index)
-	return options
-}
-
-// SetQuery : Allow user to set Query
-func (options *PostSearchOptions) SetQuery(query string) *PostSearchOptions {
-	options.Query = core.StringPtr(query)
 	return options
 }
 
@@ -15928,6 +14920,12 @@ func (options *PostSearchOptions) SetIncludeFields(includeFields []string) *Post
 // SetLimit : Allow user to set Limit
 func (options *PostSearchOptions) SetLimit(limit int64) *PostSearchOptions {
 	options.Limit = core.Int64Ptr(limit)
+	return options
+}
+
+// SetQuery : Allow user to set Query
+func (options *PostSearchOptions) SetQuery(query string) *PostSearchOptions {
+	options.Query = core.StringPtr(query)
 	return options
 }
 
@@ -15988,14 +14986,14 @@ func (options *PostSearchOptions) SetHeaders(param map[string]string) *PostSearc
 // PostViewOptions : The PostView options.
 type PostViewOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"view" validate:"required,ne="`
+	View *string `json:"view" validate:"required"`
 
 	// Parameter to specify whether to include the encoding information in attachment stubs if the particular attachment is
 	// compressed.
@@ -16231,30 +15229,29 @@ func (options *PostViewOptions) SetHeaders(param map[string]string) *PostViewOpt
 // PostViewQueriesOptions : The PostViewQueries options.
 type PostViewQueriesOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// Path parameter to specify the map reduce view function name.
-	View *string `json:"view" validate:"required,ne="`
+	View *string `json:"view" validate:"required"`
 
 	// An array of query objects with fields for the parameters of each individual view query to be executed. The field
 	// names and their meaning are the same as the query parameters of a regular view request.
-	Queries []ViewQuery `json:"queries" validate:"required"`
+	Queries []ViewQuery `json:"queries,omitempty"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPostViewQueriesOptions : Instantiate PostViewQueriesOptions
-func (*CloudantV1) NewPostViewQueriesOptions(db string, ddoc string, view string, queries []ViewQuery) *PostViewQueriesOptions {
+func (*CloudantV1) NewPostViewQueriesOptions(db string, ddoc string, view string) *PostViewQueriesOptions {
 	return &PostViewQueriesOptions{
 		Db: core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
 		View: core.StringPtr(view),
-		Queries: queries,
 	}
 }
 
@@ -16291,13 +15288,13 @@ func (options *PostViewQueriesOptions) SetHeaders(param map[string]string) *Post
 // PutAttachmentOptions : The PutAttachment options.
 type PutAttachmentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// Path parameter to specify the attachment name.
-	AttachmentName *string `json:"attachment_name" validate:"required,ne="`
+	AttachmentName *string `json:"attachment_name" validate:"required"`
 
 	// HTTP request body for attachment operations.
 	Attachment io.ReadCloser `json:"attachment" validate:"required"`
@@ -16374,48 +15371,19 @@ func (options *PutAttachmentOptions) SetHeaders(param map[string]string) *PutAtt
 	return options
 }
 
-// PutCapacityThroughputInformationOptions : The PutCapacityThroughputInformation options.
-type PutCapacityThroughputInformationOptions struct {
-	// A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global queries/sec
-	// of provisioned throughput capacity.
-	Blocks *int64 `json:"blocks" validate:"required"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewPutCapacityThroughputInformationOptions : Instantiate PutCapacityThroughputInformationOptions
-func (*CloudantV1) NewPutCapacityThroughputInformationOptions(blocks int64) *PutCapacityThroughputInformationOptions {
-	return &PutCapacityThroughputInformationOptions{
-		Blocks: core.Int64Ptr(blocks),
-	}
-}
-
-// SetBlocks : Allow user to set Blocks
-func (options *PutCapacityThroughputInformationOptions) SetBlocks(blocks int64) *PutCapacityThroughputInformationOptions {
-	options.Blocks = core.Int64Ptr(blocks)
-	return options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *PutCapacityThroughputInformationOptions) SetHeaders(param map[string]string) *PutCapacityThroughputInformationOptions {
-	options.Headers = param
-	return options
-}
-
 // PutCloudantSecurityConfigurationOptions : The PutCloudantSecurityConfiguration options.
 type PutCloudantSecurityConfigurationOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
-
-	// Database permissions for Cloudant users and/or API keys.
-	Cloudant map[string][]string `json:"cloudant" validate:"required"`
+	Db *string `json:"db" validate:"required"`
 
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
 
 	// Schema for names and roles to map to a database permission.
 	Members *SecurityObject `json:"members,omitempty"`
+
+	// Database permissions for Cloudant users and/or API keys.
+	Cloudant map[string][]string `json:"cloudant,omitempty"`
 
 	// Manage permissions using the `_users` database only.
 	CouchdbAuthOnly *bool `json:"couchdb_auth_only,omitempty"`
@@ -16438,22 +15406,15 @@ const (
 )
 
 // NewPutCloudantSecurityConfigurationOptions : Instantiate PutCloudantSecurityConfigurationOptions
-func (*CloudantV1) NewPutCloudantSecurityConfigurationOptions(db string, cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
+func (*CloudantV1) NewPutCloudantSecurityConfigurationOptions(db string) *PutCloudantSecurityConfigurationOptions {
 	return &PutCloudantSecurityConfigurationOptions{
 		Db: core.StringPtr(db),
-		Cloudant: cloudant,
 	}
 }
 
 // SetDb : Allow user to set Db
 func (options *PutCloudantSecurityConfigurationOptions) SetDb(db string) *PutCloudantSecurityConfigurationOptions {
 	options.Db = core.StringPtr(db)
-	return options
-}
-
-// SetCloudant : Allow user to set Cloudant
-func (options *PutCloudantSecurityConfigurationOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
-	options.Cloudant = cloudant
 	return options
 }
 
@@ -16466,6 +15427,12 @@ func (options *PutCloudantSecurityConfigurationOptions) SetAdmins(admins *Securi
 // SetMembers : Allow user to set Members
 func (options *PutCloudantSecurityConfigurationOptions) SetMembers(members *SecurityObject) *PutCloudantSecurityConfigurationOptions {
 	options.Members = members
+	return options
+}
+
+// SetCloudant : Allow user to set Cloudant
+func (options *PutCloudantSecurityConfigurationOptions) SetCloudant(cloudant map[string][]string) *PutCloudantSecurityConfigurationOptions {
+	options.Cloudant = cloudant
 	return options
 }
 
@@ -16483,11 +15450,6 @@ func (options *PutCloudantSecurityConfigurationOptions) SetHeaders(param map[str
 
 // PutCorsConfigurationOptions : The PutCorsConfiguration options.
 type PutCorsConfigurationOptions struct {
-	// An array of strings that contain allowed origin domains. You have to specify the full URL including the protocol. It
-	// is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you have to specify
-	// all subdomains used.
-	Origins []string `json:"origins" validate:"required"`
-
 	// Boolean value to allow authentication credentials. If set to true, browser requests must be done by using
 	// withCredentials = true.
 	AllowCredentials *bool `json:"allow_credentials,omitempty"`
@@ -16495,21 +15457,18 @@ type PutCorsConfigurationOptions struct {
 	// Boolean value to turn CORS on and off.
 	EnableCors *bool `json:"enable_cors,omitempty"`
 
+	// An array of strings that contain allowed origin domains. You have to specify the full URL including the protocol. It
+	// is recommended that only the HTTPS protocol is used. Subdomains count as separate domains, so you have to specify
+	// all subdomains used.
+	Origins []string `json:"origins,omitempty"`
+
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
 // NewPutCorsConfigurationOptions : Instantiate PutCorsConfigurationOptions
-func (*CloudantV1) NewPutCorsConfigurationOptions(origins []string) *PutCorsConfigurationOptions {
-	return &PutCorsConfigurationOptions{
-		Origins: origins,
-	}
-}
-
-// SetOrigins : Allow user to set Origins
-func (options *PutCorsConfigurationOptions) SetOrigins(origins []string) *PutCorsConfigurationOptions {
-	options.Origins = origins
-	return options
+func (*CloudantV1) NewPutCorsConfigurationOptions() *PutCorsConfigurationOptions {
+	return &PutCorsConfigurationOptions{}
 }
 
 // SetAllowCredentials : Allow user to set AllowCredentials
@@ -16524,6 +15483,12 @@ func (options *PutCorsConfigurationOptions) SetEnableCors(enableCors bool) *PutC
 	return options
 }
 
+// SetOrigins : Allow user to set Origins
+func (options *PutCorsConfigurationOptions) SetOrigins(origins []string) *PutCorsConfigurationOptions {
+	options.Origins = origins
+	return options
+}
+
 // SetHeaders : Allow user to set Headers
 func (options *PutCorsConfigurationOptions) SetHeaders(param map[string]string) *PutCorsConfigurationOptions {
 	options.Headers = param
@@ -16533,7 +15498,7 @@ func (options *PutCorsConfigurationOptions) SetHeaders(param map[string]string) 
 // PutDatabaseOptions : The PutDatabase options.
 type PutDatabaseOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Query parameter to specify whether to enable database partitions when creating a database.
 	Partitioned *bool `json:"partitioned,omitempty"`
@@ -16580,14 +15545,14 @@ func (options *PutDatabaseOptions) SetHeaders(param map[string]string) *PutDatab
 // PutDesignDocumentOptions : The PutDesignDocument options.
 type PutDesignDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the design document name. The design document name is the design document ID excluding the
 	// `_design/` prefix.
-	Ddoc *string `json:"ddoc" validate:"required,ne="`
+	Ddoc *string `json:"ddoc" validate:"required"`
 
 	// HTTP request body for DesignDocument operations.
-	DesignDocument *DesignDocument `json:"designDocument" validate:"required"`
+	DesignDocument *DesignDocument `json:"designDocument,omitempty"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -16616,11 +15581,10 @@ const (
 )
 
 // NewPutDesignDocumentOptions : Instantiate PutDesignDocumentOptions
-func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string, designDocument *DesignDocument) *PutDesignDocumentOptions {
+func (*CloudantV1) NewPutDesignDocumentOptions(db string, ddoc string) *PutDesignDocumentOptions {
 	return &PutDesignDocumentOptions{
 		Db: core.StringPtr(db),
 		Ddoc: core.StringPtr(ddoc),
-		DesignDocument: designDocument,
 	}
 }
 
@@ -16675,10 +15639,10 @@ func (options *PutDesignDocumentOptions) SetHeaders(param map[string]string) *Pu
 // PutDocumentOptions : The PutDocument options.
 type PutDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -16786,10 +15750,10 @@ func (options *PutDocumentOptions) SetHeaders(param map[string]string) *PutDocum
 // PutLocalDocumentOptions : The PutLocalDocument options.
 type PutLocalDocumentOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// HTTP request body for Document operations.
 	Document *Document `json:"document,omitempty"`
@@ -16868,10 +15832,10 @@ func (options *PutLocalDocumentOptions) SetHeaders(param map[string]string) *Put
 // PutReplicationDocumentOptions : The PutReplicationDocument options.
 type PutReplicationDocumentOptions struct {
 	// Path parameter to specify the document ID.
-	DocID *string `json:"doc_id" validate:"required,ne="`
+	DocID *string `json:"doc_id" validate:"required"`
 
 	// HTTP request body for replication operations.
-	ReplicationDocument *ReplicationDocument `json:"replicationDocument" validate:"required"`
+	ReplicationDocument *ReplicationDocument `json:"replicationDocument,omitempty"`
 
 	// Header parameter to specify the document revision. Alternative to rev query parameter.
 	IfMatch *string `json:"If-Match,omitempty"`
@@ -16900,10 +15864,9 @@ const (
 )
 
 // NewPutReplicationDocumentOptions : Instantiate PutReplicationDocumentOptions
-func (*CloudantV1) NewPutReplicationDocumentOptions(docID string, replicationDocument *ReplicationDocument) *PutReplicationDocumentOptions {
+func (*CloudantV1) NewPutReplicationDocumentOptions(docID string) *PutReplicationDocumentOptions {
 	return &PutReplicationDocumentOptions{
 		DocID: core.StringPtr(docID),
-		ReplicationDocument: replicationDocument,
 	}
 }
 
@@ -16952,7 +15915,7 @@ func (options *PutReplicationDocumentOptions) SetHeaders(param map[string]string
 // PutSecurityOptions : The PutSecurity options.
 type PutSecurityOptions struct {
 	// Path parameter to specify the database name.
-	Db *string `json:"db" validate:"required,ne="`
+	Db *string `json:"db" validate:"required"`
 
 	// Schema for names and roles to map to a database permission.
 	Admins *SecurityObject `json:"admins,omitempty"`
@@ -17067,18 +16030,9 @@ type ReplicationDatabase struct {
 	HeadersVar map[string]string `json:"headers,omitempty"`
 
 	// Replication database URL.
-	URL *string `json:"url" validate:"required"`
+	URL *string `json:"url,omitempty"`
 }
 
-
-// NewReplicationDatabase : Instantiate ReplicationDatabase (Generic Model Constructor)
-func (*CloudantV1) NewReplicationDatabase(url string) (model *ReplicationDatabase, err error) {
-	model = &ReplicationDatabase{
-		URL: core.StringPtr(url),
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // UnmarshalReplicationDatabase unmarshals an instance of ReplicationDatabase from the specified map of raw messages.
 func UnmarshalReplicationDatabase(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -17120,18 +16074,9 @@ func UnmarshalReplicationDatabaseAuth(m map[string]json.RawMessage, result inter
 // ReplicationDatabaseAuthIam : Schema for an IAM API key for replication database authentication.
 type ReplicationDatabaseAuthIam struct {
 	// IAM API key.
-	ApiKey *string `json:"api_key" validate:"required"`
+	ApiKey *string `json:"api_key,omitempty"`
 }
 
-
-// NewReplicationDatabaseAuthIam : Instantiate ReplicationDatabaseAuthIam (Generic Model Constructor)
-func (*CloudantV1) NewReplicationDatabaseAuthIam(apiKey string) (model *ReplicationDatabaseAuthIam, err error) {
-	model = &ReplicationDatabaseAuthIam{
-		ApiKey: core.StringPtr(apiKey),
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // UnmarshalReplicationDatabaseAuthIam unmarshals an instance of ReplicationDatabaseAuthIam from the specified map of raw messages.
 func UnmarshalReplicationDatabaseAuthIam(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -17242,13 +16187,13 @@ type ReplicationDocument struct {
 	SocketOptions *string `json:"socket_options,omitempty"`
 
 	// Schema for a replication source or target database.
-	Source *ReplicationDatabase `json:"source" validate:"required"`
+	Source *ReplicationDatabase `json:"source,omitempty"`
 
 	// Address of a (http or socks5 protocol) proxy server through which replication with the source database should occur.
 	SourceProxy *string `json:"source_proxy,omitempty"`
 
 	// Schema for a replication source or target database.
-	Target *ReplicationDatabase `json:"target" validate:"required"`
+	Target *ReplicationDatabase `json:"target,omitempty"`
 
 	// Address of a (http or socks5 protocol) proxy server through which replication with the target database should occur.
 	TargetProxy *string `json:"target_proxy,omitempty"`
@@ -17272,16 +16217,6 @@ type ReplicationDocument struct {
 	additionalProperties map[string]interface{}
 }
 
-
-// NewReplicationDocument : Instantiate ReplicationDocument (Generic Model Constructor)
-func (*CloudantV1) NewReplicationDocument(source *ReplicationDatabase, target *ReplicationDatabase) (model *ReplicationDocument, err error) {
-	model = &ReplicationDocument{
-		Source: source,
-		Target: target,
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // SetProperty allows the user to set an arbitrary property on an instance of ReplicationDocument
 func (o *ReplicationDocument) SetProperty(key string, value interface{}) {
@@ -17580,37 +16515,37 @@ func UnmarshalReplicationDocument(m map[string]json.RawMessage, result interface
 // ReplicationHistory : Schema for replication history information.
 type ReplicationHistory struct {
 	// Number of document write failures.
-	DocWriteFailures *int64 `json:"doc_write_failures" validate:"required"`
+	DocWriteFailures *int64 `json:"doc_write_failures,omitempty"`
 
 	// Number of documents read.
-	DocsRead *int64 `json:"docs_read" validate:"required"`
+	DocsRead *int64 `json:"docs_read,omitempty"`
 
 	// Number of documents written to target.
-	DocsWritten *int64 `json:"docs_written" validate:"required"`
+	DocsWritten *int64 `json:"docs_written,omitempty"`
 
 	// Last sequence number in changes stream.
-	EndLastSeq *string `json:"end_last_seq" validate:"required"`
+	EndLastSeq *string `json:"end_last_seq,omitempty"`
 
 	// Date/Time replication operation completed in RFC 2822 format.
-	EndTime *string `json:"end_time" validate:"required"`
+	EndTime *string `json:"end_time,omitempty"`
 
 	// Number of missing documents checked.
-	MissingChecked *int64 `json:"missing_checked" validate:"required"`
+	MissingChecked *int64 `json:"missing_checked,omitempty"`
 
 	// Number of missing documents found.
-	MissingFound *int64 `json:"missing_found" validate:"required"`
+	MissingFound *int64 `json:"missing_found,omitempty"`
 
 	// Last recorded sequence number.
-	RecordedSeq *string `json:"recorded_seq" validate:"required"`
+	RecordedSeq *string `json:"recorded_seq,omitempty"`
 
 	// Session ID for this replication operation.
-	SessionID *string `json:"session_id" validate:"required"`
+	SessionID *string `json:"session_id,omitempty"`
 
 	// First sequence number in changes stream.
-	StartLastSeq *string `json:"start_last_seq" validate:"required"`
+	StartLastSeq *string `json:"start_last_seq,omitempty"`
 
 	// Date/Time replication operation started in RFC 2822 format.
-	StartTime *string `json:"start_time" validate:"required"`
+	StartTime *string `json:"start_time,omitempty"`
 }
 
 
@@ -17668,19 +16603,19 @@ func UnmarshalReplicationHistory(m map[string]json.RawMessage, result interface{
 // ReplicationResult : Schema for a replication result.
 type ReplicationResult struct {
 	// Replication history.
-	History []ReplicationHistory `json:"history" validate:"required"`
+	History []ReplicationHistory `json:"history,omitempty"`
 
 	// Replication status.
-	Ok *bool `json:"ok" validate:"required"`
+	Ok *bool `json:"ok,omitempty"`
 
 	// Replication protocol version.
-	ReplicationIDVersion *int64 `json:"replication_id_version" validate:"required"`
+	ReplicationIDVersion *int64 `json:"replication_id_version,omitempty"`
 
 	// Unique session ID.
-	SessionID *string `json:"session_id" validate:"required"`
+	SessionID *string `json:"session_id,omitempty"`
 
 	// Last sequence number read from source database.
-	SourceLastSeq *string `json:"source_last_seq" validate:"required"`
+	SourceLastSeq *string `json:"source_last_seq,omitempty"`
 }
 
 
@@ -17714,22 +16649,12 @@ func UnmarshalReplicationResult(m map[string]json.RawMessage, result interface{}
 // Revisions : Schema for list of revision information.
 type Revisions struct {
 	// Array of valid revision IDs, in reverse order (latest first).
-	Ids []string `json:"ids" validate:"required"`
+	Ids []string `json:"ids,omitempty"`
 
 	// Prefix number for the latest revision.
-	Start *int64 `json:"start" validate:"required"`
+	Start *int64 `json:"start,omitempty"`
 }
 
-
-// NewRevisions : Instantiate Revisions (Generic Model Constructor)
-func (*CloudantV1) NewRevisions(ids []string, start int64) (model *Revisions, err error) {
-	model = &Revisions{
-		Ids: ids,
-		Start: core.Int64Ptr(start),
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // UnmarshalRevisions unmarshals an instance of Revisions from the specified map of raw messages.
 func UnmarshalRevisions(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -17774,10 +16699,10 @@ func UnmarshalRevsDiff(m map[string]json.RawMessage, result interface{}) (err er
 // SchedulerDocsResult : Schema for a listing of replication scheduler documents.
 type SchedulerDocsResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows" validate:"required"`
+	TotalRows *int64 `json:"total_rows,omitempty"`
 
 	// Array of replication scheduler doc objects.
-	Docs []SchedulerDocument `json:"docs" validate:"required"`
+	Docs []SchedulerDocument `json:"docs,omitempty"`
 }
 
 
@@ -17799,25 +16724,25 @@ func UnmarshalSchedulerDocsResult(m map[string]json.RawMessage, result interface
 // SchedulerDocument : Schema for a replication scheduler document.
 type SchedulerDocument struct {
 	// Database where replication document came from.
-	Database *string `json:"database" validate:"required"`
+	Database *string `json:"database,omitempty"`
 
 	// Replication document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id,omitempty"`
 
 	// Consecutive errors count. Indicates how many times in a row this replication has crashed. Replication will be
 	// retried with an exponential backoff based on this number. As soon as the replication succeeds this count is reset to
 	// 0. To can be used to get an idea why a particular replication is not making progress.
-	ErrorCount *int64 `json:"error_count" validate:"required"`
+	ErrorCount *int64 `json:"error_count,omitempty"`
 
 	// Replication ID, or null if state is completed or failed.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 
 	// Schema for scheduler document information. A JSON object that may contain additional information about the state.
 	// For error states this will contain an error field and string value.
-	Info *SchedulerInfo `json:"info" validate:"required"`
+	Info *SchedulerInfo `json:"info,omitempty"`
 
 	// Timestamp of last state update.
-	LastUpdated *strfmt.DateTime `json:"last_updated" validate:"required"`
+	LastUpdated *strfmt.DateTime `json:"last_updated,omitempty"`
 
 	// Cluster node where the job is running.
 	Node *string `json:"node,omitempty"`
@@ -17829,10 +16754,10 @@ type SchedulerDocument struct {
 	SourceProxy *string `json:"source_proxy,omitempty"`
 
 	// Timestamp of when the replication was started.
-	StartTime *strfmt.DateTime `json:"start_time" validate:"required"`
+	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
 
 	// Schema for replication state.
-	State *string `json:"state" validate:"required"`
+	State *string `json:"state,omitempty"`
 
 	// Replication target.
 	Target *string `json:"target,omitempty"`
@@ -17998,38 +16923,38 @@ func UnmarshalSchedulerInfo(m map[string]json.RawMessage, result interface{}) (e
 // SchedulerJob : Schema for a replication scheduler job.
 type SchedulerJob struct {
 	// Replication document database.
-	Database *string `json:"database" validate:"required"`
+	Database *string `json:"database,omitempty"`
 
 	// Replication document ID.
-	DocID *string `json:"doc_id" validate:"required"`
+	DocID *string `json:"doc_id,omitempty"`
 
 	// Timestamped history of events as a list of objects.
-	History []SchedulerJobEvent `json:"history" validate:"required"`
+	History []SchedulerJobEvent `json:"history,omitempty"`
 
 	// Schema for a replication job id.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 
 	// Schema for scheduler document information. A JSON object that may contain additional information about the state.
 	// For error states this will contain an error field and string value.
-	Info *SchedulerInfo `json:"info" validate:"required"`
+	Info *SchedulerInfo `json:"info,omitempty"`
 
 	// Cluster node where the job is running.
-	Node *string `json:"node" validate:"required"`
+	Node *string `json:"node,omitempty"`
 
 	// Replication process ID.
-	Pid *string `json:"pid" validate:"required"`
+	Pid *string `json:"pid,omitempty"`
 
 	// Replication source.
-	Source *string `json:"source" validate:"required"`
+	Source *string `json:"source,omitempty"`
 
 	// Timestamp of when the replication was started.
-	StartTime *strfmt.DateTime `json:"start_time" validate:"required"`
+	StartTime *strfmt.DateTime `json:"start_time,omitempty"`
 
 	// Replication target.
-	Target *string `json:"target" validate:"required"`
+	Target *string `json:"target,omitempty"`
 
 	// Name of user running replication.
-	User *string `json:"user" validate:"required"`
+	User *string `json:"user,omitempty"`
 }
 
 
@@ -18087,10 +17012,10 @@ func UnmarshalSchedulerJob(m map[string]json.RawMessage, result interface{}) (er
 // SchedulerJobEvent : Schema for a replication scheduler job event.
 type SchedulerJobEvent struct {
 	// Timestamp of the event.
-	Timestamp *strfmt.DateTime `json:"timestamp" validate:"required"`
+	Timestamp *strfmt.DateTime `json:"timestamp,omitempty"`
 
 	// Type of the event.
-	Type *string `json:"type" validate:"required"`
+	Type *string `json:"type,omitempty"`
 }
 
 
@@ -18112,10 +17037,10 @@ func UnmarshalSchedulerJobEvent(m map[string]json.RawMessage, result interface{}
 // SchedulerJobsResult : Schema for a listing of replication scheduler jobs.
 type SchedulerJobsResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows" validate:"required"`
+	TotalRows *int64 `json:"total_rows,omitempty"`
 
 	// Array of replication job objects.
-	Jobs []SchedulerJob `json:"jobs" validate:"required"`
+	Jobs []SchedulerJob `json:"jobs,omitempty"`
 }
 
 
@@ -18137,7 +17062,7 @@ func UnmarshalSchedulerJobsResult(m map[string]json.RawMessage, result interface
 // SearchAnalyzeResult : Schema for the output of testing search analyzer tokenization.
 type SearchAnalyzeResult struct {
 	// tokens.
-	Tokens []string `json:"tokens" validate:"required"`
+	Tokens []string `json:"tokens,omitempty"`
 }
 
 
@@ -18278,7 +17203,7 @@ func UnmarshalSearchInfoResult(m map[string]json.RawMessage, result interface{})
 // SearchResult : Schema for the result of a query search operation.
 type SearchResult struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows" validate:"required"`
+	TotalRows *int64 `json:"total_rows,omitempty"`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -18339,7 +17264,7 @@ func UnmarshalSearchResult(m map[string]json.RawMessage, result interface{}) (er
 // SearchResultProperties : Schema for the result of a query search operation.
 type SearchResultProperties struct {
 	// Number of total rows.
-	TotalRows *int64 `json:"total_rows" validate:"required"`
+	TotalRows *int64 `json:"total_rows,omitempty"`
 
 	// Opaque bookmark token used when paginating results.
 	Bookmark *string `json:"bookmark,omitempty"`
@@ -18396,13 +17321,13 @@ type SearchResultRow struct {
 	Doc *Document `json:"doc,omitempty"`
 
 	// Schema for the fields returned by a query search operation, a map of field name to value.
-	Fields map[string]interface{} `json:"fields" validate:"required"`
+	Fields map[string]interface{} `json:"fields,omitempty"`
 
 	// Returns the context in which a search term was mentioned so that you can display more emphasized results to a user.
 	Highlights map[string][]string `json:"highlights,omitempty"`
 
 	// Schema for a document ID.
-	ID *string `json:"id" validate:"required"`
+	ID *string `json:"id,omitempty"`
 }
 
 
@@ -18509,19 +17434,16 @@ func UnmarshalSecurityObject(m map[string]json.RawMessage, result interface{}) (
 // ServerInformation : Schema for information about the server instance.
 type ServerInformation struct {
 	// Welcome message.
-	Couchdb *string `json:"couchdb" validate:"required"`
+	Couchdb *string `json:"couchdb,omitempty"`
 
 	// List of enabled optional features.
-	Features []string `json:"features" validate:"required"`
+	Features []string `json:"features,omitempty"`
 
 	// Schema for server vendor information.
-	Vendor *ServerVendor `json:"vendor" validate:"required"`
+	Vendor *ServerVendor `json:"vendor,omitempty"`
 
 	// Apache CouchDB version.
-	Version *string `json:"version" validate:"required"`
-
-	// List of feature flags.
-	FeaturesFlags []string `json:"features_flags" validate:"required"`
+	Version *string `json:"version,omitempty"`
 }
 
 
@@ -18544,10 +17466,6 @@ func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "features_flags", &obj.FeaturesFlags)
-	if err != nil {
-		return
-	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -18555,7 +17473,7 @@ func UnmarshalServerInformation(m map[string]json.RawMessage, result interface{}
 // ServerVendor : Schema for server vendor information.
 type ServerVendor struct {
 	// Vendor name.
-	Name *string `json:"name" validate:"required"`
+	Name *string `json:"name,omitempty"`
 
 	// Vendor variant.
 	Variant *string `json:"variant,omitempty"`
@@ -18593,7 +17511,7 @@ type SessionAuthentication struct {
 	AuthenticationDb *string `json:"authentication_db,omitempty"`
 
 	// authentication_handlers.
-	AuthenticationHandlers []string `json:"authentication_handlers" validate:"required"`
+	AuthenticationHandlers []string `json:"authentication_handlers,omitempty"`
 }
 
 
@@ -18619,13 +17537,13 @@ func UnmarshalSessionAuthentication(m map[string]json.RawMessage, result interfa
 // SessionInformation : Schema for information about a session.
 type SessionInformation struct {
 	// ok.
-	Ok *bool `json:"ok" validate:"required"`
+	Ok *bool `json:"ok,omitempty"`
 
 	// Schema for session authentication information.
-	Info *SessionAuthentication `json:"info" validate:"required"`
+	Info *SessionAuthentication `json:"info,omitempty"`
 
 	// Schema for the user context of a session.
-	UserCtx *UserContext `json:"userCtx" validate:"required"`
+	UserCtx *UserContext `json:"userCtx,omitempty"`
 }
 
 
@@ -18652,7 +17570,7 @@ func UnmarshalSessionInformation(m map[string]json.RawMessage, result interface{
 // that shard.
 type ShardsInformation struct {
 	// Mapping of shard hash value range to a list of nodes.
-	Shards map[string][]string `json:"shards" validate:"required"`
+	Shards map[string][]string `json:"shards,omitempty"`
 }
 
 
@@ -18667,53 +17585,10 @@ func UnmarshalShardsInformation(m map[string]json.RawMessage, result interface{}
 	return
 }
 
-// ThroughputInformation : Schema for detailed information about throughput capacity with breakdown by specific throughput requests classes.
-type ThroughputInformation struct {
-	// A number of blocks of throughput units. A block consists of 100 reads/sec, 50 writes/sec, and 5 global queries/sec
-	// of provisioned throughput capacity.
-	Blocks *int64 `json:"blocks" validate:"required"`
-
-	// Provisioned global queries capacity in operations per second.
-	Query *int64 `json:"query" validate:"required"`
-
-	// Provisioned reads capacity in operations per second.
-	Read *int64 `json:"read" validate:"required"`
-
-	// Provisioned writes capacity in operations per second.
-	Write *int64 `json:"write" validate:"required"`
-}
-
-
-// UnmarshalThroughputInformation unmarshals an instance of ThroughputInformation from the specified map of raw messages.
-func UnmarshalThroughputInformation(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ThroughputInformation)
-	err = core.UnmarshalPrimitive(m, "blocks", &obj.Blocks)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "query", &obj.Query)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "read", &obj.Read)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "write", &obj.Write)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // UpInformation : Schema for information about the up state of the server.
 type UpInformation struct {
-	// seeds.
-	Seeds interface{} `json:"seeds" validate:"required"`
-
 	// status.
-	Status *string `json:"status" validate:"required"`
+	Status *string `json:"status,omitempty"`
 }
 
 // Constants associated with the UpInformation.Status property.
@@ -18728,10 +17603,6 @@ const (
 // UnmarshalUpInformation unmarshals an instance of UpInformation from the specified map of raw messages.
 func UnmarshalUpInformation(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(UpInformation)
-	err = core.UnmarshalPrimitive(m, "seeds", &obj.Seeds)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
@@ -18746,10 +17617,10 @@ type UserContext struct {
 	Db *string `json:"db,omitempty"`
 
 	// User name.
-	Name *string `json:"name" validate:"required"`
+	Name *string `json:"name,omitempty"`
 
 	// List of user roles.
-	Roles []string `json:"roles" validate:"required"`
+	Roles []string `json:"roles,omitempty"`
 }
 
 // Constants associated with the UserContext.Roles property.
@@ -18765,16 +17636,6 @@ const (
 	UserContextRolesWriterConst = "_writer"
 )
 
-
-// NewUserContext : Instantiate UserContext (Generic Model Constructor)
-func (*CloudantV1) NewUserContext(name string, roles []string) (model *UserContext, err error) {
-	model = &UserContext{
-		Name: core.StringPtr(name),
-		Roles: roles,
-	}
-	err = core.ValidateStruct(model, "required parameters")
-	return
-}
 
 // UnmarshalUserContext unmarshals an instance of UserContext from the specified map of raw messages.
 func UnmarshalUserContext(m map[string]json.RawMessage, result interface{}) (err error) {
@@ -18798,7 +17659,7 @@ func UnmarshalUserContext(m map[string]json.RawMessage, result interface{}) (err
 // UuidsResult : Schema for a set of uuids generated by the server.
 type UuidsResult struct {
 	// uuids.
-	Uuids []string `json:"uuids" validate:"required"`
+	Uuids []string `json:"uuids,omitempty"`
 }
 
 
@@ -19006,7 +17867,7 @@ type ViewResult struct {
 	UpdateSeq *string `json:"update_seq,omitempty"`
 
 	// rows.
-	Rows []ViewResultRow `json:"rows" validate:"required"`
+	Rows []ViewResultRow `json:"rows,omitempty"`
 }
 
 
@@ -19047,10 +17908,10 @@ type ViewResultRow struct {
 	ID *string `json:"id,omitempty"`
 
 	// Schema for any JSON type.
-	Key interface{} `json:"key" validate:"required"`
+	Key interface{} `json:"key,omitempty"`
 
 	// Schema for any JSON type.
-	Value interface{} `json:"value" validate:"required"`
+	Value interface{} `json:"value,omitempty"`
 }
 
 
