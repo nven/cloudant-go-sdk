@@ -75,7 +75,7 @@ consult the Cloudant documentation for further information.
 
 ### Bodies containing the `headers` parameter
 
-The `Headers` map is reserved for the API request headers.
+The `Headers` map is always reserved for the API request headers.
 In order to avoid collision between the request headers and the `headers` parameter
 that is contained by the request body, use the `HeadersVar` as
 the request body `headers` parameter.
@@ -90,7 +90,7 @@ target, _ := cloudant.NewReplicationDatabase(
 )
 
 target.HeadersVar = make(map[string]string)
-target.HeadersVar["Authorization"] = "<your-base64-encoded-auth-key>"
+target.HeadersVar["Authorization"] = "Basic <your-base64-encoded-auth-key>"
 )
 ...
 ```
@@ -100,7 +100,7 @@ The example above represents this JSON body:
     ...
     "target": {
         "headers": {
-            "Authorization": "<your-base64-encoded-auth-key>"
+            "Authorization": "Basic <your-base64-encoded-auth-key>"
         },
         "url": "<your-service-url>/animaldb-target"
     },
